@@ -118,19 +118,11 @@ public class Location {
 				+ country + ", postalCode=" + postalCode + ", title=" + title + ", locationUrl=" + locationUrl + "]";
 	}
 
-	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((locationUrl == null) ? 0 : locationUrl.hashCode());
-		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 	
@@ -143,42 +135,7 @@ public class Location {
 		if (getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
 		if (id != other.id)
-			return false;
-		if (locationUrl == null) {
-			if (other.locationUrl != null)
-				return false;
-		} else if (!locationUrl.equals(other.locationUrl))
-			return false;
-		if (postalCode == null) {
-			if (other.postalCode != null)
-				return false;
-		} else if (!postalCode.equals(other.postalCode))
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
-		if (street == null) {
-			if (other.street != null)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}

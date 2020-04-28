@@ -113,18 +113,11 @@ public class ActivityComment {
 				+ enabled + ", userId=" + userId + ", activityId=" + activityId + ", inReplyId=" + inReplyId + "]";
 	}
 
-	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + activityId;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + enabled;
 		result = prime * result + id;
-		result = prime * result + inReplyId;
-		result = prime * result + userId;
 		return result;
 	}
 
@@ -137,25 +130,7 @@ public class ActivityComment {
 		if (getClass() != obj.getClass())
 			return false;
 		ActivityComment other = (ActivityComment) obj;
-		if (activityId != other.activityId)
-			return false;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
-				return false;
-		} else if (!createDate.equals(other.createDate))
-			return false;
-		if (enabled != other.enabled)
-			return false;
 		if (id != other.id)
-			return false;
-		if (inReplyId != other.inReplyId)
-			return false;
-		if (userId != other.userId)
 			return false;
 		return true;
 	}
