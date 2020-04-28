@@ -101,17 +101,11 @@ public class UserGroup {
 				+ description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + "]";
 	}
 
-	//HASHCODE EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
 		return result;
 	}
 
@@ -124,32 +118,7 @@ public class UserGroup {
 		if (getClass() != obj.getClass())
 			return false;
 		UserGroup other = (UserGroup) obj;
-		if (createDate == null) {
-			if (other.createDate != null)
-				return false;
-		} else if (!createDate.equals(other.createDate))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (id != other.id)
-			return false;
-		if (imageUrl == null) {
-			if (other.imageUrl != null)
-				return false;
-		} else if (!imageUrl.equals(other.imageUrl))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (shortDescription == null) {
-			if (other.shortDescription != null)
-				return false;
-		} else if (!shortDescription.equals(other.shortDescription))
 			return false;
 		return true;
 	}
