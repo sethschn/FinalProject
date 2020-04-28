@@ -10,7 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Activity {
@@ -43,10 +48,23 @@ public class Activity {
 	private String equipmentDescription;
 	
 	@Column(name = "create_date")
+	@CreationTimestamp
 	private LocalDate createDate;
 	
 	@ManyToMany(mappedBy = "activities")
 	 private List<Resource> resources;
+	
+	@OneToMany(mappedBy="activity_id")
+	private List<Event> events;
+	
+	@ManyToOne
+	@JoinColumn(name="creator_id")
+	private User user;
+	
+	
+	
+//	@OneToMany(mappedBy="")
+	private List<ActivityComment> activityComments;
 	
 	//CONSTRUCTORS
 	public Activity() {}

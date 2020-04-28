@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +35,11 @@ public class ActivityComment {
 	
 	@Column(name = "in_reply_id")
 	private int inReplyId;
+	
+	@ManyToOne
+	@JoinColumn(name="activity_id")
+	private Activity activity;
+
 
 	//CONSTRUCTORS
 	public ActivityComment() {}
