@@ -1,6 +1,7 @@
 package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Activity {
@@ -43,10 +45,15 @@ public class Activity {
 	@Column(name = "create_date")
 	private LocalDate createDate;
 	
+	@ManyToMany(mappedBy = "activities")
+	 private List<Resource> resources;
+	
+	//CONSTRUCTORS
 	public Activity() {}
 
 	public Activity(int id, String title, String shortDescription, int enabled, int creatorId, String description,
-			String imageUrl, EquipmentLevel equipmentLevel, String equipmentDescription, LocalDate createDate) {
+			String imageUrl, EquipmentLevel equipmentLevel, String equipmentDescription, LocalDate createDate,
+			List<Resource> resources) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -58,6 +65,7 @@ public class Activity {
 		this.equipmentLevel = equipmentLevel;
 		this.equipmentDescription = equipmentDescription;
 		this.createDate = createDate;
+		this.resources = resources;
 	}
 
 	//GETTERS & SETTERS
@@ -140,15 +148,25 @@ public class Activity {
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
+	
+	public List<Resource> getResources() {
+		return resources;
+	}
 
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", enabled="
 				+ enabled + ", creatorId=" + creatorId + ", description=" + description + ", imageUrl=" + imageUrl
 				+ ", equipmentLevel=" + equipmentLevel + ", equipmentDescription=" + equipmentDescription
-				+ ", createDate=" + createDate + "]";
+				+ ", createDate=" + createDate + ", resources=" + resources + "]";
 	}
 
+	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,6 +179,7 @@ public class Activity {
 		result = prime * result + ((equipmentLevel == null) ? 0 : equipmentLevel.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
+		result = prime * result + ((resources == null) ? 0 : resources.hashCode());
 		result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -202,6 +221,11 @@ public class Activity {
 			if (other.imageUrl != null)
 				return false;
 		} else if (!imageUrl.equals(other.imageUrl))
+			return false;
+		if (resources == null) {
+			if (other.resources != null)
+				return false;
+		} else if (!resources.equals(other.resources))
 			return false;
 		if (shortDescription == null) {
 			if (other.shortDescription != null)
