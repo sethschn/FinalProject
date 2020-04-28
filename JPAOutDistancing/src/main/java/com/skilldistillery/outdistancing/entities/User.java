@@ -71,14 +71,17 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Event> events;
 	
-//	@ManyToMany
-//	@JoinTable(name="group_member",
-//    joinColumns= @JoinColumn(name="user_id"),
-//    inverseJoinColumns=@JoinColumn(name="group_id"))
-//	private List<Group> groups;
+	@ManyToMany
+	@JoinTable(name="group_member",
+    joinColumns= @JoinColumn(name="user_id"),
+    inverseJoinColumns=@JoinColumn(name="group_id"))
+	private List<UserGroup> groups;
 	
 	@OneToMany(mappedBy="user")
 	private List<ActivityComment> activityComments;
+	
+	@OneToMany(mappedBy="user")
+	private List<EventComment> eventComments;
 	
 	public User() {
 		super();
