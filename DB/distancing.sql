@@ -342,11 +342,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `event_photos`
+-- Table `event_photo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `event_photos` ;
+DROP TABLE IF EXISTS `event_photo` ;
 
-CREATE TABLE IF NOT EXISTS `event_photos` (
+CREATE TABLE IF NOT EXISTS `event_photo` (
   `id` INT NOT NULL,
   `image_url` VARCHAR(500) NOT NULL,
   `event_id` INT NOT NULL,
@@ -575,11 +575,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `event_photos`
+-- Data for table `event_photo`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `event_photos` (`id`, `image_url`, `event_id`) VALUES (1, 'https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg', 1);
+INSERT INTO `event_photo` (`id`, `image_url`, `event_id`) VALUES (1, 'https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg', 1);
 
 COMMIT;
 
