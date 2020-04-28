@@ -75,10 +75,21 @@ public class User {
 //	private List<Group> groups;
 
 	@OneToMany(mappedBy = "user")
+	
+	@ManyToMany
+	@JoinTable(name="group_member",
+  joinColumns= @JoinColumn(name="user_id"),
+  inverseJoinColumns=@JoinColumn(name="group_id"))
+	private List<UserGroup> groups;
+	
+	@OneToMany(mappedBy="user")
 	private List<ActivityComment> activityComments;
 
 	
 	//METHODS BEGIN: 
+	
+	@OneToMany(mappedBy="user")
+	private List<EventComment> eventComments;
 	
 	public User() {
 		super();
