@@ -2,8 +2,6 @@ package com.skilldistillery.outdistancing.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ActivityTest {
+class UserGroupTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Activity activity;
+	private UserGroup userGroup;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,27 +32,23 @@ class ActivityTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		activity = em.find(Activity.class, 1);
+		userGroup = em.find(UserGroup.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		activity= null;
+		userGroup= null;
 	}
 
 	@Test
 	@DisplayName("test Activity entity mapping")
 	void test() {
-		assertNotNull(activity);
-		assertEquals("Hiking", activity.getTitle());
-		assertEquals(1, activity.getId());
+		assertNotNull(userGroup);
+		assertEquals("Hikers United", userGroup.getName());
+		assertEquals("For Hardcore Hiking", userGroup.getShortDescription());
+		assertEquals(1, userGroup.getId());
 	}
-	
-	@Test
-	@DisplayName("test ENUM mappings")
-	void test2() {
-	assertEquals(EquipmentLevel.Low, activity.getEquipmentLevel());
-	}
+
 
 }
