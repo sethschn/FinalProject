@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "event_photos")
-public class EventPhotos {
+@Table(name = "event_photo")
+public class EventPhoto {
+
 
 	//FIELDS
 	@Id
@@ -17,13 +20,25 @@ public class EventPhotos {
 	private int id;
 	@Column(name = "image_url")
 	private String imageUrl;
-	@Column(name = "event_id")
-	private int eventId;
+	
+	@ManyToOne
+	@JoinColumn(name = "event_id")
+	private Event event;
 	
 	//METHODS BEGIN:
-	public EventPhotos() {
+	public EventPhoto() {
 		
 	}
+	
+	public Event getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
 
 	public int getId() {
 		return id;
@@ -41,13 +56,6 @@ public class EventPhotos {
 		this.imageUrl = imageUrl;
 	}
 
-	public int getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
 
 	@Override
 	public int hashCode() {
@@ -65,7 +73,7 @@ public class EventPhotos {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EventPhotos other = (EventPhotos) obj;
+		EventPhoto other = (EventPhoto) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -74,12 +82,12 @@ public class EventPhotos {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("EventPhotos [id=");
+		builder.append("EventPhoto [id=");
 		builder.append(id);
 		builder.append(", imageUrl=");
 		builder.append(imageUrl);
-		builder.append(", eventId=");
-		builder.append(eventId);
+		builder.append(", event=");
+		builder.append(event);
 		builder.append("]");
 		return builder.toString();
 	}

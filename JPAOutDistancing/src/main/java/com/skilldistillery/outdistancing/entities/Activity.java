@@ -166,22 +166,11 @@ public class Activity {
 				+ ", createDate=" + createDate + ", resources=" + resources + "]";
 	}
 
-	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + creatorId;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + enabled;
-		result = prime * result + ((equipmentDescription == null) ? 0 : equipmentDescription.hashCode());
-		result = prime * result + ((equipmentLevel == null) ? 0 : equipmentLevel.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + ((resources == null) ? 0 : resources.hashCode());
-		result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -194,48 +183,7 @@ public class Activity {
 		if (getClass() != obj.getClass())
 			return false;
 		Activity other = (Activity) obj;
-		if (createDate == null) {
-			if (other.createDate != null)
-				return false;
-		} else if (!createDate.equals(other.createDate))
-			return false;
-		if (creatorId != other.creatorId)
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (enabled != other.enabled)
-			return false;
-		if (equipmentDescription == null) {
-			if (other.equipmentDescription != null)
-				return false;
-		} else if (!equipmentDescription.equals(other.equipmentDescription))
-			return false;
-		if (equipmentLevel != other.equipmentLevel)
-			return false;
 		if (id != other.id)
-			return false;
-		if (imageUrl == null) {
-			if (other.imageUrl != null)
-				return false;
-		} else if (!imageUrl.equals(other.imageUrl))
-			return false;
-		if (resources == null) {
-			if (other.resources != null)
-				return false;
-		} else if (!resources.equals(other.resources))
-			return false;
-		if (shortDescription == null) {
-			if (other.shortDescription != null)
-				return false;
-		} else if (!shortDescription.equals(other.shortDescription))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}

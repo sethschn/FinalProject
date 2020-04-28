@@ -25,7 +25,6 @@ class ActivityTest {
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("OutDistancingPU");
 	}
-	
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {

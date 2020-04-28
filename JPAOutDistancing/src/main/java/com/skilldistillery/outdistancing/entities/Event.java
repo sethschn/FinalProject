@@ -2,18 +2,22 @@ package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Event {
 
+	
 	//FIELDS: 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +43,44 @@ public class Event {
 	@CreationTimestamp
 	private LocalDate createDate;
 	
+//	@ManyToMany(mappedBy="events")
+//	private List<User> users;
+//	
+	@OneToMany(mappedBy = "event")
+	private List<EventComment> eventCmts;
+	
+//	@ManyToOne
+//	@JoinColumn(name= "")
+//	private Location location;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "activity_id")
+//	private Activity activity;
+	
+//	@OneToMany(mappedBy="")
+//	private List<EventPhoto> eventPhotos;
+	
+	
 	//METHODS BEGIN: 
 	public Event() {
 		
+	}
+	
+//	public List<User> getUsers() {
+//		return users;
+//	}
+//
+//
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
+	public List<EventComment> getEventCmts() {
+		return eventCmts;
+	}
+
+
+	public void setEventCmts(List<EventComment> eventCmts) {
+		this.eventCmts = eventCmts;
 	}
 	
 	public int getId() {
@@ -163,6 +202,8 @@ public class Event {
 		builder.append(imageUrl);
 		builder.append(", createDate=");
 		builder.append(createDate);
+		builder.append(", eventCmts=");
+		builder.append(eventCmts);
 		builder.append("]");
 		return builder.toString();
 	}
