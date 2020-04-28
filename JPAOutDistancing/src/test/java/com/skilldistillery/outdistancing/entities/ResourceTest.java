@@ -42,12 +42,17 @@ class ResourceTest {
 	}
 
 	@Test
-	void test() {
+	void testResource() {
 		assertNotNull(resource);
 		assertEquals("Hiking for Beginnners", resource.getName());
 		assertEquals("Unlike walking on a treadmill or paved path, hiking involves more, sometimes unpredictable, variables. Of course, these variables are part of what makes it so enjoyable! Use the following hiking tips to make your first treks successful", resource.getDescription());
 		assertEquals("https://blog.liftopia.com/10-essential-hiking-tips-beginner-hike/", resource.getLink());
 		assertEquals("https://10c9rz12yp4b46gr6a2oxgub-wpengine.netdna-ssl.com/wp-content/uploads/DSC_0879.jpg", resource.getImageUrl());
+	}
+	@Test
+	void testResourceMappingActivity() {
+		assertNotNull(resource.getActivities());
+		assertTrue(resource.getActivities().size() > 0);
 	}
 
 }

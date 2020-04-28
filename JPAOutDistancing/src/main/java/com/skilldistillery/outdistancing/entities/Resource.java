@@ -69,6 +69,16 @@ public class Resource {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+	
+	
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
 
 	public Resource(int id, String name, String description, String link, String imageUrl) {
 		super();
