@@ -50,5 +50,23 @@ class EventTest {
 		assertEquals("Hike in the nice weather", event.getShortDescription());
 		
 	}
-
+	
+	@Test
+	@DisplayName("test Event OTM EventComment mapping")
+	void test2() {
+		assertTrue(event.getEventCmts().size() > 0);
+		assertEquals("yo brosephs what time we meeting up I cant read good", event.getEventCmts().get(0).getContent());
+		
+	}
 }
+
+//	@Test
+//	@DisplayName("test Event MTM User mapping")
+//	void test2() {
+//		assertTrue(event.getUsers().size() > 0);
+//		assertEquals("Peggy", event.getUsers().get(0).getFirstName());
+//		assertEquals("Smith", event.getUsers().get(0).getLastName());
+//		
+//	}
+
+
