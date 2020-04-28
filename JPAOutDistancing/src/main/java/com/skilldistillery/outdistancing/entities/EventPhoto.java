@@ -25,6 +25,8 @@ public class EventPhoto {
 	@JoinColumn(name = "event_id")
 	private Event event;
 	
+	
+	
 	//METHODS BEGIN:
 	public EventPhoto() {
 		

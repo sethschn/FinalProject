@@ -48,6 +48,8 @@ public class Activity {
 	@ManyToMany(mappedBy = "activities")
 	 private List<Resource> resources;
 	
+	
+	
 	//CONSTRUCTORS
 	public Activity() {}
 

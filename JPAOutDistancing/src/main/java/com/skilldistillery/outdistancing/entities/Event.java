@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,144 +19,174 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 public class Event {
 
-	
-	//FIELDS: 
+	// FIELDS:
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "creator_id")
 	private int creatorId;
-	@Column (name = "activity_id")
-	private int activityId;
+
 	private String title;
-	@Column (name = "event_time")
+	@Column(name = "event_time")
 	private LocalTime eventTime;
-	@Column (name = "event_date")
+	@Column(name = "event_date")
 	private LocalDate eventDate;
-	@Column (name = "short_description")
+	@Column(name = "short_description")
 	private String shortDescription;
 	private boolean enabled;
-	@Column (name = "location_id")
-	private int locationId;
+
 	private String description;
-	@Column (name = "image_url")
+	@Column(name = "image_url")
 	private String imageUrl;
-	@Column (name = "create_date")
+	@Column(name = "create_date")
 	@CreationTimestamp
 	private LocalDate createDate;
+
+	@ManyToMany(mappedBy="userEvents")
+	private List<User> users;
 	
-//	@ManyToMany(mappedBy="events")
-//	private List<User> users;
-//	
 	@OneToMany(mappedBy = "event")
 	private List<EventComment> eventCmts;
-	
-//	@ManyToOne
-//	@JoinColumn(name= "")
-//	private Location location;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "activity_id")
-//	private Activity activity;
-	
-//	@OneToMany(mappedBy="")
-//	private List<EventPhoto> eventPhotos;
-	
-	
-	//METHODS BEGIN: 
+
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+
+	@ManyToOne
+	@JoinColumn(name = "activity_id")
+	private Activity activity;
+
+	@OneToMany(mappedBy = "event")
+	private List<EventPhoto> eventPhotos;
+
+	// METHODS BEGIN:
 	public Event() {
-		
+
 	}
 	
-//	public List<User> getUsers() {
-//		return users;
-//	}
-//
-//
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public List<EventPhoto> getEventPhotos() {
+		return eventPhotos;
+	}
+
+	public void setEventPhotos(List<EventPhoto> eventPhotos) {
+		this.eventPhotos = eventPhotos;
+	}
+
 	public List<EventComment> getEventCmts() {
 		return eventCmts;
 	}
 
-
 	public void setEventCmts(List<EventComment> eventCmts) {
 		this.eventCmts = eventCmts;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getCreatorId() {
 		return creatorId;
 	}
+
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
 	}
-	public int getActivityId() {
-		return activityId;
-	}
-	public void setActivityId(int activityId) {
-		this.activityId = activityId;
-	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public LocalTime getEventTime() {
 		return eventTime;
 	}
+
 	public void setEventTime(LocalTime eventTime) {
 		this.eventTime = eventTime;
 	}
+
 	public LocalDate getEventDate() {
 		return eventDate;
 	}
+
 	public void setEventDate(LocalDate eventDate) {
 		this.eventDate = eventDate;
 	}
+
 	public String getShortDescription() {
 		return shortDescription;
 	}
+
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
+
 	public boolean isEnabled() {
 		return enabled;
 	}
+
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	public int getLocationId() {
-		return locationId;
-	}
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
+
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+
 	public LocalDate getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -162,6 +194,7 @@ public class Event {
 		result = prime * result + id;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -175,6 +208,7 @@ public class Event {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -182,8 +216,6 @@ public class Event {
 		builder.append(id);
 		builder.append(", creatorId=");
 		builder.append(creatorId);
-		builder.append(", activityId=");
-		builder.append(activityId);
 		builder.append(", title=");
 		builder.append(title);
 		builder.append(", eventTime=");
@@ -194,8 +226,6 @@ public class Event {
 		builder.append(shortDescription);
 		builder.append(", enabled=");
 		builder.append(enabled);
-		builder.append(", locationId=");
-		builder.append(locationId);
 		builder.append(", description=");
 		builder.append(description);
 		builder.append(", imageUrl=");
@@ -204,8 +234,14 @@ public class Event {
 		builder.append(createDate);
 		builder.append(", eventCmts=");
 		builder.append(eventCmts);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append(", activity=");
+		builder.append(activity);
+		builder.append(", eventPhotos=");
+		builder.append(eventPhotos);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

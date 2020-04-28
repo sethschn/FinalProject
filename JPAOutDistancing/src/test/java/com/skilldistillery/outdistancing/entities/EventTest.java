@@ -14,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EventTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Event event;
@@ -23,7 +23,6 @@ class EventTest {
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("OutDistancingPU");
 	}
-	
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
@@ -39,7 +38,7 @@ class EventTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		event= null;
+		event = null;
 	}
 
 	@Test
@@ -48,25 +47,36 @@ class EventTest {
 		assertNotNull(event);
 		assertEquals("Hiking at a Distance", event.getTitle());
 		assertEquals("Hike in the nice weather", event.getShortDescription());
-		
+
 	}
-	
+
 	@Test
 	@DisplayName("test Event OTM EventComment mapping")
 	void test2() {
 		assertTrue(event.getEventCmts().size() > 0);
 		assertEquals("yo brosephs what time we meeting up I cant read good", event.getEventCmts().get(0).getContent());
+
+	}
+
+	@Test
+	@DisplayName("test Event MTM User mapping")
+	void test3() {
+		assertTrue(event.getUsers().size() > 0);
+		assertEquals("Peggy", event.getUsers().get(0).getFirstName());
+		assertEquals("Smith", event.getUsers().get(0).getLastName());
 		
 	}
+
+	@Test
+	@DisplayName("test Event MTO Activity mapping")
+	void test4() {
+		assertTrue(event.getActivity().getResources().size() > 0);
+	}
+
+	@Test
+	@DisplayName("test Event MTO Location mapping")
+	void test5() {
+		assertNotNull(event.getLocation());
+	}
+
 }
-
-//	@Test
-//	@DisplayName("test Event MTM User mapping")
-//	void test2() {
-//		assertTrue(event.getUsers().size() > 0);
-//		assertEquals("Peggy", event.getUsers().get(0).getFirstName());
-//		assertEquals("Smith", event.getUsers().get(0).getLastName());
-//		
-//	}
-
-
