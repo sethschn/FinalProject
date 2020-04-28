@@ -1,6 +1,7 @@
 package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +39,10 @@ public class User {
 	@Column(name = "location_id")
 	private int locationId;
 	
+//	@ManyToOne
+//	@JoinColumn(name="location_id")
+//	private Location location;
+	
 	private String description;
 	
 	@Column(name = "image_url")
@@ -45,6 +55,32 @@ public class User {
 	@CreationTimestamp
 	private LocalDate createDate;
 	
+	@ManyToMany
+	@JoinTable(name="user_event",
+    joinColumns= @JoinColumn(name="user_id"),
+    inverseJoinColumns=@JoinColumn(name="event_id"))
+	private List<Event> userEvents;
+	
+	@ManyToMany
+	@JoinTable(name="favorites_list",
+    joinColumns= @JoinColumn(name="user_id"),
+    inverseJoinColumns=@JoinColumn(name="activity_id"))
+	private List<Activity> favoriteActivites;
+	
+	@OneToMany(mappedBy="user")
+	private List<Activity> activities;
+	
+	@OneToMany(mappedBy="user")
+	private List<Event> events;
+	
+//	@ManyToMany
+//	@JoinTable(name="group_member",
+//    joinColumns= @JoinColumn(name="user_id"),
+//    inverseJoinColumns=@JoinColumn(name="group_id"))
+//	private List<Group> groups;
+	
+	@OneToMany(mappedBy="user")
+	private List<ActivityComment> activityComments;
 	
 	public User() {
 		super();
