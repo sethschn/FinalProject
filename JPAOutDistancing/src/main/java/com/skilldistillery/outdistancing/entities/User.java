@@ -82,7 +82,6 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<ActivityComment> activityComments;
 	
-
 	public User() {
 		super();
 	}
