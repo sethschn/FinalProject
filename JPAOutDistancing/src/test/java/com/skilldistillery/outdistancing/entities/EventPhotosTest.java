@@ -1,6 +1,9 @@
 package com.skilldistillery.outdistancing.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +16,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class EventTest {
+class EventPhotosTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Event event;
+	private EventPhotos eventPhoto;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,21 +36,22 @@ class EventTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		event = em.find(Event.class, 1);
+		eventPhoto = em.find(EventPhotos.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		event= null;
+		eventPhoto= null;
 	}
 
 	@Test
-	@DisplayName("test Event entity mapping")
+	@DisplayName("test Event Comment entity mapping")
 	void test() {
-		assertNotNull(event);
-		assertEquals("Hiking at a Distance", event.getTitle());
-		assertEquals("Hike in the nice weather", event.getShortDescription());
+		assertNotNull(eventPhoto);
+		assertEquals(1, eventPhoto.getEventId());
+		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", eventPhoto.getImageUrl());
+	
 		
 	}
 
