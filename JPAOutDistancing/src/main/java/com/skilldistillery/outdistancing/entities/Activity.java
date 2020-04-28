@@ -61,8 +61,6 @@ public class Activity {
 	@JoinColumn(name="creator_id")
 	private User user;
 	
-	
-	
 //	@OneToMany(mappedBy="")
 	private List<ActivityComment> activityComments;
 	

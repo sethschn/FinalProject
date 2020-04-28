@@ -55,7 +55,7 @@ class EventPhotoTest {
 	@Test
 	@DisplayName("test Event Photo MTO Event")
 	void test2() {
-		assertTrue(eventPhoto.getEvent().getActivityId() > 0 );
+		assertTrue(eventPhoto.getEvent().getEventCmts().size() >0);
 		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", eventPhoto.getImageUrl());
 	}
 
