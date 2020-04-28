@@ -1,10 +1,6 @@
 package com.skilldistillery.outdistancing.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,17 +13,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class EventCommentTest {
-	
+class UserGroupTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private EventComment eventCmt;
+	private UserGroup userGroup;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("OutDistancingPU");
 	}
-	
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
@@ -37,29 +32,23 @@ class EventCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		eventCmt = em.find(EventComment.class, 1);
+		userGroup = em.find(UserGroup.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		eventCmt= null;
+		userGroup= null;
 	}
 
 	@Test
-	@DisplayName("test Event Comment entity mapping")
+	@DisplayName("test Activity entity mapping")
 	void test() {
-		assertNotNull(eventCmt);
-		assertEquals("yo brosephs what time we meeting up I cant read good", eventCmt.getContent());
-		assertEquals(LocalDateTime.of( 2020,04,28, 01,00,00), eventCmt.getCreateDate());
+		assertNotNull(userGroup);
+		assertEquals("Hikers United", userGroup.getName());
+		assertEquals("For Hardcore Hiking", userGroup.getShortDescription());
+		assertEquals(1, userGroup.getId());
 	}
-	
-	@Test
-	@DisplayName("test Event Comment MTO Event mapping")
-	void test2() {
-		assertTrue(eventCmt.getEvent().getEventCmts().size() > 0);
-		assertEquals("This is a chance to enjoy the nice weather but also respect distancing", eventCmt.getEvent().getDescription());
-	
-	}
+
 
 }

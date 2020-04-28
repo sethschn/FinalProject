@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,27 +17,46 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table (name = "event_comment")
 public class EventComment {
 
+
 	//FIELDS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String content;
+	
 	@Column (name = "create_date")
 	@CreationTimestamp
 	private LocalDateTime createDate;
+	
 	private boolean enabled;
-	@Column(name = "user_id")
-	private int userId;
-	@Column (name = "event_id")
-	private int eventId;
+	
 	@Column (name = "in_reply_id")
-	private int inReplyId;
+	private Integer inReplyId;
+	
+	@ManyToOne
+	@JoinColumn(name = "event_id")
+	private Event event;
+	
+//	@ManyToOne
+//	@JoinColumn( name = "user_id")
+//	private User user;
 	
 	//METHODS BEGIN:
 	
 	public EventComment() {
 		
 	}
+	
+	public Event getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+	
 
 	public int getId() {
 		return id;
@@ -85,37 +106,37 @@ public class EventComment {
 
 
 
-	public int getUserId() {
-		return userId;
-	}
+//	public int getUserId() {
+//		return userId;
+//	}
+//
+//
+//
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
 
 
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+//	public int getEventId() {
+//		return eventId;
+//	}
+//
+//
+//
+//	public void setEventId(int eventId) {
+//		this.eventId = eventId;
+//	}
 
 
 
-	public int getEventId() {
-		return eventId;
-	}
-
-
-
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-
-
-
-	public int getInReplyId() {
+	public Integer getInReplyId() {
 		return inReplyId;
 	}
 
 
 
-	public void setInReplyId(int inReplyId) {
+	public void setInReplyId(Integer inReplyId) {
 		this.inReplyId = inReplyId;
 	}
 
@@ -155,10 +176,10 @@ public class EventComment {
 		builder.append(createDate);
 		builder.append(", enabled=");
 		builder.append(enabled);
-		builder.append(", userId=");
-		builder.append(userId);
-		builder.append(", eventId=");
-		builder.append(eventId);
+//		builder.append(", userId=");
+//		builder.append(userId);
+//		builder.append(", eventId=");
+//		builder.append(eventId);
 		builder.append(", inReplyId=");
 		builder.append(inReplyId);
 		builder.append("]");

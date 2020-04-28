@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -81,7 +82,6 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<ActivityComment> activityComments;
 	
-
 	public User() {
 		super();
 	}

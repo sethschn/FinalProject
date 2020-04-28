@@ -2,6 +2,7 @@ package com.skilldistillery.outdistancing.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -16,11 +17,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class EventPhotosTest {
+class EventPhotoTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private EventPhotos eventPhoto;
+	private EventPhoto eventPhoto;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -36,7 +37,7 @@ class EventPhotosTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		eventPhoto = em.find(EventPhotos.class, 1);
+		eventPhoto = em.find(EventPhoto.class, 1);
 	}
 
 	@AfterEach
@@ -46,13 +47,16 @@ class EventPhotosTest {
 	}
 
 	@Test
-	@DisplayName("test Event Comment entity mapping")
+	@DisplayName("test Event Photo entity mapping")
 	void test() {
 		assertNotNull(eventPhoto);
-		assertEquals(1, eventPhoto.getEventId());
 		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", eventPhoto.getImageUrl());
-	
-		
+	}
+	@Test
+	@DisplayName("test Event Photo MTO Event")
+	void test2() {
+		assertTrue(eventPhoto.getEvent().getActivityId() > 0 );
+		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", eventPhoto.getImageUrl());
 	}
 
 }
