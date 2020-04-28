@@ -54,14 +54,14 @@ public class Activity {
 	@ManyToMany(mappedBy = "activities")
 	 private List<Resource> resources;
 	
-	@OneToMany(mappedBy="activity_id")
+	@OneToMany(mappedBy="activity")
 	private List<Event> events;
 	
 	@ManyToOne
-	@JoinColumn(name="creator_id")
+	@JoinColumn(name="activities")
 	private User user;
 	
-//	@OneToMany(mappedBy="")
+	@OneToMany(mappedBy="activity_id")
 	private List<ActivityComment> activityComments;
 	
 	//CONSTRUCTORS

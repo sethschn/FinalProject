@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,8 +34,9 @@ public class ActivityComment {
 	@Column(name = "activity_id")
 	private int activityId;
 	
+	@OneToOne
 	@Column(name = "in_reply_id")
-	private int inReplyId;
+	private ActivityComment parentComment;
 	
 	@ManyToOne
 	@JoinColumn(name="activity_id")
@@ -43,9 +45,9 @@ public class ActivityComment {
 
 	//CONSTRUCTORS
 	public ActivityComment() {}
-	
+
 	public ActivityComment(int id, String content, LocalDate createDate, int enabled, int userId, int activityId,
-			int inReplyId) {
+			ActivityComment parentComment, Activity activity) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -53,7 +55,8 @@ public class ActivityComment {
 		this.enabled = enabled;
 		this.userId = userId;
 		this.activityId = activityId;
-		this.inReplyId = inReplyId;
+		this.parentComment = parentComment;
+		this.activity = activity;
 	}
 
 	//GETTERS & SETTERS
@@ -105,19 +108,27 @@ public class ActivityComment {
 		this.activityId = activityId;
 	}
 
-	public int getInReplyId() {
-		return inReplyId;
+	public ActivityComment getParentComment() {
+		return parentComment;
 	}
 
-	public void setInReplyId(int inReplyId) {
-		this.inReplyId = inReplyId;
+	public void setParentComment(ActivityComment parentComment) {
+		this.parentComment = parentComment;
 	}
 
-	//TO STRING
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
 	@Override
 	public String toString() {
 		return "ActivityComment [id=" + id + ", content=" + content + ", createDate=" + createDate + ", enabled="
-				+ enabled + ", userId=" + userId + ", activityId=" + activityId + ", inReplyId=" + inReplyId + "]";
+				+ enabled + ", userId=" + userId + ", activityId=" + activityId + ", parentComment=" + parentComment
+				+ ", activity=" + activity + "]";
 	}
 
 	@Override
@@ -141,6 +152,8 @@ public class ActivityComment {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 
