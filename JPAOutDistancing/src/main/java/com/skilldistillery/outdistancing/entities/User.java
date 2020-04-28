@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -44,7 +45,7 @@ public class User {
 	@CreationTimestamp
 	private LocalDate createDate;
 	
-
+	
 	public User() {
 		super();
 	}

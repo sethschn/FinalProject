@@ -2,6 +2,7 @@ package com.skilldistillery.outdistancing.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -50,9 +51,15 @@ class EventCommentTest {
 	void test() {
 		assertNotNull(eventCmt);
 		assertEquals("yo brosephs what time we meeting up I cant read good", eventCmt.getContent());
-		assertEquals(LocalDateTime.of( 2020,04,28, 00,00,00), eventCmt.getCreateDate());
-		assertEquals(1, eventCmt.getEventId());
-		
+		assertEquals(LocalDateTime.of( 2020,04,28, 01,00,00), eventCmt.getCreateDate());
+	}
+	
+	@Test
+	@DisplayName("test Event Comment MTO Event mapping")
+	void test2() {
+		assertTrue(eventCmt.getEvent().getEventCmts().size() > 0);
+		assertEquals("This is a chance to enjoy the nice weather but also respect distancing", eventCmt.getEvent().getDescription());
+	
 	}
 
 }
