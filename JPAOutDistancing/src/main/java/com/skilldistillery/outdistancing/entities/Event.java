@@ -40,6 +40,9 @@ public class Event {
 	private LocalDate createDate;
 	
 	//METHODS BEGIN: 
+	public Event() {
+		
+	}
 	
 	public int getId() {
 		return id;
