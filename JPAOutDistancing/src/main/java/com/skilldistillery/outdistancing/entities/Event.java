@@ -23,8 +23,8 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "creator_id")
-	private int creatorId;
+//	@Column(name = "creator_id")
+//	private int creatorId;
 
 	private String title;
 	@Column(name = "event_time")
@@ -58,12 +58,27 @@ public class Event {
 
 	@OneToMany(mappedBy = "event")
 	private List<EventPhoto> eventPhotos;
+	
+	@ManyToOne
+	@JoinColumn(name = "creator_id")
+	private User creator;
 
 	// METHODS BEGIN:
+	
 	public Event() {
 
 	}
 	
+
+	public User getCreator() {
+		return creator;
+	}
+
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
 
 	public List<User> getUsers() {
 		return users;
@@ -115,13 +130,7 @@ public class Event {
 		this.id = id;
 	}
 
-	public int getCreatorId() {
-		return creatorId;
-	}
 
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
-	}
 
 	public String getTitle() {
 		return title;
@@ -211,37 +220,11 @@ public class Event {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Event [id=");
-		builder.append(id);
-		builder.append(", creatorId=");
-		builder.append(creatorId);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", eventTime=");
-		builder.append(eventTime);
-		builder.append(", eventDate=");
-		builder.append(eventDate);
-		builder.append(", shortDescription=");
-		builder.append(shortDescription);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", imageUrl=");
-		builder.append(imageUrl);
-		builder.append(", createDate=");
-		builder.append(createDate);
-		builder.append(", eventCmts=");
-		builder.append(eventCmts);
-		builder.append(", location=");
-		builder.append(location);
-		builder.append(", activity=");
-		builder.append(activity);
-		builder.append(", eventPhotos=");
-		builder.append(eventPhotos);
-		builder.append("]");
-		return builder.toString();
+		return "Event [id=" + id  + ", title=" + title + ", eventTime=" + eventTime
+				+ ", eventDate=" + eventDate + ", shortDescription=" + shortDescription + ", enabled=" + enabled
+				+ ", description=" + description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + ", users="
+				+ users + ", eventCmts=" + eventCmts + ", location=" + location + ", activity=" + activity
+				+ ", eventPhotos=" + eventPhotos + ", creator=" + creator + "]";
 	}
 
 }

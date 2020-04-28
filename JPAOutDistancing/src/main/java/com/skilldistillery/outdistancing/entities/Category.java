@@ -25,7 +25,7 @@ public class Category {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
-	@ManyToMany(mappedBy="category")
+	@ManyToMany(mappedBy="categories")
 	private List<Activity> activities;
 	
 	public int getId() {
