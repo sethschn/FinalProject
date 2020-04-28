@@ -28,14 +28,15 @@ public class ActivityComment {
 	
 	private int enabled;
 	
-	@Column(name = "user_id")
-	private int userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	@Column(name = "activity_id")
-	private int activityId;
+//	@Column(name = "activity_id")
+//	private int activityId;
 	
 	@OneToOne
-	@Column(name = "in_reply_id")
+	@JoinColumn(name = "in_reply_id")
 	private ActivityComment parentComment;
 	
 	@ManyToOne
@@ -46,18 +47,27 @@ public class ActivityComment {
 	//CONSTRUCTORS
 	public ActivityComment() {}
 
-	public ActivityComment(int id, String content, LocalDate createDate, int enabled, int userId, int activityId,
+	
+
+	
+
+
+	public ActivityComment(int id, String content, LocalDate createDate, int enabled, User user,
 			ActivityComment parentComment, Activity activity) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.createDate = createDate;
 		this.enabled = enabled;
-		this.userId = userId;
-		this.activityId = activityId;
+		this.user = user;
 		this.parentComment = parentComment;
 		this.activity = activity;
 	}
+
+
+
+
+
 
 	//GETTERS & SETTERS
 	public int getId() {
@@ -92,21 +102,20 @@ public class ActivityComment {
 		this.enabled = enabled;
 	}
 
-	public int getUserId() {
-		return userId;
+	
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getActivityId() {
-		return activityId;
-	}
 
-	public void setActivityId(int activityId) {
-		this.activityId = activityId;
-	}
+
 
 	public ActivityComment getParentComment() {
 		return parentComment;
@@ -127,7 +136,7 @@ public class ActivityComment {
 	@Override
 	public String toString() {
 		return "ActivityComment [id=" + id + ", content=" + content + ", createDate=" + createDate + ", enabled="
-				+ enabled + ", userId=" + userId + ", activityId=" + activityId + ", parentComment=" + parentComment
+				+ enabled + ", user=" + user + ", parentComment=" + parentComment
 				+ ", activity=" + activity + "]";
 	}
 

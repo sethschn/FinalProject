@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,8 +33,11 @@ public class Activity {
 	
 	private int enabled;
 	
-	@Column(name = "creator_id")
-	private int creatorId;
+	@ManyToOne
+	@JoinColumn(name = "creator_id")
+	private User user;
+//	@Column(name = "creator_id")
+//	private int creatorId;
 	
 	private String description;
 	
@@ -57,37 +61,78 @@ public class Activity {
 	@OneToMany(mappedBy="activity")
 	private List<Event> events;
 	
-	@ManyToOne
-	@JoinColumn(name="activities")
-	private User user;
+	@ManyToMany(mappedBy="favoriteActivities")
+	private List <User> users;
 	
-	@OneToMany(mappedBy="activity_id")
+	@OneToMany(mappedBy="activity")
 	private List<ActivityComment> activityComments;
+	
+	@ManyToMany
+	@JoinTable(name="activity_category",
+	joinColumns = @JoinColumn(name="activity_id"),
+	inverseJoinColumns = @JoinColumn(name="category_id"))
+	private List<Category> categories;
 	
 	//CONSTRUCTORS
 	public Activity() {}
 
-	public Activity(int id, String title, String shortDescription, int enabled, int creatorId, String description,
+	
+
+	
+
+
+
+	public Activity(int id, String title, String shortDescription, int enabled, User user, String description,
 			String imageUrl, EquipmentLevel equipmentLevel, String equipmentDescription, LocalDate createDate,
-			List<Resource> resources) {
+			List<Resource> resources, List<Event> events, List<User> users, List<ActivityComment> activityComments) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.shortDescription = shortDescription;
 		this.enabled = enabled;
-		this.creatorId = creatorId;
+		this.user = user;
 		this.description = description;
 		this.imageUrl = imageUrl;
 		this.equipmentLevel = equipmentLevel;
 		this.equipmentDescription = equipmentDescription;
 		this.createDate = createDate;
 		this.resources = resources;
+		this.events = events;
+		this.users = users;
+		this.activityComments = activityComments;
 	}
 
+
+
+
+
+
+
 	//GETTERS & SETTERS
+	
 	public int getId() {
 		return id;
 	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+
+
+
+
+
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+
+
+
+
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -117,13 +162,77 @@ public class Activity {
 		this.enabled = enabled;
 	}
 
-	public int getCreatorId() {
-		return creatorId;
+	
+
+
+
+
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
+
+
+
+
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
+
+
+
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+
+
+
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+
+
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+
+
+
+	public List<ActivityComment> getActivityComments() {
+		return activityComments;
+	}
+
+
+
+	public void setActivityComments(List<ActivityComment> activityComments) {
+		this.activityComments = activityComments;
+	}
+
+
 
 	public String getDescription() {
 		return description;
@@ -173,13 +282,13 @@ public class Activity {
 		this.resources = resources;
 	}
 
-	//TOSTRING
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", enabled="
-				+ enabled + ", creatorId=" + creatorId + ", description=" + description + ", imageUrl=" + imageUrl
+				+ enabled + ", user=" + user + ", description=" + description + ", imageUrl=" + imageUrl
 				+ ", equipmentLevel=" + equipmentLevel + ", equipmentDescription=" + equipmentDescription
-				+ ", createDate=" + createDate + ", resources=" + resources + "]";
+				+ ", createDate=" + createDate + ", resources=" + resources + ", events=" + events + ", users=" + users
+				+ ", activityComments=" + activityComments + ", categories=" + categories + "]";
 	}
 
 	@Override

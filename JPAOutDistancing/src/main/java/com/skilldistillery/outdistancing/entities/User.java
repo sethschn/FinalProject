@@ -59,13 +59,15 @@ public class User {
 	private List<Event> userEvents;
 
 	@ManyToMany
-	@JoinTable(name = "favorites_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "activity_id"))
-	private List<Activity> favoriteActivites;
+	@JoinTable(name = "favorites_list", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "activity_id"))
+	private List<Activity> favoriteActivities;
 
 	@OneToMany(mappedBy = "user")
 	private List<Activity> activities;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "creator")
 	private List<Event> events;
 	
 	@ManyToMany
@@ -95,12 +97,12 @@ public class User {
 		this.userEvents = userEvents;
 	}
 
-	public List<Activity> getFavoriteActivites() {
-		return favoriteActivites;
+	public List<Activity> getFavoriteActivities() {
+		return favoriteActivities;
 	}
 
-	public void setFavoriteActivites(List<Activity> favoriteActivites) {
-		this.favoriteActivites = favoriteActivites;
+	public void setFavoriteActivities(List<Activity> favoriteActivites) {
+		this.favoriteActivities = favoriteActivites;
 	}
 
 	public List<Activity> getActivities() {

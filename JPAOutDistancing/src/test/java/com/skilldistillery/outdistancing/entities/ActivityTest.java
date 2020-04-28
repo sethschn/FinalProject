@@ -56,5 +56,13 @@ class ActivityTest {
 	void test2() {
 	assertEquals(EquipmentLevel.Low, activity.getEquipmentLevel());
 	}
+	
+	@Test
+	@DisplayName("test relationships to resources")
+	void test3() {
+		assertNotNull(activity.getResources());
+		assertTrue(activity.getResources().size()>0);
+		
+	}
 
 }

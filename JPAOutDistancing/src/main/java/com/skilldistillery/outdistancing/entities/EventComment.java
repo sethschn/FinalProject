@@ -38,9 +38,9 @@ public class EventComment {
 	@JoinColumn(name = "event_id")
 	private Event event;
 	
-//	@ManyToOne
-//	@JoinColumn( name = "user_id")
-//	private User user;
+	@ManyToOne
+	@JoinColumn( name = "user_id")
+	private User user;
 	
 	//METHODS BEGIN:
 	
@@ -106,15 +106,7 @@ public class EventComment {
 
 
 
-//	public int getUserId() {
-//		return userId;
-//	}
-//
-//
-//
-//	public void setUserId(int userId) {
-//		this.userId = userId;
-//	}
+	
 
 
 
@@ -129,6 +121,14 @@ public class EventComment {
 //	}
 
 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Integer getInReplyId() {
 		return inReplyId;

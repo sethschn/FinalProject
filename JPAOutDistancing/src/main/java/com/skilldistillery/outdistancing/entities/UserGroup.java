@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,11 +33,20 @@ public class UserGroup {
 	@Column(name = "create_date")
 	private LocalDate createDate;
 	
+	@ManyToOne
+	@JoinColumn(name = "creator_id")
+//	@Column(name = "creator_id")
+	private User creator;
+	
+	
+	
 	//CONSTRUCTORS
 	public UserGroup() {}
 
+	
+
 	public UserGroup(int id, String name, String shortDescription, String description, String imageUrl,
-			LocalDate createDate) {
+			LocalDate createDate, User creator) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,7 +54,10 @@ public class UserGroup {
 		this.description = description;
 		this.imageUrl = imageUrl;
 		this.createDate = createDate;
+		this.creator = creator;
 	}
+
+
 
 	//GETTERS & SETTERS
 	public int getId() {
@@ -93,12 +107,21 @@ public class UserGroup {
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
+	
+	
 
-	//TOSTRING
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
 	@Override
 	public String toString() {
 		return "UserGroup [id=" + id + ", name=" + name + ", shortDescription=" + shortDescription + ", description="
-				+ description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + "]";
+				+ description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + ", creator=" + creator + "]";
 	}
 
 	@Override
