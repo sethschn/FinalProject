@@ -128,10 +128,17 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   `name` VARCHAR(100) NOT NULL,
   `short_description` VARCHAR(45) NOT NULL,
   `enabled` TINYINT NOT NULL DEFAULT '1',
+  `creator_id` INT NOT NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(3000) NULL,
   `create_date` DATE NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  INDEX `fk_group_user_creator_idx` (`creator_id` ASC),
+  CONSTRAINT `fk_group_user_creator`
+    FOREIGN KEY (`creator_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -497,7 +504,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `user_group` (`id`, `name`, `short_description`, `enabled`, `description`, `image_url`, `create_date`) VALUES (1, 'Hikers United', 'For Hardcore Hiking', 1, 'This group is for people that want to go on long hikes', 'https://i1.wp.com/s3.amazonaws.com/passionpassport-1/wp-content/uploads/2020/02/12131422/oziel-gomez-IbLZjKcelpM-unsplash.jpg?fit=1068%2C638&ssl=1', '2020-04-28');
+INSERT INTO `user_group` (`id`, `name`, `short_description`, `enabled`, `creator_id`, `description`, `image_url`, `create_date`) VALUES (1, 'Hikers United', 'For Hardcore Hiking', 1, 7, 'This group is for people that want to go on long hikes', 'https://i1.wp.com/s3.amazonaws.com/passionpassport-1/wp-content/uploads/2020/02/12131422/oziel-gomez-IbLZjKcelpM-unsplash.jpg?fit=1068%2C638&ssl=1', '2020-04-28');
 
 COMMIT;
 
