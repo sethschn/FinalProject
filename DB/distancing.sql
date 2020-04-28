@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `description` TEXT NULL,
   `image_url` VARCHAR(3000) NULL,
   `equipment_level` ENUM('Low', 'Medium', 'High') NULL,
-  `equipment_desciption` TEXT NULL,
+  `equipment_description` TEXT NULL,
   `create_date` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_activity_user_idx` (`creator_id` ASC),
@@ -477,7 +477,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `activity` (`id`, `title`, `short_description`, `enabled`, `creator_id`, `description`, `image_url`, `equipment_level`, `equipment_desciption`, `create_date`) VALUES (1, 'Hiking', 'Neature Walk Together', 1, 1, 'Let\'s go on a wonderful neature walk together', 'https://www.outsideonline.com/sites/default/files/styles/img_600x600/public/2020/04/17/thru-hike-vlog_s.jpg?itok=ZM4vc4JG', 'Low', 'You will need a water source and good hiking boots', '2020-04-28');
+INSERT INTO `activity` (`id`, `title`, `short_description`, `enabled`, `creator_id`, `description`, `image_url`, `equipment_level`, `equipment_description`, `create_date`) VALUES (1, 'Hiking', 'Neature Walk Together', 1, 1, 'Let\'s go on a wonderful neature walk together', 'https://www.outsideonline.com/sites/default/files/styles/img_600x600/public/2020/04/17/thru-hike-vlog_s.jpg?itok=ZM4vc4JG', 'Low', 'You will need a water source and good hiking boots', '2020-04-28');
 
 COMMIT;
 
