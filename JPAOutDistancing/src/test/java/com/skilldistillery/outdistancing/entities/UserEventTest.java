@@ -72,7 +72,7 @@ class UserEventTest {
 	@DisplayName("test user_event MTO Event mappings")
 	void test4() {
 		assertNotNull(userEvent.getEvent());
-		assertEquals("Hiking at a Distance", userEvent.getEvent().getTitle());
+		assertEquals("Bicycle Colorado", userEvent.getEvent().getTitle());
 	}
 		
 
