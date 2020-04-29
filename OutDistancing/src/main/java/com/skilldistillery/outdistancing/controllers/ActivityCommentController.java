@@ -1,5 +1,6 @@
 package com.skilldistillery.outdistancing.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +48,9 @@ public class ActivityCommentController {
 	//create activity comment
 		@PostMapping("activities/{actId}/activitycomments")
 		public ActivityComment createActivityComment(@RequestBody ActivityComment comment, @PathVariable("actId")int actId, HttpServletRequest request,
-				HttpServletResponse response) {
+				HttpServletResponse response, Principal principal) {
 			try {
-				ActivityComment newComment = comSvc.addActivityComment(comment, actId);
+				ActivityComment newComment = comSvc.addActivityComment(comment, actId, principal.getName());
 				response.setStatus(201);
 				StringBuffer url = request.getRequestURL();
 				url.append("/").append(comment.getId());
