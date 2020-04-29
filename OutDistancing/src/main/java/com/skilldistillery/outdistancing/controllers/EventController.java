@@ -22,17 +22,17 @@ import com.skilldistillery.outdistancing.services.EventService;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4220" })
 public class EventController {
-	
-	//COME BACK AND CHECK RECURSION
-	
+
+	// COME BACK AND CHECK RECURSION
+
 	@Autowired
 	private EventService eventSvc;
-	
+
 	@GetMapping("events")
-	public List<Event> index(){
+	public List<Event> index() {
 		return eventSvc.findAll();
 	}
-	
+
 	@GetMapping("events/{evtId}")
 	public Event showById(@PathVariable("evtId") Integer id, HttpServletResponse response) {
 		Event event = eventSvc.findById(id);
@@ -41,13 +41,16 @@ public class EventController {
 		}
 		return event;
 	}
-	
-	@PostMapping("events")
+
+	@PostMapping("activities/{actId}/events")
 	@ResponseBody
-	public Event addEvent(@RequestBody Event event, HttpServletRequest request,
+	public Event addEvent(@PathVariable("actId") int actId, @RequestBody Event event, HttpServletRequest request,
 			HttpServletResponse resp) {
+		System.out.println("********" + event);
+		// hardcoded user 1, fix with spring security
+		String hardcodedUsername = "kissmyaxe";
 		try {
-			Event addedEvent= eventSvc.createEvent(event);
+			Event addedEvent = eventSvc.createEvent(event, actId, hardcodedUsername);
 			resp.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(event.getId());
@@ -61,6 +64,4 @@ public class EventController {
 		}
 	}
 
-	
-	
 }
