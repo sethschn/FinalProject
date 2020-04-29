@@ -57,6 +57,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateUser(int userId, User user) {
+		
+		Location updateLocation = user.getLocation();
+		locRepo.saveAndFlush(updateLocation);
+		
 		Optional<User> optUser = userRepo.findById(userId);
 		if (optUser.isPresent()) {
 			User managedUser = optUser.get();
@@ -69,6 +73,7 @@ public class UserServiceImpl implements UserService {
 			managedUser.setImageUrl(user.getImageUrl());
 			managedUser.setEnabled(user.isEnabled());
 			managedUser.setRole(user.getRole());
+			managedUser.setLocation(updateLocation);
 			return userRepo.saveAndFlush(managedUser);
 		}
 		return null;
