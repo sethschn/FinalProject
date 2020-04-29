@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,6 +75,21 @@ public class ResourceController {
 			resource = null;
 		}
 		return resource;
+	}
+	
+	@DeleteMapping("resources/{resourceId}")
+	public void deleteHikeEntry(@PathVariable("resourceId") int resourceId, HttpServletResponse response) {
+		try {
+			if (resourceSvc.deleteById(resourceId)) {
+				response.setStatus(204);
+
+			} else {
+				response.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(409);
+		}
 	}
 
 }
