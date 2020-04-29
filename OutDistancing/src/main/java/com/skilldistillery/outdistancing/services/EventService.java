@@ -14,6 +14,8 @@ public interface EventService {
 
 	Event updateEvent(int evtId , Event event, String username);
 
-//	boolean disable();
+	Boolean deleteById(int evtId);
+	
+	Boolean changeEventEnabled(int evtId);
 
 }

@@ -80,7 +80,6 @@ public class EventServiceImpl implements EventService {
 			managedEvent.setEventTime(event.getEventTime());
 			managedEvent.setEventDate(event.getEventDate());
 			managedEvent.setShortDescription(event.getShortDescription());
-			managedEvent.setEnabled(true);
 			managedEvent.setDescription(event.getDescription());
 			managedEvent.setImageUrl(event.getImageUrl());
 			managedEvent.setCreator(currentUser);
@@ -95,10 +94,30 @@ public class EventServiceImpl implements EventService {
 		return null;
 	}
 
-//	@Override
-//	public boolean disable(int evtId) {
-//		
-//		return false;
-//	}
+	@Override
+	public Boolean deleteById(int evtId) {
+		Optional<Event> optEvent = eventRepo.findById(evtId);
+		if (optEvent.isPresent()) {
+			Event deleteEvent = optEvent.get();
+			if (deleteEvent != null) {
+				eventRepo.deleteById(evtId);
+				return true;
+			}
+		}
+		return false;
+	}
 
+	@Override
+	public Boolean changeEventEnabled(int evtId) {
+		Optional<Event> optEvent = eventRepo.findById(evtId);
+		if (optEvent.isPresent()) {
+			Event updateEvent = optEvent.get();
+			updateEvent.setEnabled(!updateEvent.isEnabled());
+			eventRepo.save(updateEvent);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
