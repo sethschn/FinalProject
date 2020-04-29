@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.outdistancing.entities.Location;
 import com.skilldistillery.outdistancing.entities.User;
+import com.skilldistillery.outdistancing.repositories.LocationRepository;
 import com.skilldistillery.outdistancing.repositories.UserRepository;
 
 @Service
@@ -16,6 +18,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 
+	@Autowired
+	private LocationRepository locRepo;
 
 	@Override
 	public List<User> listAllUsers() {
@@ -39,6 +43,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
+		Location newLocation = user.getLocation();
+		locRepo.saveAndFlush(newLocation);
 		try {
 			user = userRepo.saveAndFlush(user);
 			return user;
