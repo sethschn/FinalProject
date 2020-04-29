@@ -71,7 +71,8 @@ public class Activity {
 	@JoinTable(name = "activity_category", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
-	@ManyToMany(mappedBy = "activities")
+	@ManyToMany
+	@JoinTable(name= "activity_location", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "location_id"))
 	private List<Location> locations;
 
 	// CONSTRUCTORS
