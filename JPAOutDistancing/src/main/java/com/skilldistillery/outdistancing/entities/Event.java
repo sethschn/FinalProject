@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Event {
 
@@ -41,13 +43,16 @@ public class Event {
 	@Column(name = "create_date")
 	@CreationTimestamp
 	private LocalDate createDate;
-
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy="userEvents")
 	private List<User> users;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "event")
 	private List<EventComment> eventCmts;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
@@ -55,7 +60,8 @@ public class Event {
 	@ManyToOne
 	@JoinColumn(name = "activity_id")
 	private Activity activity;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "event")
 	private List<EventPhoto> eventPhotos;
 	
@@ -220,11 +226,26 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id  + ", title=" + title + ", eventTime=" + eventTime
-				+ ", eventDate=" + eventDate + ", shortDescription=" + shortDescription + ", enabled=" + enabled
-				+ ", description=" + description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + ", users="
-				+ users + ", eventCmts=" + eventCmts + ", location=" + location + ", activity=" + activity
-				+ ", eventPhotos=" + eventPhotos + ", creator=" + creator + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Title=");
+		builder.append(title);
+		builder.append(", eventTime=");
+		builder.append(eventTime);
+		builder.append(", eventDate=");
+		builder.append(eventDate);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", createDate=");
+		builder.append(createDate);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append(", activity=");
+		builder.append(activity);
+		return builder.toString();
 	}
 
 }
