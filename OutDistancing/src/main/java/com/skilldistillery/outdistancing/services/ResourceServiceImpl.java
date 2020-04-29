@@ -34,21 +34,45 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public Resource createResource(Resource resource) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			resource = resourceRepo.saveAndFlush(resource);
+			return resource;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public Resource updateResource(int resourceId, Resource resource) {
-		// TODO Auto-generated method stub
+		Optional<Resource> optResource = resourceRepo.findById(resourceId);
+		if (optResource.isPresent()) {
+			Resource managedResource = optResource.get();
+			managedResource.setName(resource.getName());
+			managedResource.setDescription(resource.getDescription());
+			managedResource.setLink(resource.getLink());
+			managedResource.setImageUrl(resource.getImageUrl());
+			return resourceRepo.saveAndFlush(managedResource);
+		}
 		return null;
 	}
 
 	@Override
-	public Boolean deleteResource(int resourceId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean changeResourceEnabled(String name) {
+		Resource resource = null;
+		resource = resourceRepo.findByName(name);
+		if (resource != null) {
+			resource.setEnabled(!resource.getEnabled());
+			resourceRepo.save(resource);
+			return true;
+		} else {
+			return false;
+
+		}
+
 	}
+
+	
 	
 	
 	

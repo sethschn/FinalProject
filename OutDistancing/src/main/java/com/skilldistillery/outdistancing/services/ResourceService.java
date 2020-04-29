@@ -9,5 +9,5 @@ public interface ResourceService {
 	Resource findById(int resourceId);
 	Resource createResource(Resource resource);
 	Resource updateResource (int resourceId, Resource resource);
-	Boolean deleteResource(int resourceId);
+	Boolean changeResourceEnabled(String name);
 }
