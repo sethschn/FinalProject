@@ -6,4 +6,5 @@ import com.skilldistillery.outdistancing.entities.Event;
 
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
+	
 }

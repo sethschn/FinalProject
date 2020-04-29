@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Location {
 	
@@ -34,12 +36,15 @@ public class Location {
 	@Column(name = "location_url")
 	public String locationUrl;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy= "location")
 	private List<User> users;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy= "location")
 	private List<Event> events;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="locations")
 	private List<Activity> activities;
 	
