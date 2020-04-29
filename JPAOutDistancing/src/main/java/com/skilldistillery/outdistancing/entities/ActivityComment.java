@@ -35,9 +35,9 @@ public class ActivityComment {
 //	@Column(name = "activity_id")
 //	private int activityId;
 	
-	@OneToOne
-	@JoinColumn(name = "in_reply_id")
-	private ActivityComment parentComment;
+//	@OneToOne
+	@Column(name = "in_reply_id")
+	private Integer parentComment;
 	
 	@ManyToOne
 	@JoinColumn(name="activity_id")
@@ -53,7 +53,7 @@ public class ActivityComment {
 
 
 	public ActivityComment(int id, String content, LocalDate createDate, int enabled, User user,
-			ActivityComment parentComment, Activity activity) {
+			Integer parentComment, Activity activity) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -64,6 +64,7 @@ public class ActivityComment {
 		this.activity = activity;
 	}
 
+	
 
 
 
@@ -117,11 +118,11 @@ public class ActivityComment {
 
 
 
-	public ActivityComment getParentComment() {
+	public Integer getParentComment() {
 		return parentComment;
 	}
 
-	public void setParentComment(ActivityComment parentComment) {
+	public void setParentComment(Integer parentComment) {
 		this.parentComment = parentComment;
 	}
 

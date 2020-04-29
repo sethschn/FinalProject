@@ -96,6 +96,7 @@ class ActivityTest {
 //	select * from activity_comment join activity where activity.id = activity_comment.activity_id;
 	void test7() {
 		assertTrue(activity.getActivityComments().size() > 0);
+		assertEquals(2, activity.getActivityComments().size());
 		assertEquals("dude hiking is my passion", activity.getActivityComments().get(0).getContent());
 	}
 	
