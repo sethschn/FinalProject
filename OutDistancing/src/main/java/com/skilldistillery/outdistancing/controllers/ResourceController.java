@@ -29,7 +29,7 @@ public class ResourceController {
 	private ResourceService resourceSvc;
 
 	@GetMapping("resources")
-	public List<Resource> listHikes() {
+	public List<Resource> listResources() {
 		return resourceSvc.listAllResources();
 	}
 
@@ -78,7 +78,7 @@ public class ResourceController {
 	}
 	
 	@DeleteMapping("resources/{resourceId}")
-	public void deleteHikeEntry(@PathVariable("resourceId") int resourceId, HttpServletResponse response) {
+	public void deleteResourceEntry(@PathVariable("resourceId") int resourceId, HttpServletResponse response) {
 		try {
 			if (resourceSvc.deleteById(resourceId)) {
 				response.setStatus(204);
