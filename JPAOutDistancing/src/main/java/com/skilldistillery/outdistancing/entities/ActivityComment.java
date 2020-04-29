@@ -26,7 +26,7 @@ public class ActivityComment {
 	@Column(name = "create_date")
 	private LocalDate createDate;
 	
-	private int enabled;
+	private boolean enabled;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -52,7 +52,7 @@ public class ActivityComment {
 	
 
 
-	public ActivityComment(int id, String content, LocalDate createDate, int enabled, User user,
+	public ActivityComment(int id, String content, LocalDate createDate, boolean enabled, User user,
 			Integer parentComment, Activity activity) {
 		super();
 		this.id = id;
@@ -95,11 +95,11 @@ public class ActivityComment {
 		this.createDate = createDate;
 	}
 
-	public int getEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 

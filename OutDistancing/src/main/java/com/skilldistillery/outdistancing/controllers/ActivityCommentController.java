@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +68,18 @@ public class ActivityCommentController {
 		public ActivityComment updateFlight(@PathVariable Integer id, @RequestBody ActivityComment comment) {
 			ActivityComment updatedComment = comSvc.updateActivityComment(comment, id);
 			return updatedComment;
+		}
+		
+		//disable activity comment
+		@DeleteMapping("activitycomments/{comId}")
+		public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId) {
+			boolean isEnabled = comSvc.changeCommentEnabled(comId);
+			if (isEnabled) {
+				res.setStatus(200);
+			}else {
+				res.setStatus(404);
+			}
+			return isEnabled;
 		}
 
 }
