@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Category;
+import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.entities.UserGroup;
 import com.skilldistillery.outdistancing.repositories.UserGroupRepository;
+import com.skilldistillery.outdistancing.repositories.UserRepository;
 
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
 	
 	@Autowired
 	private UserGroupRepository usergroupRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<UserGroup> listAllGroups() {
@@ -34,20 +39,26 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	@Override
-	public UserGroup createGroup(UserGroup userGroup) {
-		if (userGroup != null) {
-			return usergroupRepo.saveAndFlush(userGroup);			
-		}else {
-			return null;
+	public UserGroup createGroup(UserGroup userGroup, String username) {
+		User currentUser = userRepo.findByUsername(username);
+		if (userGroup != null && currentUser != null) {
+			userGroup.setCreator(currentUser);
+			try {
+				return usergroupRepo.saveAndFlush(userGroup);							
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return null;
 	}
 
 	@Override
-	public UserGroup updateGroup(int userGroupId, UserGroup userGroup) {
-        Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
-        if (optUserGroup.isPresent()) {
+	public UserGroup updateGroup(int userGroupId, UserGroup userGroup, String username) {
+		User currentUser = userRepo.findByUsername(username);
+		Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
+        if (optUserGroup.isPresent() && currentUser != null) {
             UserGroup updateUserGroup = optUserGroup.get();
-            updateUserGroup.setCreator(userGroup.getCreator());
+            updateUserGroup.setCreator(currentUser);
             updateUserGroup.setDescription(userGroup.getDescription());
             updateUserGroup.setImageUrl(userGroup.getImageUrl());
             updateUserGroup.setName(userGroup.getName());

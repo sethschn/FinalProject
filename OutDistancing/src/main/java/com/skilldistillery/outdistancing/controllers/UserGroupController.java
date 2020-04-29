@@ -48,23 +48,27 @@ public class UserGroupController {
 	
 	@PostMapping("usergroups")
 	public UserGroup create(@RequestBody UserGroup userGroup, HttpServletRequest req, HttpServletResponse res) {
-		UserGroup createdUserGroup = usergroupSvc.createGroup(userGroup);
-		if (createdUserGroup != null) {
+		String hardcodedUsername = "kissmyaxe";
+		try {
+		UserGroup createdUserGroup = usergroupSvc.createGroup(userGroup, hardcodedUsername);
 			res.setStatus(201);
 			StringBuffer reqUrl = req.getRequestURL();
 			reqUrl.append("/").append(createdUserGroup.getId());
 			res.setHeader("Location", reqUrl.toString());
-		} else {
+			return createdUserGroup;
+		} catch (Exception e) {
+			e.printStackTrace();
 			res.setStatus(404);
+			return null;
 		}
-		return createdUserGroup;
 	}
 	
 	@PutMapping("usergroups/{userGroupId}")
 	public UserGroup updateUserGroup(@PathVariable("userGroupId") int userGroupId, @RequestBody UserGroup userGroup,
 			HttpServletResponse resp) {
+		String hardcodedUsername = "kissmyaxe";
 		try {
-			userGroup = usergroupSvc.updateGroup(userGroupId, userGroup);
+			userGroup = usergroupSvc.updateGroup(userGroupId, userGroup, hardcodedUsername);
 			if (userGroup == null) {
 				resp.setStatus(400);
 			}
