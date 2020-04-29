@@ -57,6 +57,14 @@ class UserGroupTest {
 		assertEquals("p.smith@sd.com", userGroup.getUsers().get(0).getEmail());
 		assertEquals("Peggy", userGroup.getUsers().get(0).getFirstName());
 	}
+	
+	@Test
+	@DisplayName("test UserGroup MTO User(creator) mapping")
+	void test3() {
+		assertNotNull(userGroup.getCreator());
+		assertEquals("hackedbychina", userGroup.getCreator().getUsername());
+		assertEquals("Mary", userGroup.getCreator().getFirstName());
+	}
 
 
 }
