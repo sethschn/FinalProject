@@ -20,67 +20,64 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Activity {
-	// F I E L D S 
-	
+	// F I E L D S
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
-	
+
 	@Column(name = "short_description")
 	private String shortDescription;
-	
+
 	private int enabled;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
 	private User user;
 //	@Column(name = "creator_id")
 //	private int creatorId;
-	
+
 	private String description;
-	
+
 	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	@Column(name = "equipment_level")
 	@Enumerated(EnumType.STRING)
 	private EquipmentLevel equipmentLevel;
-	
+
 	@Column(name = "equipment_description")
 	private String equipmentDescription;
-	
+
 	@Column(name = "create_date")
 	@CreationTimestamp
 	private LocalDate createDate;
-	
+
 	@ManyToMany(mappedBy = "activities")
-	 private List<Resource> resources;
-	
-	@OneToMany(mappedBy="activity")
+	private List<Resource> resources;
+
+	@OneToMany(mappedBy = "activity")
 	private List<Event> events;
-	
-	@ManyToMany(mappedBy="favoriteActivities")
-	private List <User> users;
-	
-	@OneToMany(mappedBy="activity")
+
+	@ManyToMany(mappedBy = "favoriteActivities")
+	private List<User> users;
+
+	@OneToMany(mappedBy = "activity")
 	private List<ActivityComment> activityComments;
-	
+
 	@ManyToMany
-	@JoinTable(name="activity_category",
-	joinColumns = @JoinColumn(name="activity_id"),
-	inverseJoinColumns = @JoinColumn(name="category_id"))
+	@JoinTable(name = "activity_category", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
-	
-	//CONSTRUCTORS
-	public Activity() {}
 
-	
+	@ManyToMany
+	@JoinTable(name= "activity_location", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "location_id"))
+	private List<Location> locations;
 
-	
-
-
+	// CONSTRUCTORS
+	public Activity() {
+	}
 
 	public Activity(int id, String title, String shortDescription, int enabled, User user, String description,
 			String imageUrl, EquipmentLevel equipmentLevel, String equipmentDescription, LocalDate createDate,
@@ -102,14 +99,8 @@ public class Activity {
 		this.activityComments = activityComments;
 	}
 
+	// GETTERS & SETTERS
 
-
-
-
-
-
-	//GETTERS & SETTERS
-	
 	public int getId() {
 		return id;
 	}
@@ -118,21 +109,17 @@ public class Activity {
 		return categories;
 	}
 
+	public List<Location> getLocations() {
+		return locations;
+	}
 
-
-
-
-
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
-
-
-
-
-
-
 
 	public void setId(int id) {
 		this.id = id;
@@ -162,77 +149,37 @@ public class Activity {
 		this.enabled = enabled;
 	}
 
-	
-
-
-
-
 	public List<User> getUsers() {
 		return users;
 	}
-
-
-
-
-
-
 
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
-
-
-
-
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
-
-
-
 
 	public List<Event> getEvents() {
 		return events;
 	}
 
-
-
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-
-
-
-
-
 
 	public User getUser() {
 		return user;
 	}
 
-
-
-
-
-
-
 	public List<ActivityComment> getActivityComments() {
 		return activityComments;
 	}
 
-
-
 	public void setActivityComments(List<ActivityComment> activityComments) {
 		this.activityComments = activityComments;
 	}
-
-
 
 	public String getDescription() {
 		return description;
@@ -273,7 +220,7 @@ public class Activity {
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	public List<Resource> getResources() {
 		return resources;
 	}
@@ -284,11 +231,29 @@ public class Activity {
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", enabled="
-				+ enabled + ", user=" + user + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", equipmentLevel=" + equipmentLevel + ", equipmentDescription=" + equipmentDescription
-				+ ", createDate=" + createDate + ", resources=" + resources + ", events=" + events + ", users=" + users
-				+ ", activityComments=" + activityComments + ", categories=" + categories + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Activity [id=");
+		builder.append(id);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", equipmentLevel=");
+		builder.append(equipmentLevel);
+		builder.append(", equipmentDescription=");
+		builder.append(equipmentDescription);
+		builder.append(", createDate=");
+		builder.append(createDate);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -312,9 +277,5 @@ public class Activity {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }

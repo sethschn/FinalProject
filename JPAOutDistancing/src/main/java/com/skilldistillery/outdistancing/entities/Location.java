@@ -1,10 +1,14 @@
 package com.skilldistillery.outdistancing.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Location {
@@ -30,6 +34,15 @@ public class Location {
 	@Column(name = "location_url")
 	public String locationUrl;
 	
+	@OneToMany(mappedBy= "location")
+	private List<User> users;
+	
+	@OneToMany(mappedBy= "location")
+	private List<Event> events;
+	
+	@ManyToMany(mappedBy="locations")
+	private List<Activity> activities;
+	
 	//CONSTRUCTORS
 	public Location() {}
 
@@ -47,8 +60,34 @@ public class Location {
 	}
 
 	//GETTERS & SETTERS
+	
+	
 	public int getId() {
 		return id;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	public void setId(int id) {
@@ -111,11 +150,27 @@ public class Location {
 		this.locationUrl = locationUrl;
 	}
 
-	//TOSTRING
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", country="
-				+ country + ", postalCode=" + postalCode + ", title=" + title + ", locationUrl=" + locationUrl + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Location [id=");
+		builder.append(id);
+		builder.append(", street=");
+		builder.append(street);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", country=");
+		builder.append(country);
+		builder.append(", postalCode=");
+		builder.append(postalCode);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", locationUrl=");
+		builder.append(locationUrl);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
