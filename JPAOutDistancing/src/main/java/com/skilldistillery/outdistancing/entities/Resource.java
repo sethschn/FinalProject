@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Resource {
 	@Id
@@ -24,6 +26,7 @@ public class Resource {
 	@Column (name = "image_url")
 	private String imageUrl;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="activity_resource",
     joinColumns= @JoinColumn(name="resource_id"),
