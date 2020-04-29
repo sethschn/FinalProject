@@ -20,6 +20,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class User {
+	
+	//FIELDS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -35,12 +37,10 @@ public class User {
 
 	private boolean enabled;
 
-	@Column(name = "location_id")
-	private int locationId;
 
-//	@ManyToOne
-//	@JoinColumn(name="location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name="location_id")
+	private Location location;
 
 	private String description;
 
@@ -82,12 +82,51 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<EventComment> eventComments;
+	
+	
+	
 	//METHODS BEGIN: 
-	
-	
 	public User() {
 		super();
 	}
+	
+	
+
+	public Location getLocation() {
+		return location;
+	}
+
+
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+
+
+	public List<UserGroup> getGroups() {
+		return groups;
+	}
+
+
+
+	public void setGroups(List<UserGroup> groups) {
+		this.groups = groups;
+	}
+
+
+
+	public List<EventComment> getEventComments() {
+		return eventComments;
+	}
+
+
+
+	public void setEventComments(List<EventComment> eventComments) {
+		this.eventComments = eventComments;
+	}
+
+
 
 	public List<Event> getUserEvents() {
 		return userEvents;
@@ -185,14 +224,6 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public int getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -250,11 +281,31 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=").append(id).append(", username=").append(username).append(", password=")
-				.append(password).append(", email=").append(email).append(", firstName=").append(firstName)
-				.append(", lastName=").append(lastName).append(", enabled=").append(enabled).append(", locationId=")
-				.append(locationId).append(", description=").append(description).append(", imageUrl=").append(imageUrl)
-				.append(", role=").append(role).append(", createDate=").append(createDate).append("]");
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", createDate=");
+		builder.append(createDate);
+		builder.append("]");
 		return builder.toString();
 	}
 
