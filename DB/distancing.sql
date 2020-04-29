@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `location_id` INT NOT NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(3000) NULL,
-  `role` ENUM('user', 'admin') NULL DEFAULT 'user',
+  `role` VARCHAR(45) NULL DEFAULT 'user',
   `create_date` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_location_idx` (`location_id` ASC),

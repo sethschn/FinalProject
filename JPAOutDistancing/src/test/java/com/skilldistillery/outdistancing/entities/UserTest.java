@@ -62,7 +62,7 @@ class UserTest {
 //		assertEquals(2, user.getLocationId());
 		assertEquals(" Freelance internet buff. Amateur introvert. Writer. Web nerd. Travel aficionado.", user.getDescription());
 		assertEquals("https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/GettyImages-1158622531_thumb.jpg", user.getImageUrl());
-		assertEquals(Role.user, user.getRole());
+		assertEquals("user", user.getRole());
 		assertEquals(LocalDate.of(2020, 04, 28), user.getCreateDate());
 	}
 	
