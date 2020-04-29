@@ -1,5 +1,6 @@
 package com.skilldistillery.outdistancing.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,9 +46,9 @@ public class ResourceController {
 	@PostMapping("resources")
 	@ResponseBody
 	public Resource createNewResource(@RequestBody Resource resource, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		try {
-			Resource addResource = resourceSvc.createResource(resource);
+			Resource addResource = resourceSvc.createResource(resource, principal.getName());
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(resource.getId());
@@ -63,9 +64,9 @@ public class ResourceController {
 	
 	@PutMapping("resources/{resourceId}")
 	public Resource updateResourceEntry(@PathVariable("resourceId") int resourceId, @RequestBody Resource resource,
-			HttpServletResponse resp) {
+			HttpServletResponse resp, Principal principal) {
 		try {
-			resource = resourceSvc.updateResource(resourceId, resource);
+			resource = resourceSvc.updateResource(resourceId, resource, principal.getName());
 			if (resource == null) {
 				resp.setStatus(400);
 			}
@@ -78,9 +79,9 @@ public class ResourceController {
 	}
 	
 	@DeleteMapping("resources/{resourceId}")
-	public void deleteResourceEntry(@PathVariable("resourceId") int resourceId, HttpServletResponse response) {
+	public void deleteResourceEntry(@PathVariable("resourceId") int resourceId, HttpServletResponse response, Principal principal) {
 		try {
-			if (resourceSvc.deleteById(resourceId)) {
+			if (resourceSvc.deleteById(resourceId, principal.getName())) {
 				response.setStatus(204);
 
 			} else {
