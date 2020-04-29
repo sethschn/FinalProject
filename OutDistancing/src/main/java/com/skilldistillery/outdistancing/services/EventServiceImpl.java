@@ -67,15 +67,38 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public Event updateEvent(int evtId, Event event) {
-		// TODO Auto-generated method stub
+	public Event updateEvent(int evtId, Event event, String username) {
+		Location updateLocation = event.getLocation();
+		locRepo.saveAndFlush(updateLocation);
+
+		Optional<Event> optEvent = eventRepo.findById(evtId);
+		User currentUser = userRepo.findByUsername(username);
+
+		if (optEvent.isPresent() && currentUser != null) {
+			Event managedEvent = optEvent.get();
+			managedEvent.setTitle(event.getTitle());
+			managedEvent.setEventTime(event.getEventTime());
+			managedEvent.setEventDate(event.getEventDate());
+			managedEvent.setShortDescription(event.getShortDescription());
+			managedEvent.setEnabled(true);
+			managedEvent.setDescription(event.getDescription());
+			managedEvent.setImageUrl(event.getImageUrl());
+			managedEvent.setCreator(currentUser);
+			managedEvent.setLocation(updateLocation);
+			try {
+				managedEvent = eventRepo.saveAndFlush(managedEvent);
+				return managedEvent;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
-	@Override
-	public boolean deleteById(int evtId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean disable(int evtId) {
+//		
+//		return false;
+//	}
 
 }
