@@ -77,6 +77,16 @@ class EventTest {
 	@DisplayName("test Event MTO Location mapping")
 	void test5() {
 		assertNotNull(event.getLocation());
+		assertEquals("Colorado", event.getLocation().getState());
+		assertEquals("Greenwood Village", event.getLocation().getCity());
+	}
+	
+	@Test
+	@DisplayName("test Event OTM EventPhoto Mapping")
+	void test6() {
+		assertTrue(event.getEventPhotos().size() >0);
+		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", 
+				event.getEventPhotos().get(0).getImageUrl());
 	}
 
 }

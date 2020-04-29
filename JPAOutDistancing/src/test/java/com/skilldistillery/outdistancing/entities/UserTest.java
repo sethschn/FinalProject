@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
@@ -63,6 +64,16 @@ class UserTest {
 		assertEquals("https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/GettyImages-1158622531_thumb.jpg", user.getImageUrl());
 		assertEquals(Role.user, user.getRole());
 		assertEquals(LocalDate.of(2020, 04, 28), user.getCreateDate());
+	}
+	
+	@Test
+	@DisplayName("test User MTO Location mappings")
+	void test2() {
+		assertNotNull(user.getLocation());
+		assertEquals("2710 S Colorado Blvd",user.getLocation().getStreet());
+		assertEquals("Denver",user.getLocation().getCity());
+		assertEquals("Colorado",user.getLocation().getState());
+		assertEquals("80222" ,user.getLocation().getPostalCode());
 	}
 
 }
