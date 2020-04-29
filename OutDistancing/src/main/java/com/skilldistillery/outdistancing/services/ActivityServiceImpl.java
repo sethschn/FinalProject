@@ -40,12 +40,19 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public Activity updateActivity(Activity activity, int id) {
-		Optional<Activity> updatedWorkout = activityRepo.findById(id);
-		if (updatedWorkout.isPresent()) {
-			activity.setId(id);
-			activityRepo.saveAndFlush(activity);
+		Optional<Activity> updatedActivity = activityRepo.findById(id);
+		if (updatedActivity.isPresent()) {
+			Activity managedActivity = updatedActivity.get();
+			managedActivity.setTitle(activity.getTitle());
+			managedActivity.setShortDescription(activity.getShortDescription());
+			managedActivity.setDescription(activity.getDescription());
+			managedActivity.setEnabled(activity.getEnabled());
+			managedActivity.setImageUrl(activity.getImageUrl());
+			managedActivity.setEquipmentLevel(activity.getEquipmentLevel());
+			managedActivity.setEquipmentDescription(activity.getDescription());
+			return activityRepo.saveAndFlush(managedActivity);
 		}
-		return activity;
+		return null;
 	}
 
 //	@Override

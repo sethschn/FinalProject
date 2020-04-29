@@ -49,13 +49,13 @@ public class ActivityController {
 	public Activity createWorkout(@RequestBody Activity activity, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			Activity newWorkout = activitySvc.addActivity(activity);
+			Activity newActivity = activitySvc.addActivity(activity);
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(activity.getId());
 			String location = url.toString();
 			response.addHeader("Location", location);
-			return newWorkout;
+			return newActivity;
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(400);
@@ -67,6 +67,7 @@ public class ActivityController {
 		@PutMapping("activities/{id}")
 		public Activity updateFlight(@PathVariable Integer id, @RequestBody Activity activity) {
 			Activity updatedActivity = activitySvc.updateActivity(activity, id);
+			System.out.println(updatedActivity);
 			return updatedActivity;
 		}
 		
