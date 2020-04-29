@@ -57,12 +57,14 @@ public class ResourceServiceImpl implements ResourceService {
 		return null;
 	}
 
+
+
 	@Override
 	public Boolean changeResourceEnabled(String name) {
 		Resource resource = null;
 		resource = resourceRepo.findByName(name);
 		if (resource != null) {
-			resource.setEnabled(!resource.getEnabled());
+//			resource.setEnabled(!resource.getEnabled());
 			resourceRepo.save(resource);
 			return true;
 		} else {

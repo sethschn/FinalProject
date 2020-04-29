@@ -33,7 +33,7 @@ public class Activity {
 	@Column(name = "short_description")
 	private String shortDescription;
 
-	private int enabled;
+	private boolean enabled;
 
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
@@ -87,7 +87,7 @@ public class Activity {
 	public Activity() {
 	}
 
-	public Activity(int id, String title, String shortDescription, int enabled, User user, String description,
+	public Activity(int id, String title, String shortDescription, boolean enabled, User user, String description,
 			String imageUrl, EquipmentLevel equipmentLevel, String equipmentDescription, LocalDate createDate,
 			List<Resource> resources, List<Event> events, List<User> users, List<ActivityComment> activityComments) {
 		super();
@@ -149,11 +149,11 @@ public class Activity {
 		this.shortDescription = shortDescription;
 	}
 
-	public int getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
