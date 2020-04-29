@@ -35,6 +35,7 @@ public class Activity {
 
 	private boolean enabled;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
 	private User user;
