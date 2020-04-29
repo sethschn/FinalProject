@@ -10,7 +10,7 @@ public interface ActivityCommentService {
 
 	ActivityComment findById(int id);
 
-	ActivityComment addActivityComment(ActivityComment comment, int actId);
+	ActivityComment addActivityComment(ActivityComment comment, int actId, String username);
 
 	ActivityComment updateActivityComment(ActivityComment comment, int id);
 

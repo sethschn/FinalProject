@@ -38,13 +38,12 @@ public class ActivityCommentServiceImpl implements ActivityCommentService {
 	}
 
 	@Override
-	public ActivityComment addActivityComment(ActivityComment comment, int actId) {
+	public ActivityComment addActivityComment(ActivityComment comment, int actId, String username) {
 		Optional<Activity> optActivity = activityRepo.findById(actId);
-		User newUser = comment.getUser();
-		userRepo.saveAndFlush(newUser);
+		User user = userRepo.findByUsername(username);
 		if (optActivity.isPresent()) {
 			comment.setActivity(optActivity.get());
-			comment.setUser(newUser);
+			comment.setUser(user);
 			try {
 				comment = comRepo.saveAndFlush(comment);
 				return comment;
