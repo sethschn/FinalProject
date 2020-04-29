@@ -49,6 +49,14 @@ class UserGroupTest {
 		assertEquals("For Hardcore Hiking", userGroup.getShortDescription());
 		assertEquals(1, userGroup.getId());
 	}
+	
+	@Test
+	@DisplayName("test UserGroup MTM User mapping")
+	void test2() {
+		assertNotNull(userGroup.getUsers().size() > 0);
+		assertEquals("p.smith@sd.com", userGroup.getUsers().get(0).getEmail());
+		assertEquals("Peggy", userGroup.getUsers().get(0).getFirstName());
+	}
 
 
 }

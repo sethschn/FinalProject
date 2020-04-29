@@ -1,6 +1,7 @@
 package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -38,6 +40,10 @@ public class UserGroup {
 //	@Column(name = "creator_id")
 	private User creator;
 	
+	@ManyToMany(mappedBy="groups")
+	private List<User> users;
+	
+	
 	
 	
 	//CONSTRUCTORS
@@ -60,9 +66,23 @@ public class UserGroup {
 
 
 	//GETTERS & SETTERS
+	
+	
 	public int getId() {
 		return id;
 	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -120,8 +140,23 @@ public class UserGroup {
 
 	@Override
 	public String toString() {
-		return "UserGroup [id=" + id + ", name=" + name + ", shortDescription=" + shortDescription + ", description="
-				+ description + ", imageUrl=" + imageUrl + ", createDate=" + createDate + ", creator=" + creator + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserGroup [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", createDate=");
+		builder.append(createDate);
+		builder.append(", creator=");
+		builder.append(creator);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override

@@ -75,5 +75,13 @@ class UserTest {
 		assertEquals("Colorado",user.getLocation().getState());
 		assertEquals("80222" ,user.getLocation().getPostalCode());
 	}
+	
+	@Test
+	@DisplayName("test User MTM UserGroup mappings")
+	void test3() {
+		assertTrue(user.getGroups().size() > 0);
+		assertEquals("Hikers United",user.getGroups().get(0).getName());
+		assertEquals("For Hardcore Hiking",user.getGroups().get(0).getShortDescription());
+	}
 
 }
