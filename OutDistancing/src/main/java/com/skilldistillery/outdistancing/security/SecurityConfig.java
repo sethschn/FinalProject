@@ -35,9 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 	        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/categories").permitAll()     // will hit the OPTIONS on the route
+	        .antMatchers(HttpMethod.GET,"/api/categories/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/activities").permitAll()     // will hit the OPTIONS on the route
+	        .antMatchers(HttpMethod.GET,"/api/activities/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/events").permitAll()     // will hit the OPTIONS on the route
+	        .antMatchers(HttpMethod.GET,"/api/events/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/resources").permitAll()     // will hit the OPTIONS on the route
+	        .antMatchers(HttpMethod.GET,"/api/resources/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/usergroups").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/activitycomments").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET,"/api/eventcomments").permitAll()     // will hit the OPTIONS on the route

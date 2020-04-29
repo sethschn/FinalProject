@@ -1,5 +1,6 @@
 package com.skilldistillery.outdistancing.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,8 @@ public class CategoryController {
 	private CategoryService categorySvc;
 	
 	@GetMapping("categories")
-	public List<Category> index(){
+	public List<Category> index(HttpServletRequest req, HttpServletResponse res){
+		System.out.println("************************************");
 		return categorySvc.listAllCategories();
 	}
 	
