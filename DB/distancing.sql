@@ -319,7 +319,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `event_comment` ;
 
 CREATE TABLE IF NOT EXISTS `event_comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `content` TEXT NOT NULL,
   `create_date` DATETIME NOT NULL,
   `enabled` TINYINT NOT NULL DEFAULT '1',
