@@ -49,8 +49,8 @@ public class User {
 	@Column(name = "image_url")
 	private String imageUrl;
 
-	@Enumerated(EnumType.STRING)
-	private Role role;
+	
+	private String role;
 
 	@Column(name = "create_date")
 	@CreationTimestamp
@@ -248,13 +248,19 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 
-	public Role getRole() {
+	
+
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+
+
+	public void setRole(String role) {
 		this.role = role;
 	}
+
+
 
 	public LocalDate getCreateDate() {
 		return createDate;

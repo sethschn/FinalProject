@@ -41,18 +41,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	@Override
-	public User createUser(User user) {
-		Location newLocation = user.getLocation();
-		locRepo.saveAndFlush(newLocation);
-		try {
-			user = userRepo.saveAndFlush(user);
-			return user;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	@Override
+//	public User createUser(User user) {
+//		Location newLocation = user.getLocation();
+//		locRepo.saveAndFlush(newLocation);
+//		try {
+//			user = userRepo.saveAndFlush(user);
+//			return user;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 
 	@Override
