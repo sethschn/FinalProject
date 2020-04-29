@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name = "user_group")
 public class UserGroup {
@@ -40,6 +42,7 @@ public class UserGroup {
 //	@Column(name = "creator_id")
 	private User creator;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="groups")
 	private List<User> users;
 	

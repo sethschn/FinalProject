@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 
@@ -25,6 +27,7 @@ public class Category {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="categories")
 	private List<Activity> activities;
 	

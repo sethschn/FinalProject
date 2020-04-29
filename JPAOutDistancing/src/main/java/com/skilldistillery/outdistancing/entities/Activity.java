@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Activity {
 	// F I E L D S
@@ -55,22 +57,28 @@ public class Activity {
 	@CreationTimestamp
 	private LocalDate createDate;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "activities")
 	private List<Resource> resources;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "activity")
 	private List<Event> events;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "favoriteActivities")
 	private List<User> users;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "activity")
 	private List<ActivityComment> activityComments;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "activity_category", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name= "activity_location", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "location_id"))
 	private List<Location> locations;
