@@ -88,5 +88,11 @@ class EventTest {
 		assertEquals("https://www.gohikeit.com/wp-content/uploads/2015/04/hiker-selfie-saddleback-mountain-hiking-trail.jpg", 
 				event.getEventPhotos().get(0).getImageUrl());
 	}
+	
+	@Test
+	@DisplayName("test Event MTO User Mapping")
+	void test7() {
+		assertNotNull(event.getCreator());
+	}
 
 }
