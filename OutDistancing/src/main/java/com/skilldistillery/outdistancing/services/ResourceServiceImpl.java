@@ -58,17 +58,29 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public Boolean changeResourceEnabled(String name) {
-		Resource resource = null;
-		resource = resourceRepo.findByName(name);
-		if (resource != null) {
-			resource.setEnabled(!resource.getEnabled());
-			resourceRepo.save(resource);
+	public boolean deleteById(int resourceId) {
+		Optional<Resource> optHike = resourceRepo.findById(resourceId);
+		if (optHike.isPresent()) {
+			resourceRepo.deleteById(resourceId);
 			return true;
-		} else {
-			return false;
-
 		}
+		return false;
+	}
+	
+	
+
+//	@Override
+//	public Boolean changeResourceEnabled(String name) {
+//		Resource resource = null;
+//		resource = resourceRepo.findByName(name);
+//		if (resource != null) {
+//			resource.setEnabled(!resource.getEnabled());
+//			resourceRepo.save(resource);
+//			return true;
+//		} else {
+//			return false;
+//
+//		}
 
 	}
 
@@ -78,4 +90,4 @@ public class ResourceServiceImpl implements ResourceService {
 	
 
 
-}
+
