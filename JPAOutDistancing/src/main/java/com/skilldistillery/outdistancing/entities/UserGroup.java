@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -35,6 +37,7 @@ public class UserGroup {
 	private String imageUrl;
 	
 	@Column(name = "create_date")
+	@CreationTimestamp
 	private LocalDate createDate;
 	
 	@ManyToOne
