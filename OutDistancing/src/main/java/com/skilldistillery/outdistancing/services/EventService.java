@@ -10,10 +10,12 @@ public interface EventService {
 
 	Event findById(int evtId);
 
-	Event createEvent(Event event);
+	Event createEvent(Event event, int actId, String username);
 
-	Event updateEvent(int evtId , Event event);
+	Event updateEvent(int evtId , Event event, String username);
 
-	boolean deleteById(int evtId);
+	Boolean deleteById(int evtId);
+	
+	Boolean changeEventEnabled(int evtId);
 
 }
