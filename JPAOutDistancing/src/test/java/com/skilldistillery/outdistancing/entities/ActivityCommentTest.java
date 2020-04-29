@@ -33,7 +33,7 @@ class ActivityCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		activityCmt = em.find(ActivityComment.class, 2);
+		activityCmt = em.find(ActivityComment.class, 1);
 	}
 
 	@AfterEach
@@ -49,11 +49,30 @@ class ActivityCommentTest {
 //	+----+---------------------------+---------------------+---------+---------+-------------+-------------+
 	@Test
 	@DisplayName("test Activity Commententity mapping")
-	void test() {
+	void test1() {
 		assertNotNull(activityCmt);
-		assertEquals("highly doubtful, prove it n00b", activityCmt.getContent());
-		assertEquals(2, activityCmt.getId());
+		assertEquals("dude hiking is my passion", activityCmt.getContent());
+		assertEquals(1, activityCmt.getId());
 	}
+	
+	@Test
+	@DisplayName("test Activity Comment MTM User mapping")
+//	 select * from user join activity_comment where activity_comment.user_id = user.id;
+	void test2() {
+		assertNotNull(activityCmt);
+		assertEquals("kissmyaxe", activityCmt.getUser().getUsername());
+		assertEquals("Peggy", activityCmt.getUser().getFirstName());
+	}
+	
+	@Test
+	@DisplayName("test Activity Comment MTM Activity mapping")
+//	 select * from activity join activity_comment where activity_comment.activity_id = activity.id;
+	void test3() {
+		assertNotNull(activityCmt);
+		assertEquals("Hiking", activityCmt.getActivity().getTitle());
+		assertEquals("Neature Walk Together", activityCmt.getActivity().getShortDescription());
+	}
+	
 	
 	
 
