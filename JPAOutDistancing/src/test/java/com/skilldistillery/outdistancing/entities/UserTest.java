@@ -77,14 +77,6 @@ class UserTest {
 	}
 	
 	@Test
-	@DisplayName("test User MTM UserGroup mappings")
-	void test3() {
-		assertTrue(user.getGroups().size() > 0);
-		assertEquals("Hikers United",user.getGroups().get(0).getName());
-		assertEquals("For Hardcore Hiking",user.getGroups().get(0).getShortDescription());
-	}
-	
-	@Test
 	@DisplayName("test User OTM/MTM Event mappings")
 	void test4() {
 		assertTrue(user.getEvents().size() > 0);
@@ -92,6 +84,7 @@ class UserTest {
 		assertEquals("This is a chance to enjoy the nice weather but also respect distancing",user.getEvents().get(0).getDescription());
 		assertTrue( user.getUserEvents().size() > 0);
 	}
+	
 	@Test
 	@DisplayName("test User MTM/OTM Activity mappings")
 	void test5() {
@@ -101,6 +94,17 @@ class UserTest {
 		assertEquals("Neature Walk Together",user.getActivities().get(0).getShortDescription());
 		
 	}
+	
+	@Test
+	@DisplayName("test User MTM UserGroup mappings")
+	void test3() {
+		assertTrue(user.getGroups().size() > 0);
+		assertEquals("Hikers United",user.getGroups().get(0).getName());
+		assertEquals("For Hardcore Hiking",user.getGroups().get(0).getShortDescription());
+	}
+	
+
+
 	
 	@Test
 	@DisplayName("test User OTM ActivityComment mapping")
@@ -118,9 +122,6 @@ class UserTest {
 		assertEquals("yo brosephs what time we meeting up I cant read good", user.getEventComments().get(0).getContent());
 		assertEquals(1, user.getEventComments().get(0).getUser().getId());
 	}
-	
-	
-	
-	
+		
 
 }
