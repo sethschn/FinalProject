@@ -61,5 +61,13 @@ class EventCommentTest {
 		assertEquals("This is a chance to enjoy the nice weather but also respect distancing", eventCmt.getEvent().getDescription());
 	
 	}
+	@Test
+	@DisplayName("test Event Comment MTO User mapping")
+	void test3() {
+		assertNotNull(eventCmt.getUser());
+		assertEquals("Peggy", eventCmt.getUser().getFirstName());
+		assertEquals("Smith", eventCmt.getUser().getLastName());
+		
+	}
 
 }

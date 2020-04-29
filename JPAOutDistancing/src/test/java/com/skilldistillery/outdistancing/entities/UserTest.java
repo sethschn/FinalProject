@@ -75,5 +75,52 @@ class UserTest {
 		assertEquals("Colorado",user.getLocation().getState());
 		assertEquals("80222" ,user.getLocation().getPostalCode());
 	}
+	
+	@Test
+	@DisplayName("test User MTM UserGroup mappings")
+	void test3() {
+		assertTrue(user.getGroups().size() > 0);
+		assertEquals("Hikers United",user.getGroups().get(0).getName());
+		assertEquals("For Hardcore Hiking",user.getGroups().get(0).getShortDescription());
+	}
+	
+	@Test
+	@DisplayName("test User OTM/MTM Event mappings")
+	void test4() {
+		assertTrue(user.getEvents().size() > 0);
+		assertEquals("Hiking at a Distance",user.getEvents().get(0).getTitle());
+		assertEquals("This is a chance to enjoy the nice weather but also respect distancing",user.getEvents().get(0).getDescription());
+		assertTrue( user.getUserEvents().size() > 0);
+	}
+	@Test
+	@DisplayName("test User MTM/OTM Activity mappings")
+	void test5() {
+		assertTrue(user.getFavoriteActivities().size() > 0);
+		assertTrue(user.getActivities().size() > 0);
+		assertEquals("Let's go on a wonderful neature walk together",user.getFavoriteActivities().get(0).getDescription());
+		assertEquals("Neature Walk Together",user.getActivities().get(0).getShortDescription());
+		
+	}
+	
+	@Test
+	@DisplayName("test User OTM ActivityComment mapping")
+	void test6() {
+		assertTrue(user.getActivityComments().size() > 0);
+		assertEquals("kissmyaxe", user.getActivityComments().get(0).getUser().getUsername());
+		assertEquals(LocalDate.of(2020, 04, 28), user.getActivityComments().get(0).getCreateDate());
+		assertEquals("dude hiking is my passion", user.getActivityComments().get(0).getContent());
+	}
+	
+	@Test
+	@DisplayName("test User OTM EventComment mapping")
+	void test7() {
+		assertTrue(user.getEventComments().size() > 0);
+		assertEquals("yo brosephs what time we meeting up I cant read good", user.getEventComments().get(0).getContent());
+		assertEquals(1, user.getEventComments().get(0).getUser().getId());
+	}
+	
+	
+	
+	
 
 }
