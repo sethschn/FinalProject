@@ -73,15 +73,7 @@ class ActivityCommentTest {
 		assertEquals("Neature Walk Together", activityCmt.getActivity().getShortDescription());
 	}
 	
-	@Test
-	@DisplayName("test Activity Comment OTO Activity Comment mapping")
-//	 select * from activity_comment a1 inner join activity_comment a2 where a1.in_reply_id = a2.id;
-	void test4() {
-		assertNotNull(activityCmt);
-		assertEquals(2, activityCmt.getParentComment().getId());
-		assertEquals("highly doubtful, prove it n00b", activityCmt.getParentComment().getContent());
-		assertEquals("shaquilleoatmeal", activityCmt.getParentComment().getUser().getFirstName());
-	}
+	
 	
 
 }
