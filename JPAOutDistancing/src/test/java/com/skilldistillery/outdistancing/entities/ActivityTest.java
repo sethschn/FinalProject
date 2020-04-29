@@ -91,13 +91,13 @@ class ActivityTest {
 		assertEquals("Peggy", activity.getUsers().get(0).getFirstName());
 	}
 	
-	@Test
-	@DisplayName("test Activity OTM Activity Comment mappings")
-//	select * from activity_comment join activity where activity.id = activity_comment.activity_id;
-	void test7() {
-		assertTrue(activity.getActivityComments().size() > 0);
-		assertEquals("dude hiking is my passion", activity.getActivityComments().get(0).getContent());
-	}
+//	@Test
+//	@DisplayName("test Activity OTM Activity Comment mappings")
+////	select * from activity_comment join activity where activity.id = activity_comment.activity_id;
+//	void test7() {
+//		assertTrue(activity.getActivityComments().size() > 0);
+//		assertEquals("dude hiking is my passion", activity.getActivityComments().get(0).getContent());
+//	}
 	
 	@Test
 	@DisplayName("test Activity MTM Activity Category mappings")
