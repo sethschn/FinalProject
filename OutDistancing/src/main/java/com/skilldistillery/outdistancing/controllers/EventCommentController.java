@@ -48,12 +48,9 @@ public class EventCommentController {
 	}
 
 	@PostMapping("events/{evtId}/eventcomments")
-	public EventComment addEventComment(
-			@PathVariable("evtId") Integer evtId, 
-			@RequestBody EventComment eventCmt,
-			HttpServletRequest req, HttpServletResponse resp,
-			Principal principal) {
-		
+	public EventComment addEventComment(@PathVariable("evtId") Integer evtId, @RequestBody EventComment eventCmt,
+			HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+
 		try {
 			EventComment addEventCmt = eventCmtSvc.createEventComment(eventCmt, evtId, principal.getName());
 			resp.setStatus(201);
@@ -68,18 +65,23 @@ public class EventCommentController {
 			return null;
 		}
 	}
-	
+
 	@PutMapping("events/{evtId}/eventcomments/{evtCmtId}")
-	public EventComment updateEventComment(
-			@RequestBody EventComment eventCmt,
-			@PathVariable("evtId") Integer eventId,
-			@PathVariable("evtCmtId") Integer evtCmtId,
-			HttpServletRequest req, HttpServletResponse resp,
+	public EventComment updateEventComment(@RequestBody EventComment eventCmt, @PathVariable("evtId") Integer eventId,
+			@PathVariable("evtCmtId") Integer evtCmtId, HttpServletRequest req, HttpServletResponse resp,
 			Principal principal) {
-		eventCmt = eventCmtSvc.updateEventComment(evtCmtId, eventCmt, principal.getName());
-		
-		
-		return null;
+		try {
+			eventCmt = eventCmtSvc.updateEventComment(evtCmtId, eventCmt, principal.getName());
+			if (eventCmt == null) {
+				resp.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(404);
+			eventCmt = null;
+		}
+
+		return eventCmt;
 	}
 
 }
