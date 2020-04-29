@@ -6,5 +6,6 @@ import com.skilldistillery.outdistancing.entities.ActivityComment;
 
 
 public interface ActivityCommentRepository extends JpaRepository<ActivityComment, Integer>{
+	
 
 }

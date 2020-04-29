@@ -30,7 +30,7 @@ public class ActivityController {
 	
 	//find all
 	@GetMapping("activities")
-	public List <Activity> findAll(){
+	public List <Activity> findAll(HttpServletRequest req, HttpServletResponse res){
 		return activitySvc.findAll();
 	}
 	
