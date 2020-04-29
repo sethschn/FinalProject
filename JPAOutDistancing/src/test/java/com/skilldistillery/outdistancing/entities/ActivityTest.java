@@ -64,5 +64,14 @@ class ActivityTest {
 		assertTrue(activity.getResources().size()>0);
 		
 	}
+	
+	@Test
+	@DisplayName("test Activity MTM Location mappings")
+	void test4() {
+		assertTrue(activity.getLocations().size() > 0);
+		assertEquals("https://skilldistillery.com/", activity.getLocations().get(0).getLocationUrl());
+		assertEquals("Greenwood Village", activity.getLocations().get(0).getCity());
+		assertEquals("Colorado", activity.getLocations().get(0).getState());
+	}
 
 }

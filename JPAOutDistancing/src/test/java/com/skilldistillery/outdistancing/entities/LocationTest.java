@@ -50,6 +50,30 @@ class LocationTest {
 		assertEquals(1, location.getId());
 	}
 	
+	@Test
+	@DisplayName("test Location OTM User mapping")
+	void test2() {
+		assertTrue(location.getUsers().size() > 0);
+		assertEquals("m.wood@sd.com", location.getUsers().get(0).getEmail());
+		assertEquals("Mary", location.getUsers().get(0).getFirstName());
+	}
+	
+	@Test
+	@DisplayName("test Location OTM Event mapping")
+	void test3() {
+		assertTrue(location.getEvents().size() > 0);
+		assertEquals("This is a chance to enjoy the nice weather but also respect distancing", location.getEvents().get(0).getDescription());
+		assertEquals("Hiking at a Distance", location.getEvents().get(0).getTitle());
+	}
+	@Test
+	@DisplayName("test Location MTM Activity mapping")
+	void test4() {
+		assertTrue(location.getActivities().size() > 0);
+		assertEquals("You will need a water source and good hiking boots", location.getActivities().get(0).getEquipmentDescription());
+		assertEquals(EquipmentLevel.Low, location.getActivities().get(0).getEquipmentLevel());
+	}
+	
+	
 
 
 }
