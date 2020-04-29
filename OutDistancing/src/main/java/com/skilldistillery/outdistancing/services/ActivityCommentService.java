@@ -14,4 +14,6 @@ public interface ActivityCommentService {
 
 	ActivityComment updateActivityComment(ActivityComment comment, int id);
 
+	Boolean changeCommentEnabled(int commentId);
+
 }

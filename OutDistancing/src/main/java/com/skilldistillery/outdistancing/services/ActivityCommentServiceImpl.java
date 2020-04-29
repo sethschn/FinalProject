@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Activity;
 import com.skilldistillery.outdistancing.entities.ActivityComment;
+import com.skilldistillery.outdistancing.entities.Category;
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.ActivityCommentRepository;
 import com.skilldistillery.outdistancing.repositories.ActivityRepository;
@@ -63,6 +64,19 @@ public class ActivityCommentServiceImpl implements ActivityCommentService {
 			comRepo.saveAndFlush(comment);
 		}
 		return comment;
+	}
+	
+	@Override
+	public Boolean changeCommentEnabled(int commentId) {
+		Optional<ActivityComment> optComment = comRepo.findById(commentId);
+        if (optComment.isPresent()) {
+            ActivityComment updateComment = optComment.get();
+            updateComment.setEnabled(!updateComment.isEnabled());
+			comRepo.save(updateComment);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
