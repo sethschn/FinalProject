@@ -47,15 +47,17 @@ public class UserGroup {
 	private List<User> users;
 	
 	
+	private boolean enabled;
+	
+	
 	
 	
 	//CONSTRUCTORS
 	public UserGroup() {}
 
-	
 
 	public UserGroup(int id, String name, String shortDescription, String description, String imageUrl,
-			LocalDate createDate, User creator) {
+			LocalDate createDate, User creator, List<User> users, boolean enabled) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,8 +66,9 @@ public class UserGroup {
 		this.imageUrl = imageUrl;
 		this.createDate = createDate;
 		this.creator = creator;
+		this.users = users;
+		this.enabled = enabled;
 	}
-
 
 
 	//GETTERS & SETTERS
@@ -140,27 +143,39 @@ public class UserGroup {
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
+	
+	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("UserGroup [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", shortDescription=");
-		builder.append(shortDescription);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", imageUrl=");
-		builder.append(imageUrl);
-		builder.append(", createDate=");
-		builder.append(createDate);
-		builder.append(", creator=");
-		builder.append(creator);
-		builder.append("]");
+		builder.append("UserGroup [id=")
+		.append(id).append(", name=")
+		.append(name).append(", shortDescription=")
+		.append(shortDescription)
+		.append(", description=")
+		.append(description)
+		.append(", imageUrl=")
+		.append(imageUrl)
+		.append(", createDate=")
+		.append(createDate)
+		.append(", creator=")
+		.append(creator)
+		.append(", enabled=")
+		.append(enabled)
+		.append("]");
 		return builder.toString();
 	}
+
 
 	@Override
 	public int hashCode() {
