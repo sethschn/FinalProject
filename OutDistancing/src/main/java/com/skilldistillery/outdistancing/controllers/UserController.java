@@ -44,25 +44,25 @@ public class UserController {
 		return user;
 	}
 	
-	@PostMapping("users")
-	@ResponseBody
-	public User createNewUser(@RequestBody User user, HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		try {
-			User addUser = userSvc.createUser(user);
-			response.setStatus(201);
-			StringBuffer url = request.getRequestURL();
-			url.append("/").append(user.getId());
-			String location = url.toString();
-			response.addHeader("Location", location);
-			return addUser;
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(400);
-			return null;
-		}
-	}
+//	@PostMapping("users")
+//	@ResponseBody
+//	public User createNewUser(@RequestBody User user, HttpServletRequest request,
+//			HttpServletResponse response) {
+//		
+//		try {
+//			User addUser = userSvc.createUser(user);
+//			response.setStatus(201);
+//			StringBuffer url = request.getRequestURL();
+//			url.append("/").append(user.getId());
+//			String location = url.toString();
+//			response.addHeader("Location", location);
+//			return addUser;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			response.setStatus(400);
+//			return null;
+//		}
+//	}
 	
 	@PutMapping("users/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User user,
