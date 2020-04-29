@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Resource;
+import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.ResourceRepository;
+import com.skilldistillery.outdistancing.repositories.UserRepository;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
 	@Autowired
 	private ResourceRepository resourceRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Resource> listAllResources() {
@@ -33,7 +38,9 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public Resource createResource(Resource resource) {
+	public Resource createResource(Resource resource, String username) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
 		try {
 			resource = resourceRepo.saveAndFlush(resource);
 			return resource;
@@ -41,12 +48,15 @@ public class ResourceServiceImpl implements ResourceService {
 			e.printStackTrace();
 			return null;
 		}
+		}
+		return null;
 	}
 
 	@Override
-	public Resource updateResource(int resourceId, Resource resource) {
+	public Resource updateResource(int resourceId, Resource resource, String username) {
+		User user = userRepo.findByUsername(username);
 		Optional<Resource> optResource = resourceRepo.findById(resourceId);
-		if (optResource.isPresent()) {
+		if (optResource.isPresent() && user!=null) {
 			Resource managedResource = optResource.get();
 			managedResource.setName(resource.getName());
 			managedResource.setDescription(resource.getDescription());
@@ -60,31 +70,17 @@ public class ResourceServiceImpl implements ResourceService {
 
 
 
-	public boolean deleteById(int resourceId) {
+	public boolean deleteById(int resourceId, String username) {
+		User user = userRepo.findByUsername(username);
 		Optional<Resource> optHike = resourceRepo.findById(resourceId);
-		if (optHike.isPresent()) {
+		if (optHike.isPresent() && user!=null) {
 			resourceRepo.deleteById(resourceId);
 			return true;
 		}
 		return false;
 	}
 	
-	
-
-//	@Override
-//	public Boolean changeResourceEnabled(String name) {
-//		Resource resource = null;
-//		resource = resourceRepo.findByName(name);
-//		if (resource != null) {
-//			resource.setEnabled(!resource.getEnabled());
-//			resourceRepo.save(resource);
-//			return true;
-//		} else {
-//			return false;
-//
-//		}
-
-	}
+}
 
 	
 	
