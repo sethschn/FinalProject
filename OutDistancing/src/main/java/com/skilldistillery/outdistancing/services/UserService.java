@@ -10,4 +10,5 @@ public interface UserService {
 //	User createUser(User user);
 	User updateUser (int userId, User user);
 	Boolean changeUserEnabled(String username);
+	User findUserByUsername(String username);
 }
