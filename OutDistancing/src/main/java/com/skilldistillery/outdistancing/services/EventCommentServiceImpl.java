@@ -24,7 +24,6 @@ public class EventCommentServiceImpl implements EventCommentService {
 
 	@Autowired
 	private EventRepository eventRepo;
-	
 
 	@Override
 	public List<EventComment> findAll() {
@@ -83,18 +82,18 @@ public class EventCommentServiceImpl implements EventCommentService {
 	}
 
 	@Override
-	public Boolean deleteById(int eventCommentId) {
+	public Boolean deleteById(int eventCommentId, String username) {
 		Optional<EventComment> optEventCmt = eventCmtRepo.findById(eventCommentId);
-		if(optEventCmt.isPresent()) {
-			
-		}
-		return null;
-	}
+		User currentUser = userRepo.findByUsername(username);
+		if (optEventCmt.isPresent() && currentUser != null) {
+			EventComment deleteEventCmt = optEventCmt.get();
+			if (deleteEventCmt != null) {
+				eventCmtRepo.deleteById(eventCommentId);
+				return true;
+			}
 
-	@Override
-	public Boolean changeEventCommentEnabled(int eventCommentId) {
-		// TODO Auto-generated method stub
-		return null;
+		}
+		return false;
 	}
 
 }

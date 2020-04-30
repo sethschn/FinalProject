@@ -83,5 +83,24 @@ public class EventCommentController {
 
 		return eventCmt;
 	}
+	
+	@DeleteMapping("events/{evtId}/eventcomments/{evtCmtId}")
+	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtCmtId") Integer evtCmtId,
+			@PathVariable("evtId") Integer evtId, Principal principal) {
+
+		try {
+			if (eventCmtSvc.deleteById(evtCmtId, principal.getName())) {
+				res.setStatus(200);
+				return true;
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(409);
+		}
+		return false;
+	}
+
 
 }
