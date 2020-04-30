@@ -36,8 +36,8 @@ public class UserController {
 	}
 	
 	@GetMapping("users/{userId}")
-	public User showById(@PathVariable("userId") int id, HttpServletResponse response) {
-		User user = userSvc.findById(id);
+	public User showById(@PathVariable("userId") int id, HttpServletResponse response, Principal principal) {
+		User user = userSvc.findById(id, principal.getName());
 		if (user == null) {
 			response.setStatus(404);
 		}
@@ -66,9 +66,9 @@ public class UserController {
 	
 	@PutMapping("users/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User user,
-			HttpServletResponse resp) {
+			HttpServletResponse resp, Principal principal) {
 		try {
-			user = userSvc.updateUser(userId, user);
+			user = userSvc.updateUser(userId, user, principal.getName());
 			if (user == null) {
 				resp.setStatus(400);
 			}
@@ -81,14 +81,16 @@ public class UserController {
 	}
 	
 	
-	@DeleteMapping("users/{username}")
-	public void deactivateUser(@PathVariable String username, HttpServletResponse resp, Principal principal) {
-		if (userSvc.changeUserEnabled(username)) {
-            resp.setStatus(200);
-        } else {
-            resp.setStatus(404);
-        }
-    } 
+	@DeleteMapping("users/{userId}")
+	public boolean deactivateUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
+		boolean isEnabled = userSvc.changeUserEnabled(userId, principal.getName());
+		if (isEnabled) {
+			res.setStatus(200);
+		}else {
+			res.setStatus(404);
+		}
+		return isEnabled;
+	}
 	
 	
 	

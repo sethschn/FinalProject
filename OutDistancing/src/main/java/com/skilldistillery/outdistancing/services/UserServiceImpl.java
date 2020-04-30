@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.outdistancing.entities.Category;
 import com.skilldistillery.outdistancing.entities.Location;
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.LocationRepository;
@@ -23,16 +24,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> listAllUsers() {
+		
 		return userRepo.findAll();
 	}
 
 
 
 	@Override
-	public User findById(int userId) {
+	public User findById(int userId, String username) {
+		User user = userRepo.findByUsername(username);
 		Optional<User> optUser = userRepo.findById(userId);
-		User user = null;
-		if (optUser.isPresent()) {
+		
+		if (optUser.isPresent() && user!= null) {
 			user = optUser.get();
 		} else {
 			return null;
@@ -56,13 +59,13 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public User updateUser(int userId, User user) {
-		
+	public User updateUser(int userId, User user, String username) {
+		User newUser = userRepo.findByUsername(username);
 		Location updateLocation = user.getLocation();
 		locRepo.saveAndFlush(updateLocation);
 		
 		Optional<User> optUser = userRepo.findById(userId);
-		if (optUser.isPresent()) {
+		if (optUser.isPresent() && newUser != null) {
 			User managedUser = optUser.get();
 			managedUser.setUsername(user.getUsername());
 			managedUser.setPassword(user.getPassword());
@@ -80,18 +83,19 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public Boolean changeUserEnabled(String username) {
-		User user = null;
-		user = userRepo.findByUsername(username);
-		if (user != null) {
-			user.setEnabled(!user.isEnabled());
-			userRepo.save(user);
+	public Boolean changeUserEnabled(int userId, String username) {
+		User user = userRepo.findByUsername(username);
+		Optional<User> optUser = userRepo.findById(userId);
+        if (optUser.isPresent() && user != null) {
+            User updateUser = optUser.get();
+            updateUser.setEnabled(!updateUser.isEnabled());
+			userRepo.save(updateUser);
 			return true;
 		} else {
 			return false;
-
 		}
 	}
+	
 
 
 	@Override
