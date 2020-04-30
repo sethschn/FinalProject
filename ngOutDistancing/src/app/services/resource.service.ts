@@ -4,26 +4,22 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Resource } from '../models/resource';
+import { AuthService } from './auth.service';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
 
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api/resources';
   constructor(
-    private http: HttpClient
+    private http: HttpClient, private datePipe: DatePipe, private authService: AuthService
   ) { }
 
 
-private url = environment.baseUrl + 'api/resources';
-
-  indexResource() {
+  public indexResource() {
     return this.http.get<Resource[]>(this.url + '?sorted=true')
       .pipe(
         catchError((err: any) => {
@@ -33,7 +29,7 @@ private url = environment.baseUrl + 'api/resources';
       );
   }
 
-  public showResource(id: number) {
+  public showResource(id) {
     return this.http.get<Resource>(`${this.url}/${id}`).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -42,37 +38,50 @@ private url = environment.baseUrl + 'api/resources';
       );
   }
 
-  deleteResource(id: number) {
-    return this.http.delete<Resource>(this.url + '/' + id)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('error deleting resource');
-      })
-    );
-  }
-  createResource(data: Resource) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    return this.http.post<any>(this.url, data, httpOptions)
+  public createResource(resource: Resource) {
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.post<Resource>(this.url, resource, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('create method in resource service failed');
       })
     );
+    }
   }
   public updateResource(resource: Resource) {
-    return this.http.put<Resource>(`${this.url}/${resource.id}`, resource)
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.put<Resource>(`${this.url}/${resource.id}`, resource, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('update method in resource service failed');
       })
+      );
+    }
+  }
+  public deleteResource(id: number) {
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.delete<Resource>(`${this.url}/${id}`, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error deleting resource');
+      })
     );
+    }
+  }
+  private getHttpOptions() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${this.authService.getCredentials()}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return httpOptions;
   }
 }
 
