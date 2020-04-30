@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 export class LogoutComponent implements OnInit {
 
 
+
   constructor(private authService: AuthService, private router:Router) { }
+
 
   ngOnInit(): void {
   }
@@ -20,6 +22,7 @@ export class LogoutComponent implements OnInit {
     console.log("logout");
     this.authService.logout();
     this.router.navigateByUrl('/nonUserLanding');
+
 
   }
 
