@@ -49,7 +49,6 @@ public class EventServiceImpl implements EventService {
 	public Event createEvent(Event event, int actId, String username) {
 		Location newLocation = event.getLocation();
 		locRepo.saveAndFlush(newLocation);
-		// get the user associated with event and activity
 		Optional<Activity> optActivity = actRepo.findById(actId);
 		User currentUser = userRepo.findByUsername(username);
 		if (optActivity.isPresent() && currentUser != null) {
@@ -80,8 +79,8 @@ public class EventServiceImpl implements EventService {
 			managedEvent.setEventTime(event.getEventTime());
 			managedEvent.setEventDate(event.getEventDate());
 			managedEvent.setShortDescription(event.getShortDescription());
-			managedEvent.setDescription(event.getDescription());
-			managedEvent.setImageUrl(event.getImageUrl());
+//			managedEvent.setDescription(event.getDescription());
+//			managedEvent.setImageUrl(event.getImageUrl());
 			managedEvent.setCreator(currentUser);
 			managedEvent.setLocation(updateLocation);
 			try {
@@ -95,9 +94,10 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public Boolean deleteById(int evtId) {
+	public Boolean deleteById(int evtId, String username) {
 		Optional<Event> optEvent = eventRepo.findById(evtId);
-		if (optEvent.isPresent()) {
+		User currentUser = userRepo.findByUsername(username);
+		if (optEvent.isPresent() && currentUser != null) {
 			Event deleteEvent = optEvent.get();
 			if (deleteEvent != null) {
 				eventRepo.deleteById(evtId);
@@ -108,12 +108,13 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public Boolean changeEventEnabled(int evtId) {
+	public Boolean changeEventEnabled(int evtId, String username) {
 		Optional<Event> optEvent = eventRepo.findById(evtId);
-		if (optEvent.isPresent()) {
+		User currentUser = userRepo.findByUsername(username);
+		if (optEvent.isPresent() && currentUser != null) {
 			Event updateEvent = optEvent.get();
 			updateEvent.setEnabled(!updateEvent.isEnabled());
-			eventRepo.save(updateEvent);
+			eventRepo.saveAndFlush(updateEvent);
 			return true;
 		} else {
 			return false;

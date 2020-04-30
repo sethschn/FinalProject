@@ -1,5 +1,6 @@
 package com.skilldistillery.outdistancing.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,13 +48,10 @@ public class EventController {
 	@PostMapping("activities/{actId}/events")
 	@ResponseBody
 	public Event addEvent(@PathVariable("actId") int actId, @RequestBody Event event, HttpServletRequest request,
-			HttpServletResponse resp) {
-
-		// hardcoded user 1, fix with spring security
-		String hardcodedUsername = "kissmyaxe";
+			HttpServletResponse resp, Principal principal) {
 
 		try {
-			Event addedEvent = eventSvc.createEvent(event, actId, hardcodedUsername);
+			Event addedEvent = eventSvc.createEvent(event, actId, principal.getName());
 			resp.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(event.getId());
@@ -69,10 +67,10 @@ public class EventController {
 
 	@PutMapping("activities/{actId}/events/{evtId}")
 	public Event updateEvent(@PathVariable("evtId") Integer evtId, @PathVariable("actId") Integer actId,
-			@RequestBody Event event, HttpServletResponse resp) {
-		String hardcodedUsername = "kissmyaxe";
+			@RequestBody Event event, HttpServletResponse resp, Principal principal) {
+		
 		try {
-			event = eventSvc.updateEvent(evtId, event, hardcodedUsername);
+			event = eventSvc.updateEvent(evtId, event, principal.getName());
 			if (event == null) {
 				resp.setStatus(400);
 			}
@@ -86,10 +84,10 @@ public class EventController {
 
 	@DeleteMapping("activities/{actId}/events/{evtId}")
 	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtId") Integer evtId,
-			@PathVariable("actId") Integer actId) {
+			@PathVariable("actId") Integer actId, Principal principal) {
 //		boolean isEnabled = eventSvc.changeEventEnabled(evtId);
 		try {
-			if (eventSvc.deleteById(evtId)) {
+			if (eventSvc.deleteById(evtId, principal.getName())) {
 				res.setStatus(200);
 				return true;
 			} else {
