@@ -79,8 +79,8 @@ public class EventServiceImpl implements EventService {
 			managedEvent.setEventTime(event.getEventTime());
 			managedEvent.setEventDate(event.getEventDate());
 			managedEvent.setShortDescription(event.getShortDescription());
-//			managedEvent.setDescription(event.getDescription());
-//			managedEvent.setImageUrl(event.getImageUrl());
+			managedEvent.setDescription(event.getDescription());
+			managedEvent.setImageUrl(event.getImageUrl());
 			managedEvent.setCreator(currentUser);
 			managedEvent.setLocation(updateLocation);
 			try {
