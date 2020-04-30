@@ -79,7 +79,7 @@ public class UserController {
 		}
 		return user;
 	}
-	
+
 	
 	@DeleteMapping("users/{userId}")
 	public boolean deactivateUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {

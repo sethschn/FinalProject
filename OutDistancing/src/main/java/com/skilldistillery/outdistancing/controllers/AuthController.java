@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.services.AuthService;
+import com.skilldistillery.outdistancing.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4220" })
 public class AuthController {
 	@Autowired
 	private AuthService svc;
+	
+	@Autowired
+	private UserService userSvc;
 
 	@PostMapping("/register")
 	public User registerUser(@RequestBody User user, HttpServletResponse response) {
@@ -32,8 +36,9 @@ public class AuthController {
 	}
 
 	@GetMapping("/authenticate")
-	public Principal authenticate(Principal principal) {
-		return principal;
+	public User authenticate(Principal principal) {
+		return userSvc.findUserByUsername(principal.getName());
+		//return principal;
 	}
 
 

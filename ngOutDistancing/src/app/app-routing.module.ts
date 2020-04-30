@@ -1,3 +1,4 @@
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'nonUserLanding' },
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
+  { path: 'profile', component: UserprofileComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'event/:id', component: EventDetailComponent},
   { path: 'activities/:id', component: NonUserLandingComponent},
