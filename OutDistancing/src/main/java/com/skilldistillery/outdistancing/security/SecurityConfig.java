@@ -34,20 +34,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 	        .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 	        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/categories").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/categories/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/activities").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/activities/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/events").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/events/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/resources").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/resources/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/usergroups").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/locations").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/locations/**").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/activitycomments").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/eventcomments").permitAll()     // will hit the OPTIONS on the route
-	        .antMatchers(HttpMethod.GET,"/api/eventcomments/**").permitAll()     // will hit the OPTIONS on the route
+	        .antMatchers(HttpMethod.GET,"/api/categories").permitAll()    
+	        .antMatchers(HttpMethod.GET,"/api/categories/**").permitAll()    
+	        .antMatchers(HttpMethod.GET,"/api/activities").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/activities/**").permitAll()    
+	        .antMatchers(HttpMethod.GET,"/api/events").permitAll()    
+	        .antMatchers(HttpMethod.GET,"/api/events/**").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/resources").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/resources/**").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/usergroups").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/usergroups/**").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/locations").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/locations/**").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/activitycomments").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/activitycomments/**").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/eventcomments").permitAll()     
+	        .antMatchers(HttpMethod.GET,"/api/eventcomments/**").permitAll()     
 	        .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 	        .anyRequest().permitAll()               // All other requests are allowed without authorization.
 	        .and()

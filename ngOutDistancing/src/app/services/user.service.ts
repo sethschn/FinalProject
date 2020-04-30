@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -13,13 +12,12 @@ import { throwError } from 'rxjs';
 export class UserService {
 
   private baseUrl = environment.baseUrl;
-  private url = this.baseUrl + 'api/user';
+  private url = this.baseUrl + 'api/users';
 
-  constructor(private http: HttpClient, private datePipe: DatePipe, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   index() {
     const httpOptions = this.getHttpOptions();
-    if (this.authService.checkLogin()){
       return this.http.get<User[]>(this.url, httpOptions)
       .pipe(
         catchError((err: any) => {
@@ -28,16 +26,10 @@ export class UserService {
         })
         );
       }
-    else{
-      console.log("not logged in")
-      //this.router.navigateByUrl('/login')
-    }
-  }
 
   public show(id: number){
     const httpOptions = this.getHttpOptions();
     console.log("Show user with id "+id);
-    if (this.authService.checkLogin()){
       return this.http.get<User>(`${this.url}/${id}`, httpOptions)
       .pipe(
         catchError((err: any) => {
@@ -46,7 +38,6 @@ export class UserService {
         })
       );
     }
-  }
 
   public update(user: User){
     const httpOptions = this.getHttpOptions();
