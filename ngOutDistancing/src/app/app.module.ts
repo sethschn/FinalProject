@@ -23,7 +23,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
-
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 
@@ -41,7 +42,10 @@ import { LocationDetailComponent } from './components/location-detail/location-d
     RegisterComponent,
     UserprofileComponent,
     ResourceDetailComponent,
-    LocationDetailComponent
+    LocationDetailComponent,
+    AboutComponent,
+    ContactComponent
+
   ],
   imports: [
     BrowserModule,

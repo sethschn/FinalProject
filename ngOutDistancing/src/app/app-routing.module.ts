@@ -11,6 +11,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
 
 
 
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'profile', component: UserprofileComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'about', component: AboutComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'event/:id', component: EventDetailComponent},
   { path: 'activities/:id', component: NonUserLandingComponent},

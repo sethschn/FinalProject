@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   newUser = new User();
+  selected = null;
+
   constructor(private authService:AuthService, private router: Router) { }
   ngOnInit(): void {
   }
