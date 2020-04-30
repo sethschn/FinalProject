@@ -3,12 +3,12 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Resource } from '../models/resource';
+import { Location } from '../models/location';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceService {
+export class LocationService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,30 +20,29 @@ export class ResourceService {
     private http: HttpClient
   ) { }
 
+  private url = environment.baseUrl + 'api/locations';
 
-private url = environment.baseUrl + 'api/resources';
-
-  indexResource() {
-    return this.http.get<Resource[]>(this.url + '?sorted=true')
+  indexLocation() {
+    return this.http.get<Location[]>(this.url + '?sorted=true')
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('index is not working in resource');
+          return throwError('index is not working in location');
         })
       );
   }
 
-  public showResource(id: number) {
-    return this.http.get<Resource>(`${this.url}/${id}`).pipe(
+  public showLocation(id: number) {
+    return this.http.get<Location>(`${this.url}/${id}`).pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('show method in resource service failed');
+          return throwError('show method in location service failed');
         })
       );
   }
 
-  deleteResource(id: number) {
-    return this.http.delete<Resource>(this.url + '/' + id)
+  deleteLocation(id: number) {
+    return this.http.delete<Location>(this.url + '/' + id)
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -51,7 +50,8 @@ private url = environment.baseUrl + 'api/resources';
       })
     );
   }
-  createResource(data: Resource) {
+
+  createLocation(data: Location) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -61,19 +61,18 @@ private url = environment.baseUrl + 'api/resources';
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('create method in resource service failed');
+        return throwError('create method in location service failed');
       })
     );
   }
-  public updateResource(resource: Resource) {
-    return this.http.put<Resource>(`${this.url}/${resource.id}`, resource)
+
+  public updateLocation(location: Location) {
+    return this.http.put<Location>(`${this.url}/${location.id}`, location)
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('update method in resource service failed');
+        return throwError('update method in location service failed');
       })
     );
   }
 }
-
-
