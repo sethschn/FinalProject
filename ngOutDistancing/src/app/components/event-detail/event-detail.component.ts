@@ -11,14 +11,14 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventDetailComponent implements OnInit {
 
-
+  title = 'Checking Event Details Page'
   selected = null;
   newEvent = new Event();
+  editEvent = null;
 
-  events: Event[] = [];
+  eventList: Event[] = [];
 
   constructor(private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router) { }
-
 
   ngOnInit(): void {
     if (!this.selected && this.currentRoute.snapshot.paramMap.get('id')) {
@@ -27,7 +27,7 @@ export class EventDetailComponent implements OnInit {
           this.selected = data;
         },
         bad => {
-          this.router.navigateByUrl('home')
+          this.router.navigateByUrl('eventDetail')
           console.error('EventDetailComponent.reload(): error retrieving event detail list');
           console.error(bad);
         }
@@ -37,9 +37,28 @@ export class EventDetailComponent implements OnInit {
     }
 
 
+  displayEvent(event){
+     this.router.navigateByUrl(`/event/${event.id}`);
+  }
+
+  showEvent(id){
+    this.eventSvc.show((this.currentRoute.snapshot.paramMap.get('id'))).subscribe(
+      good => {
+        this.loadEvents();
+      },
+      bad => {
+        console.error("EventDetailListComponent.show(): error")
+      }
+    )
+  };
+
+  displayTable(){
+    this.selected = null;
+  }
+
   loadEvents(){
     this.eventSvc.index().subscribe(
-      data => {this.events = data;
+      data => {this.eventList = data;
       },
       bad => {
         console.error("EventDetailComponent.loadEvents(): error loading");
@@ -48,4 +67,48 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
-}
+  createEvent(event: Event){
+    console.log(event);
+    this.eventSvc.create(event).subscribe(
+      good => {
+        this.loadEvents();
+        this.newEvent = new Event();
+      },
+      bad => {
+        console.error("EventDetailListComponent.createEvent(): error adding");
+        console.error(bad);
+      })
+  }
+
+  setEditEvent(){
+    this.editEvent = Object.assign({}, this.selected)
+  }
+
+  updateEvent(event: Event){
+    console.log(event);
+   this.eventSvc.update(event).subscribe(
+     good =>{
+       this.loadEvents();
+       this.editEvent= null;
+       this.selected = this.editEvent;
+     },
+     bad => {
+       console.error("EventDetailListComponent.updateEvent(): error updating");
+       console.error(bad);
+     })
+  }
+
+  deleteEvent(eventId){
+    this.eventSvc.destroy(eventId).subscribe(
+
+      data => {
+        this.loadEvents();
+        this.selected = null;
+
+      },
+      err => {
+        console.error("EventDetailListComponent.deleteEvent(): error deleting" + err);
+      })
+    };
+
+  }
