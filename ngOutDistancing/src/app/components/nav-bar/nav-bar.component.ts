@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +10,16 @@ export class NavBarComponent implements OnInit {
 
 
   isCollapsed = false;
-  constructor() { }
+  constructor(
+
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
+
+  loggedIn(){
+    return this.authService.checkLogin();
+      }
 
 }
