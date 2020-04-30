@@ -47,8 +47,8 @@ public class CategoryController {
 	}
 	
 	@PostMapping("categories")
-	public Category create(@RequestBody Category category, HttpServletRequest req, HttpServletResponse res) {
-		Category createdCategory = categorySvc.createCategory(category);
+	public Category create(@RequestBody Category category, HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Category createdCategory = categorySvc.createCategory(category, principal.getName());
 		if (createdCategory != null) {
 			res.setStatus(201);
 			StringBuffer reqUrl = req.getRequestURL();
@@ -62,11 +62,13 @@ public class CategoryController {
 	
 	@PutMapping("categories/{categoryId}")
 	public Category updateCategory(@PathVariable("categoryId") int categoryId, @RequestBody Category category,
-			HttpServletResponse resp) {
+			HttpServletResponse resp, Principal principal) {
 		try {
-			category = categorySvc.updateCategory(categoryId, category);
+			category = categorySvc.updateCategory(categoryId, category, principal.getName());
 			if (category == null) {
 				resp.setStatus(400);
+			}else {
+				resp.setStatus(202);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,10 +78,10 @@ public class CategoryController {
 		return category;
 	}
 	
-//  DELETE todos/{tid}
+	
 	@DeleteMapping("categories/{categoryId}")
-	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int categoryId) {
-		boolean isEnabled = categorySvc.changeCategoryEnabled(categoryId);
+	public boolean changeEnabled(HttpServletRequest req, HttpServletResponse res, @PathVariable int categoryId, Principal principal) {
+		boolean isEnabled = categorySvc.changeCategoryEnabled(categoryId, principal.getName());
 		if (isEnabled) {
 			res.setStatus(200);
 		}else {

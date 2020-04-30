@@ -70,9 +70,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	@Override
-	public Boolean deleteGroup(int userGroupId) {
+	public Boolean deleteGroup(int userGroupId, String username) {
+		User user = userRepo.findByUsername(username);
         Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
-        if (optUserGroup.isPresent()) {
+        if (optUserGroup.isPresent() && user != null) {
 			UserGroup userGroup = optUserGroup.get();
 			if (userGroup != null) {
 				usergroupRepo.deleteById(userGroupId);
@@ -83,9 +84,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	@Override
-	public Boolean changeGroupEnabled(int userGroupId) {
+	public Boolean changeGroupEnabled(int userGroupId, String username) {
+		User user = userRepo.findByUsername(username);
 		Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
-        if (optUserGroup.isPresent()) {
+        if (optUserGroup.isPresent() && user != null) {
             UserGroup updateUserGroup = optUserGroup.get();
             updateUserGroup.setEnabled(!updateUserGroup.isEnabled());
             usergroupRepo.save(updateUserGroup);
