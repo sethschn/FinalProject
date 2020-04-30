@@ -20,7 +20,7 @@ export class ActivityCommentService {
 
   private url = environment.baseUrl + 'api/';
 
-  index() {
+  index(activityId: number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export class ActivityCommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.get<ActivityComment[]>(this.url + '?sorted=true',httpOptions)
+    return this.http.get<ActivityComment[]>(this.url + `activities/${activityId}/activitycomments`,httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -37,21 +37,17 @@ export class ActivityCommentService {
       );
   }
 
-  create(data: ActivityComment, activityId: number) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Basic ` + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    };
-    return this.http.post<ActivityComment>(this.url + 'activities/' + `${activityId}` + '/activitycomments', data, httpOptions)
+  createComment(data: ActivityComment, activityId: number) {
+    const httpOptions = this.getHttpOptions();
+    if (this.auth.checkLogin()){
+    return this.http.post<ActivityComment>(this.url + `activities/${activityId}/activitycomments`, data, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('create method in activity comment service failed');
       })
     );
+    }
   }
 
   show(id:number){
@@ -90,4 +86,13 @@ export class ActivityCommentService {
   }
 
 
+  private getHttpOptions() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${this.auth.getCredentials()}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return httpOptions;
+  }
 }
