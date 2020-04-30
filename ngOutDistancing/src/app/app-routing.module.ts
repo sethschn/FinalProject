@@ -9,6 +9,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 
 
 
@@ -21,9 +23,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'event/:id', component: EventDetailComponent},
   { path: 'activities/:id', component: NonUserLandingComponent},
-  { path: 'resources/:id', component: AdminComponent},
+  { path: 'resources/:id', component: ResourceDetailComponent},
+  { path: 'locations/:id', component: LocationDetailComponent},
   { path: 'users/:id', component: UserLandingComponent},
   { path: 'eventDetail', component: EventDetailComponent},
+  { path: 'resourceDetail', component: ResourceDetailComponent},
+  { path: 'locationDetail', component: LocationDetailComponent},
   { path: 'nonUserLanding', component: NonUserLandingComponent},
   { path: 'userLanding', component: UserLandingComponent},
   { path: 'register', component: RegisterComponent},

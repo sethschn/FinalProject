@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 
 
 
@@ -37,7 +39,11 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    SethAngular
     UserprofileComponent
+
+    ResourceDetailComponent,
+    LocationDetailComponent
   ],
   imports: [
     BrowserModule,
