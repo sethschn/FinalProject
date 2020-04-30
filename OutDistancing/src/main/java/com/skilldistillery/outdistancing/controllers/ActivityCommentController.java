@@ -65,16 +65,21 @@ public class ActivityCommentController {
 		}
 		
 		// updated activity comment
-		@PutMapping("activitycomments/{id}")
-		public ActivityComment updateFlight(@PathVariable Integer id, @RequestBody ActivityComment comment) {
-			ActivityComment updatedComment = comSvc.updateActivityComment(comment, id);
+		@PutMapping("activities/{actId}/activitycomments/{id}")
+		public ActivityComment updateComment(HttpServletRequest req, HttpServletResponse res, @PathVariable("actId")int actId, @PathVariable Integer id, @RequestBody ActivityComment comment, Principal principal) {
+			ActivityComment updatedComment = comSvc.updateActivityComment(comment, id, principal.getName());
+			if (updatedComment == null) {
+				res.setStatus(400);
+			} else {
+				res.setStatus(200);
+			}
 			return updatedComment;
 		}
 		
 		//disable activity comment
-		@DeleteMapping("activitycomments/{comId}")
-		public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId) {
-			boolean isEnabled = comSvc.changeCommentEnabled(comId);
+		@DeleteMapping("activities/{actId}/activitycomments/{comId}")
+		public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("actId")int actId, @PathVariable int comId, Principal principal) {
+			boolean isEnabled = comSvc.changeCommentEnabled(comId, principal.getName());
 			if (isEnabled) {
 				res.setStatus(200);
 			}else {

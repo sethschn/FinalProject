@@ -12,8 +12,8 @@ public interface ActivityCommentService {
 
 	ActivityComment addActivityComment(ActivityComment comment, int actId, String username);
 
-	ActivityComment updateActivityComment(ActivityComment comment, int id);
+	ActivityComment updateActivityComment(ActivityComment comment, int id, String username);
 
-	Boolean changeCommentEnabled(int commentId);
+	Boolean changeCommentEnabled(int commentId, String username);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.outdistancing.entities.Activity;
 import com.skilldistillery.outdistancing.entities.ActivityComment;
 import com.skilldistillery.outdistancing.entities.Category;
+import com.skilldistillery.outdistancing.entities.EventComment;
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.ActivityCommentRepository;
 import com.skilldistillery.outdistancing.repositories.ActivityRepository;
@@ -56,19 +57,33 @@ public class ActivityCommentServiceImpl implements ActivityCommentService {
 	}
 
 	@Override
-	public ActivityComment updateActivityComment(ActivityComment comment, int id) {
-		Optional<ActivityComment> updatedWorkout = comRepo.findById(id);
-		if (updatedWorkout.isPresent()) {
-			comment.setId(id);
-			comRepo.saveAndFlush(comment);
+	public ActivityComment updateActivityComment(ActivityComment comment, int id, String username) {
+		Optional<ActivityComment> optComment = comRepo.findById(id);
+		User currentUser = userRepo.findByUsername(username);
+		if (optComment.isPresent() && currentUser != null) {
+			ActivityComment managedtComment = optComment.get();
+			managedtComment.setContent(comment.getContent());
+			managedtComment.setParentComment(comment.getParentComment());
+			managedtComment.setUser(currentUser);
+
+			try {
+				managedtComment = comRepo.saveAndFlush(managedtComment);
+				return managedtComment;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return comment;
+
+		return null;
 	}
+
 	
 	@Override
-	public Boolean changeCommentEnabled(int commentId) {
+	public Boolean changeCommentEnabled(int commentId, String username) {
+		User user = userRepo.findByUsername(username);
 		Optional<ActivityComment> optComment = comRepo.findById(commentId);
-        if (optComment.isPresent()) {
+        if (optComment.isPresent() && user != null) {
             ActivityComment updateComment = optComment.get();
             updateComment.setEnabled(!updateComment.isEnabled());
 			comRepo.save(updateComment);

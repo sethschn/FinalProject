@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Activity;
-import com.skilldistillery.outdistancing.entities.Resource;
+import com.skilldistillery.outdistancing.entities.Event;
+import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.ActivityRepository;
+import com.skilldistillery.outdistancing.repositories.UserRepository;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
 
 	@Autowired
 	private ActivityRepository activityRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Activity> findAll() {
@@ -28,20 +33,22 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Activity addActivity(Activity activity) {
-		try {
-			activity = activityRepo.saveAndFlush(activity);
-			return activity;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	public Activity addActivity(String username, Activity activity) {
+		User user = userRepo.findByUsername(username);
+		 if (user != null) {
+	            activity.setUser(user);
+	            activityRepo.saveAndFlush(activity);
+	        } else {
+	        	activity = null;
+	        }
+	        return activity;
+	    }
 
 	@Override
-	public Activity updateActivity(Activity activity, int id) {
+	public Activity updateActivity(String username, Activity activity, int id) {
 		Optional<Activity> updatedActivity = activityRepo.findById(id);
-		if (updatedActivity.isPresent()) {
+		User currentUser = userRepo.findByUsername(username);
+		if (updatedActivity.isPresent() && currentUser != null) {
 			Activity managedActivity = updatedActivity.get();
 			managedActivity.setTitle(activity.getTitle());
 			managedActivity.setShortDescription(activity.getShortDescription());
@@ -55,28 +62,13 @@ public class ActivityServiceImpl implements ActivityService {
 		return null;
 	}
 
-//	@Override
-//	public Boolean changeActivityEnabled(int id) {
-//		Activity activity = null;
-//		activity = this.findById(id);
-//		if (activity != null) {
-//			if (activity.getEnabled() == true) {
-//				activity.setEnabled(false);
-//				activityRepo.saveAndFlush(activity);
-//			}
-//			if (activity.getEnabled() == false) {
-//				activity.setEnabled(true);
-//				activityRepo.saveAndFlush(activity);
-//			}
-//		}
-//		return activity.getEnabled();
-//	}
-	
+
 	@Override
-	public Boolean changeActivityEnabled(String title) {
+	public Boolean changeActivityEnabled(String username, String title) {
+		User user = userRepo.findByUsername(username);
 		Activity activity = null;
 		activity = activityRepo.findByTitle(title);
-		if (activity != null) {
+		if (activity != null && user != null) {
 			activity.setEnabled(!activity.getEnabled());
 			activityRepo.save(activity);
 			return true;
@@ -84,6 +76,5 @@ public class ActivityServiceImpl implements ActivityService {
 			return false;
 		}
 	}
-	
-	
+
 }
