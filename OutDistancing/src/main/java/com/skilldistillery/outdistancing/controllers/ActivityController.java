@@ -24,32 +24,34 @@ import com.skilldistillery.outdistancing.services.ActivityService;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4220" })
 public class ActivityController {
-	
+
 	@Autowired
 	private ActivityService activitySvc;
-	
-	//find all
+
+	// find all
 	@GetMapping("activities")
-	public List <Activity> findAll(HttpServletRequest req, HttpServletResponse res){
+	public List<Activity> findAll(HttpServletRequest req, HttpServletResponse res) {
 		return activitySvc.findAll();
 	}
-	
-	//find by id
+
+	// find by id
 	@GetMapping("activities/{id}")
 	public Activity findById(@PathVariable Integer id, HttpServletResponse response) {
-		Activity workout = activitySvc.findById(id);
-		if (workout == null) {
+		Activity activity = activitySvc.findById(id);
+		if (activity == null) {
 			response.setStatus(404);
+		} else {
+			response.setStatus(200);
 		}
-		return workout;
+		return activity;
 	}
-	
-	//create activity
+
+	// create activity
 	@PostMapping("activities")
-	public Activity createWorkout(@RequestBody Activity activity, HttpServletRequest request,
-			HttpServletResponse response) {
+	public Activity createActivity(@RequestBody Activity activity, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
 		try {
-			Activity newActivity = activitySvc.addActivity(activity);
+			Activity newActivity = activitySvc.addActivity(principal.getName(), activity);
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(activity.getId());
@@ -62,28 +64,29 @@ public class ActivityController {
 			return null;
 		}
 	}
-	
+
 	// updated activity
-		@PutMapping("activities/{id}")
-		public Activity updateFlight(@PathVariable Integer id, @RequestBody Activity activity) {
-			Activity updatedActivity = activitySvc.updateActivity(activity, id);
-			System.out.println(updatedActivity);
-			return updatedActivity;
+	@PutMapping("activities/{id}")
+	public Activity updateActivity(HttpServletRequest req, HttpServletResponse res, @PathVariable Integer id,
+			@RequestBody Activity activity, Principal principal) {
+		Activity updatedActivity = activitySvc.updateActivity(principal.getName(), activity, id);
+		if (updatedActivity == null) {
+			res.setStatus(400);
+		} else {
+			res.setStatus(200);
 		}
-		
+		System.out.println(updatedActivity);
+		return updatedActivity;
+	}
+
 	// disable activity
-		@DeleteMapping("activities/{title}")
-		public void deactivateActivity(@PathVariable String title, HttpServletResponse resp, Principal principal) {
-			if (activitySvc.changeActivityEnabled(title)) {
-	            resp.setStatus(200);
-	        } else {
-	            resp.setStatus(404);
-	        }
-	    } 
-		
-		
-		
-	
-	
+	@DeleteMapping("activities/{title}")
+	public void deactivateActivity(@PathVariable String title, HttpServletResponse resp, Principal principal) {
+		if (activitySvc.changeActivityEnabled(principal.getName(), title)) {
+			resp.setStatus(200);
+		} else {
+			resp.setStatus(404);
+		}
+	}
 
 }

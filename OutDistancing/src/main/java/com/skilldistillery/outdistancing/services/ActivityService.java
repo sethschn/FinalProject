@@ -9,10 +9,10 @@ public interface ActivityService {
 
 	Activity findById(int id);
 
-	Activity addActivity(Activity activity);
+	Activity addActivity(String username, Activity activity);
 
-	Activity updateActivity(Activity activity, int id);
+	Activity updateActivity(String username, Activity activity, int id);
 
-	Boolean changeActivityEnabled(String title);
+	Boolean changeActivityEnabled(String username, String title);
 
 }
