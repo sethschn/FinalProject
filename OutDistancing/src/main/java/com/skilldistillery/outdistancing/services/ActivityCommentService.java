@@ -7,6 +7,8 @@ import com.skilldistillery.outdistancing.entities.ActivityComment;
 public interface ActivityCommentService {
 
 	List<ActivityComment> findAll();
+	
+	List<ActivityComment> findByActivityId(int id);
 
 	ActivityComment findById(int id);
 

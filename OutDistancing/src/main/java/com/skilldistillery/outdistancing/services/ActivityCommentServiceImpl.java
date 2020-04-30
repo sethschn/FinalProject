@@ -93,4 +93,9 @@ public class ActivityCommentServiceImpl implements ActivityCommentService {
 		}
 	}
 
+	@Override
+	public List<ActivityComment> findByActivityId(int id) {
+		return comRepo.findByActivity_Id(id);
+	}
+
 }

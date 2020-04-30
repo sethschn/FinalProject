@@ -2,6 +2,8 @@ import { ActivityService } from './../../services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
+import { ActivityComment } from 'src/app/models/activity-comment';
+import { ActivityCommentService } from 'src/app/services/activity-comment.service';
 
 @Component({
   selector: 'app-non-user-landing',
@@ -11,12 +13,16 @@ import { Activity } from 'src/app/models/activity';
 export class NonUserLandingComponent implements OnInit {
   activity = new Activity();
   activities: Activity[] = [];
-  selected = null;
-  newActivity = new Activity();
+  activityComments: ActivityComment[] = [];
+  comment = new ActivityComment();
   editActivity = null;
+  newActivity = new Activity();
+  selected = null;
+
 
   constructor(
     private activitySvc: ActivityService,
+    private commentSvc: ActivityCommentService,
     private currentRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -28,6 +34,7 @@ export class NonUserLandingComponent implements OnInit {
       this.activitySvc.show(activityId).subscribe(
         activity =>{
           this.selected = activity;
+          this.loadComments();
         },
         fail => {
           console.error(fail);
@@ -38,6 +45,21 @@ export class NonUserLandingComponent implements OnInit {
     else{
       this.reload();
     }
+  }
+
+  loadComments(){
+    this.commentSvc.index(this.selected.id).subscribe(
+      comments =>{
+        this.activityComments = comments;
+        console.log(comments);
+      },
+      fail => {
+        console.error(fail);
+        // this.router.navigateByUrl(`/notFound`)
+      }
+    );
+
+
   }
 
   reload(){
@@ -97,6 +119,20 @@ export class NonUserLandingComponent implements OnInit {
   displayActivity(activity){
     this.router.navigateByUrl(`/activities/${activity.id}`);
   }
+
+  addComment(comment: ActivityComment, activity: Activity){
+    this.commentSvc.createComment(comment, activity.id).subscribe(
+      good => {
+        this.reload();
+        this.newActivity = new Activity();
+      },
+      bad =>{
+        console.error('workoutListComponent.addWorkout(): error adding workout')
+        console.error(bad);
+      }
+    );
+  }
+
 
 
 

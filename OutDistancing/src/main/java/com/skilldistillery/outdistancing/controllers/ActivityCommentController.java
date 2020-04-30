@@ -30,9 +30,9 @@ public class ActivityCommentController {
 	private ActivityCommentService comSvc;
 
 	// find all
-	@GetMapping("activitycomments")
-	public List<ActivityComment> findAll() {
-		return comSvc.findAll();
+	@GetMapping("activities/{actId}/activitycomments")
+	public List<ActivityComment> findAll(@PathVariable Integer actId) {
+		return comSvc.findByActivityId(actId);
 	}
 
 	// find by id
