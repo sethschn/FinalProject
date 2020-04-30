@@ -1,6 +1,8 @@
 package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table (name = "activity_comment")
@@ -24,7 +28,7 @@ public class ActivityComment {
 	private String content;
 	
 	@Column(name = "create_date")
-	private LocalDate createDate;
+	private LocalDateTime createDate;
 	
 	private boolean enabled;
 	
@@ -35,13 +39,17 @@ public class ActivityComment {
 //	@Column(name = "activity_id")
 //	private int activityId;
 	
-//	@OneToOne
-	@Column(name = "in_reply_id")
-	private Integer parentComment;
+	@ManyToOne
+	@JoinColumn(name = "in_reply_id")
+	private ActivityComment parentComment;
 	
 	@ManyToOne
 	@JoinColumn(name="activity_id")
 	private Activity activity;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="parentComment")
+	private List<ActivityComment> replies;
 
 
 	//CONSTRUCTORS
@@ -52,8 +60,8 @@ public class ActivityComment {
 	
 
 
-	public ActivityComment(int id, String content, LocalDate createDate, boolean enabled, User user,
-			Integer parentComment, Activity activity) {
+	public ActivityComment(int id, String content, LocalDateTime createDate, boolean enabled, User user,
+			ActivityComment parentComment, Activity activity) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -79,6 +87,24 @@ public class ActivityComment {
 		this.id = id;
 	}
 
+	public List<ActivityComment> getReplies() {
+		return replies;
+	}
+
+
+
+
+
+
+	public void setReplies(List<ActivityComment> replies) {
+		this.replies = replies;
+	}
+
+
+
+
+
+
 	public String getContent() {
 		return content;
 	}
@@ -87,11 +113,11 @@ public class ActivityComment {
 		this.content = content;
 	}
 
-	public LocalDate getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(LocalDate createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -118,13 +144,25 @@ public class ActivityComment {
 
 
 
-	public Integer getParentComment() {
+	
+	public ActivityComment getParentComment() {
 		return parentComment;
 	}
 
-	public void setParentComment(Integer parentComment) {
+
+
+
+
+
+	public void setParentComment(ActivityComment parentComment) {
 		this.parentComment = parentComment;
 	}
+
+
+
+
+
+	
 
 	public Activity getActivity() {
 		return activity;

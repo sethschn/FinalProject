@@ -6,16 +6,21 @@ export class ActivityComment {
 		content: string;
 		enabled: boolean;
 		user: User;
-		parentComment: number;
-		activity: Activity;
+		parentComment: ActivityComment;
+    activity: Activity;
+    replies: ActivityComment[];
+    createDate: string;
 
     constructor(
       id?: number,
       content?: string,
       enabled?: boolean,
       user?: User,
-      parentComment?: number,
-      activity?: Activity
+      parentComment?: ActivityComment,
+      activity?: Activity,
+      replies?: ActivityComment[],
+      createDate?: string
+
     ){
   this.id = id;
 		this.content = content;
@@ -23,5 +28,7 @@ export class ActivityComment {
 		this.user = user;
 		this.parentComment = parentComment;
     this.activity = activity;
+    this.replies = replies? replies: [];
+    this.createDate = createDate;
     }
 }
