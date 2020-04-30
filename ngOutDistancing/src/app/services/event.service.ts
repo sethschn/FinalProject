@@ -29,8 +29,7 @@ export class EventService {
   }
 
   public index() {
-    const httpOptions = this.getHttpOptions();
-    return this.http.get<Event[]>(this.url, httpOptions).pipe(
+    return this.http.get<Event[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('EventService.index: error retrieving events: ' + err);
@@ -39,8 +38,7 @@ export class EventService {
   }
 
   public show(id) {
-    const httpOptions = this.getHttpOptions();
-    return this.http.get<Event>(`${this.url}/${id}`, httpOptions).pipe(
+    return this.http.get<Event>(`${this.url}/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('EventService.show: error retrieving event: ' + err);

@@ -16,6 +16,10 @@ import { AuthService } from './services/auth.service';
 import { ActivityService } from './services/activity.service';
 import { EventCommentService } from './services/event-comment.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -27,7 +31,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserLandingComponent,
     NonUserLandingComponent,
     NotFoundComponent,
-    AdminComponent
+    AdminComponent,
+    NavBarComponent,
+    LoginComponent,
+    LogoutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
