@@ -21,14 +21,7 @@ export class ActivityService {
   private url = environment.baseUrl + 'api/activities';
 
   index() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Basic ` + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    };
-    return this.http.get<Activity[]>(this.url + '?sorted=true',httpOptions)
+    return this.http.get<Activity[]>(this.url)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -63,7 +56,7 @@ export class ActivityService {
       })
     };
     console.log("show todo with id: "+ id);
-    return this.http.get<Activity>(`${this.url}/${id}`,httpOptions)
+    return this.http.get<Activity>(`${this.url}/${id}`)
     .pipe(
       catchError((err: any) => {
       console.log(err);
