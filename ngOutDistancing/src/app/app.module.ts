@@ -15,6 +15,7 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ActivityService } from './services/activity.service';
 import { EventCommentService } from './services/event-comment.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -31,8 +32,10 @@ import { EventCommentService } from './services/event-comment.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     EventService,

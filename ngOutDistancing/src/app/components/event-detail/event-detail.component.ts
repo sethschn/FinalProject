@@ -11,7 +11,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventDetailComponent implements OnInit {
 
-  title = 'Checking Event Details Page'
+
   selected = null;
   newEvent = new Event();
   editEvent = null;
