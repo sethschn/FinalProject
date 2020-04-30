@@ -1,1 +1,69 @@
-<p>event-detail works!</p>
+<h1>Event Detail Page</h1>
+
+<div *ngIf="!selected">
+  <form class="form form-group inline">
+    <input class="form-control" type="text" name="title" [(ngModel)]="newEvent.title" placeholder="Title"/><br>
+    <input class="form-control" type="text" name="eventTime" [(ngModel)]="newEvent.eventTime" placeholder="Event Time"/><br>
+    <input class="form-control" type="text" name="eventDate" [(ngModel)]="newEvent.eventDate" placeholder="Event Date"/> <br>
+    <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newEvent.shortDescription" placeholder="Short Description"/> <br>
+    <input class="form-control" type="text" name="description" [(ngModel)]="newEvent.description" placeholder="Description"/> <br>
+    <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newEvent.imageUrl" placeholder="Image Url"/> <br>
+    <input class="btn btn-info" type="submit" (click)="createEvent(newEvent)" value="Add An Event"/><br>
+  </form>
+
+  <hr>
+
+  <table class="table table-info table-hover">
+    <thead class="thead thead-primary">
+     <tr>
+        <th>Title </th>
+        <th>Event Date</th>
+        <th>Event Time</th>
+        <th>Description</th>
+        <th>Delete </th>
+       </tr>
+    </thead>
+    <tbody>
+   <tr *ngFor="let event of eventList" (click)="displayEvent(event)">
+       <td><input type="number" name="id" [(ngModel)]="event.id"></td>
+       <td><input type="text" name="title" [(ngModel)]="event.title"></td>
+       <td><input type="text" name="eventDate" [(ngModel)]="event.eventDate"></td>
+       <td><input type="text" name="eventTime" [(ngModel)]="event.eventTime"></td>
+       <td><input type="text" name="shortDescription" [(ngModel)]="event.shortDescription"></td>
+       <td><input type="text" name="description" [(ngModel)]="event.description"></td>
+       <td><input type="text" name="imageUrl" [(ngModel)]="event.imageUrl"></td>
+     <td><input class="btn btn-danger" type="submit" (click)="deleteEvent(event.id)" value="Delete Event"></td>
+   </tr>
+  </tbody>
+  </table>
+</div>
+
+
+    <div *ngIf="selected">
+    <br>
+   <p> Id: {{selected.id}}<br>
+    Title: {{selected.title}}<br>
+    Event Date: {{selected.eventDate}}<br>
+    Event Time: {{selected.eventTime}}<br>
+    Short Description: {{selected.shortDescription}}<br>
+    Description: {{selected.description}}<br>
+    Image: <img [src]="selected.imageUrl"/></p>
+    <br>
+    <input class="btn btn-info" type="submit" (click)="setEditEvent()" value="Edit"/><br>
+    <button class="btn btn-dark" (click)="displayTable()">Display Table</button><br>
+<hr>
+    <form *ngIf="editEvent">
+      <input type="text" name="title" [(ngModel)]="editEvent.firstGrat" placeholder="Title"/><br>
+      <input type="text" name="eventDate" [(ngModel)]="editEvent.eventDate" placeholder="Event Date"/><br>
+      <input type="text" name="eventTime" [(ngModel)]="editEvent.eventTime" placeholder="Event Time"/><br>
+      <input type="text" name="shortDescription" [(ngModel)]="editEvent.shortDescription" placeholder="Short"/><br>
+      <input type="text" name="description" [(ngModel)]="editEvent.description" placeholder="Description"/><br>
+      <input type="text" name="imageUrl" [(ngModel)]="editEvent.imageUrl" placeholder="Image"/><br>
+
+      <input class="btn btn-info" type="submit" (click)="updateEvent(editEvent)" value="Save"/>
+      <input class="btn btn-dark" type="submit" (click)="editEvent = null" value="Cancel"/><br>
+    </form>
+    </div>
+
+
+

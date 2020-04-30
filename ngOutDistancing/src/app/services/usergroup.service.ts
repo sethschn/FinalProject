@@ -1,30 +1,30 @@
+import { Usergroup } from './../models/usergroup';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
-import { User } from '../models/user';
-import { environment } from 'src/environments/environment';
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsergroupService {
 
   private baseUrl = environment.baseUrl;
-  private url = this.baseUrl + 'api/user';
+  private url = this.baseUrl + 'api/usergroups';
 
   constructor(private http: HttpClient, private datePipe: DatePipe, private authService: AuthService) { }
 
   index() {
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-      return this.http.get<User[]>(this.url, httpOptions)
+      return this.http.get<Usergroup[]>(this.url, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('index method in user service failed');
+          return throwError('index method in usergroup service failed');
         })
         );
       }
@@ -36,26 +36,39 @@ export class UserService {
 
   public show(id: number){
     const httpOptions = this.getHttpOptions();
-    console.log("Show user with id "+id);
+    console.log("Show usergroup with id "+id);
     if (this.authService.checkLogin()){
-      return this.http.get<User>(`${this.url}/${id}`, httpOptions)
+      return this.http.get<Usergroup>(`${this.url}/${id}`, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('show single id in todo service failed');
+          return throwError('show single id in usergroup service failed');
         })
       );
     }
   }
 
-  public update(user: User){
+  public create(usergroup: Usergroup){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-    return this.http.put<User>(`${this.url}/${user.id}`, user, httpOptions)
+      return this.http.post<Usergroup>(this.url, usergroup, httpOptions)
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('create method in usergroup service failed');
+          })
+        );
+    }
+  }
+
+  public update(usergroup: Usergroup){
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.put<Usergroup>(`${this.url}/${usergroup.id}`, usergroup, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('update method in user service failed');
+          return throwError('update method in usergroup service failed');
         })
       );
     }
@@ -64,11 +77,11 @@ export class UserService {
   public destroy(id: number){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-        return this.http.delete<User>(`${this.url}/${id}`, httpOptions)
+        return this.http.delete<Usergroup>(`${this.url}/${id}`, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
-            return throwError('delete method in user service failed');
+            return throwError('delete method in usergroup service failed');
           })
         );
       }
@@ -85,5 +98,4 @@ export class UserService {
     };
     return httpOptions;
   }
-
 }

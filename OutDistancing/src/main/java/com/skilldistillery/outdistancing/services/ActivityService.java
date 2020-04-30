@@ -13,6 +13,6 @@ public interface ActivityService {
 
 	Activity updateActivity(String username, Activity activity, int id);
 
-	Boolean changeActivityEnabled(String username, String title);
+	Boolean changeActivityEnabled(String username, int activityId);
 
 }

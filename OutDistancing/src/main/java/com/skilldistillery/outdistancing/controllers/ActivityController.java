@@ -80,9 +80,9 @@ public class ActivityController {
 	}
 
 	// disable activity
-	@DeleteMapping("activities/{title}")
-	public void deactivateActivity(@PathVariable String title, HttpServletResponse resp, Principal principal) {
-		if (activitySvc.changeActivityEnabled(principal.getName(), title)) {
+	@DeleteMapping("activities/{id}")
+	public void deactivateActivity(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
+		if (activitySvc.changeActivityEnabled(principal.getName(), id)) {
 			resp.setStatus(200);
 		} else {
 			resp.setStatus(404);
