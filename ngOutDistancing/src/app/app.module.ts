@@ -39,9 +39,7 @@ import { LocationDetailComponent } from './components/location-detail/location-d
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    SethAngular
-    UserprofileComponent
-
+    UserprofileComponent,
     ResourceDetailComponent,
     LocationDetailComponent
   ],
