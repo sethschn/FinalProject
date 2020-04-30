@@ -9,7 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'nonUserLanding' },
-  { path: 'eventDetail', component:EventDetailComponent},
+  { path: 'eventDetail', component: EventDetailComponent},
   { path: 'nonUserLanding', component: NonUserLandingComponent},
   { path: 'userLanding', component: UserLandingComponent},
   { path: 'admin', component: AdminComponent},
