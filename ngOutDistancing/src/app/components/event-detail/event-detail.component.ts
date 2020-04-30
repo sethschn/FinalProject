@@ -42,7 +42,7 @@ export class EventDetailComponent implements OnInit {
       data => {this.events = data;
       },
       bad => {
-        console.error("GratitudeListComponent.loadEntries(): error loading");
+        console.error("EventDetailComponent.loadEvents(): error loading");
         console.error(bad);
       }
     );

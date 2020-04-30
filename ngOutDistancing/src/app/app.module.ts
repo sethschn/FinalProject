@@ -14,7 +14,8 @@ import { ResourceService } from './services/resource.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ActivityService } from './services/activity.service';
-import { EventcommentService } from './services/eventcomment.service';
+import { EventCommentService } from './services/event-comment.service';
+
 
 
 
@@ -39,7 +40,8 @@ import { EventcommentService } from './services/eventcomment.service';
     UserService,
     AuthService,
     ActivityService,
-    EventcommentService
+    EventCommentService
+
   ],
   bootstrap: [AppComponent]
 })
