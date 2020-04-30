@@ -72,8 +72,8 @@ public class ResourceServiceImpl implements ResourceService {
 
 	public boolean deleteById(int resourceId, String username) {
 		User user = userRepo.findByUsername(username);
-		Optional<Resource> optHike = resourceRepo.findById(resourceId);
-		if (optHike.isPresent() && user!=null) {
+		Optional<Resource> optResource = resourceRepo.findById(resourceId);
+		if (optResource.isPresent() && user!=null) {
 			resourceRepo.deleteById(resourceId);
 			return true;
 		}
