@@ -20,6 +20,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 
 
 
@@ -35,7 +37,9 @@ import { RegisterComponent } from './components/register/register.component';
     NavBarComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResourceDetailComponent,
+    LocationDetailComponent
   ],
   imports: [
     BrowserModule,
