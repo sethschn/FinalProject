@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Activity;
+import com.skilldistillery.outdistancing.entities.ActivityComment;
 import com.skilldistillery.outdistancing.entities.Event;
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.repositories.ActivityRepository;
@@ -64,13 +65,13 @@ public class ActivityServiceImpl implements ActivityService {
 
 
 	@Override
-	public Boolean changeActivityEnabled(String username, String title) {
+	public Boolean changeActivityEnabled(String username, int activityId) {
 		User user = userRepo.findByUsername(username);
-		Activity activity = null;
-		activity = activityRepo.findByTitle(title);
-		if (activity != null && user != null) {
-			activity.setEnabled(!activity.getEnabled());
-			activityRepo.save(activity);
+		Optional<Activity> optActivity = activityRepo.findById(activityId);
+        if (optActivity.isPresent() && user != null) {
+            Activity updateActivity = optActivity.get();
+            updateActivity.setEnabled(!updateActivity.getEnabled());
+			activityRepo.save(updateActivity);
 			return true;
 		} else {
 			return false;
