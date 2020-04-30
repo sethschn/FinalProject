@@ -27,10 +27,12 @@ export class AuthService {
 
     // create request to authenticate credentials
     return this.http
-      .get(this.baseUrl + 'authenticate', httpOptions)
+      .get<User>(this.baseUrl + 'authenticate', httpOptions)
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          localStorage.setItem('currentUserId' , res.id+"");
+          //console.log(res);
           return res;
         }),
         catchError((err: any) => {
@@ -51,8 +53,13 @@ export class AuthService {
     );
   }
 
+  getCurrentUserId(){
+    return localStorage.getItem('currentUserId');
+  }
+
   logout() {
     localStorage.removeItem('credentials');
+    localStorage.removeItem('currentUserId');
   }
 
   checkLogin() {

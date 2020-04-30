@@ -34,10 +34,23 @@ export class UserService {
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('show single id in todo service failed');
+          return throwError('show single id in user service failed');
         })
       );
     }
+
+    public showLoggedInUser(){
+      const id = this.authService.getCurrentUserId();
+      const httpOptions = this.getHttpOptions();
+
+        return this.http.get<User>(`${this.url}/${id}`, httpOptions)
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('show single id in user service failed');
+          })
+        );
+      }
 
   public update(user: User){
     const httpOptions = this.getHttpOptions();
