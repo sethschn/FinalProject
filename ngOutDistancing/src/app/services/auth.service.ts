@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -39,7 +40,7 @@ export class AuthService {
       );
   }
 
-  register(user) {
+  register(user: User) {
     // create request to register a new account
     return this.http.post(this.baseUrl + 'register', user)
     .pipe(
