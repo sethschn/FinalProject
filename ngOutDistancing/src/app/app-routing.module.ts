@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'userLanding', component: UserLandingComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'admin', component: AdminComponent},
-  { path: '**', component: NotFoundComponent}
+  { path: '**', component: NotFoundComponent},
 ];
 
 
