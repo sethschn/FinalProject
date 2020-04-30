@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Resource } from '../models/resource';
 import { AuthService } from './auth.service';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class ResourceService {
   private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api/resources';
   constructor(
-    private http: HttpClient, private datePipe: DatePipe, private authService: AuthService
+    private http: HttpClient, private authService: AuthService
   ) { }
 
 
