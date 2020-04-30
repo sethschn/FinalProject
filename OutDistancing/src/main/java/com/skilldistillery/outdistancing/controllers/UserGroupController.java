@@ -1,5 +1,6 @@
 package com.skilldistillery.outdistancing.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,10 +48,9 @@ public class UserGroupController {
 	}
 	
 	@PostMapping("usergroups")
-	public UserGroup create(@RequestBody UserGroup userGroup, HttpServletRequest req, HttpServletResponse res) {
-		String hardcodedUsername = "kissmyaxe";
+	public UserGroup create(@RequestBody UserGroup userGroup, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
-		UserGroup createdUserGroup = usergroupSvc.createGroup(userGroup, hardcodedUsername);
+		UserGroup createdUserGroup = usergroupSvc.createGroup(userGroup, principal.getName());
 			res.setStatus(201);
 			StringBuffer reqUrl = req.getRequestURL();
 			reqUrl.append("/").append(createdUserGroup.getId());
@@ -65,10 +65,9 @@ public class UserGroupController {
 	
 	@PutMapping("usergroups/{userGroupId}")
 	public UserGroup updateUserGroup(@PathVariable("userGroupId") int userGroupId, @RequestBody UserGroup userGroup,
-			HttpServletResponse resp) {
-		String hardcodedUsername = "kissmyaxe";
+			HttpServletResponse resp, Principal principal) {
 		try {
-			userGroup = usergroupSvc.updateGroup(userGroupId, userGroup, hardcodedUsername);
+			userGroup = usergroupSvc.updateGroup(userGroupId, userGroup, principal.getName());
 			if (userGroup == null) {
 				resp.setStatus(400);
 			}
@@ -82,8 +81,8 @@ public class UserGroupController {
 	
 
 	@DeleteMapping("usergroups/{userGroupId}")
-	public boolean changeEnabled(HttpServletRequest req, HttpServletResponse res, @PathVariable int userGroupId) {
-		boolean isEnabled = usergroupSvc.changeGroupEnabled(userGroupId);
+	public boolean changeEnabled(HttpServletRequest req, HttpServletResponse res, @PathVariable int userGroupId, Principal principal) {
+		boolean isEnabled = usergroupSvc.changeGroupEnabled(userGroupId, principal.getName());
 		if (isEnabled) {
 			res.setStatus(200);
 		}else {
