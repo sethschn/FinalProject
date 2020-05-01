@@ -31,8 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
-
-
+import { ActivityComponent } from './components/activity/activity.component';
 
 
 @NgModule({
@@ -54,6 +53,7 @@ import { MatSliderModule } from '@angular/material/slider';
     ContactComponent,
     ModalFormComponent,
     DynamicMarkersComponent,
+    ActivityComponent,
 
 
   ],
