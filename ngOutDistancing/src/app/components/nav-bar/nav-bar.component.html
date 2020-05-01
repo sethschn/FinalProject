@@ -1,32 +1,69 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class= "navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/nonUserLanding']">HOME</a>
   <a class= "navbar-brand" *ngIf="loggedIn()" [routerLink]="['/userLanding']">HOME</a>
-  <a class= "navbar-brand" *ngIf="adminLoggedIn()" [routerLink]="['/admin']">ADMIN</a>
+  <a class="profile" *ngIf="loggedIn()" [routerLink]="['/profile']" text-align="right">
+    <img src="{{userImg}}" alt="Profile Image" style="width:50px;" class="rounded-circle">
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed">
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]='isCollapsed'>
-    <ul class="navbar-nav">
-        <li class="nav-item active">
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]='isCollapsed'>
+  <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class= "nav-link" *ngIf="adminLoggedIn()" [routerLink]="['/admin']">ADMIN</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/about']">ABOUT</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/contact']">CONTACT</a>
         </li>
         <li class="nav-item" *ngIf="!loggedIn()">
-          <a class="nav-link" [routerLink]="['/login']">LOGIN</a>
+          <a class="nav-link" (click)="open(content)" [routerLink]="['']">LOGIN</a>
         </li>
         <li class="nav-item" *ngIf="!loggedIn()">
           <a class="nav-link" [routerLink]="['/register']">REGISTER</a>
         </li>
         <li class="nav-item" *ngIf="loggedIn()">
-        <a class="nav-link" [routerLink]="['/logout']">LOGOUT</a>
-      </li>
-      <app-logout class="ml-auto"></app-logout>
+          <a class="nav-link" [routerLink]="['/logout']">LOGOUT</a>
+        </li>
+        <app-logout class="ml-auto"></app-logout>
       </ul>
-  </div>
+    </div>
 </nav>
+<!-- style=“text-align:right” -->
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Login</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+          <div class="form-group">
+              <label for="uname1">Username</label>
+              <input type="text" [(ngModel)]="newUser.username" class="form-control form-control-lg rounded-0" name="username" id="uname1" required="">
+              <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+              <label>Password</label>
+              <input type="password" [(ngModel)]="newUser.password" class="form-control form-control-lg rounded-0" name="password"  required="" autocomplete="new-password">
+              <div class="invalid-feedback">Enter your password too!</div>
+          </div>
+          <button type="submit" class="btn btn-success btn-lg float-right" (click)="login(newUser); modal.close()" id="btnLogin">Login</button>
+        </form>
+      </div>
+      <!--/card-block-->
+    </div>
+    <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+  </div>
+</ng-template>
