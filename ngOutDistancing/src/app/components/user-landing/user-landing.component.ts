@@ -28,8 +28,6 @@ export class UserLandingComponent implements OnInit {
   categories: Category[] = [];
 
 
-
-
   constructor(private userService: UserService,private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService,
     private activitySvc: ActivityService, private eventSvc: EventService, private catSvc: CategoryService
     ) { }
