@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-
+  currUser = null;
   isCollapsed = false;
   constructor(
 
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +22,21 @@ export class NavBarComponent implements OnInit {
 
   loggedIn(){
     return this.authService.checkLogin();
+  }
+
+  getLoggedInUser(){
+    this.userService.showLoggedInUser().subscribe(
+      data => {
+        this.currUser = data;
       }
+    )
+  }
+
+  adminLoggedIn(){
+    if (this.loggedIn()){
+     return this.authService.getCurrentUserRole() === 'admin';
+    }
+    return false;
+  }
 
 }
