@@ -4,8 +4,12 @@
   background-size: cover;
   height: 100%;
 width: 100%;} */
+.carousel {
+  outline: none !important;
+}
 
 .picsum-img-wrapper {
+  outline: none;
     margin-top: 2%;
    width: max-content;
    height: max-content;
