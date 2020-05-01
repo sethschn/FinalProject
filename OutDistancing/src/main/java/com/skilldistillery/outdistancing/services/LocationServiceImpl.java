@@ -41,7 +41,7 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public Location createLocation(Location location, String username) {
 		User user = userRepo.findByUsername(username);
-		if (user != null) {
+		//if (user != null) {
 		try {
 			location = locationRepo.saveAndFlush(location);
 			return location;
@@ -49,8 +49,8 @@ public class LocationServiceImpl implements LocationService {
 			e.printStackTrace();
 			return null;
 		}
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 	@Override
