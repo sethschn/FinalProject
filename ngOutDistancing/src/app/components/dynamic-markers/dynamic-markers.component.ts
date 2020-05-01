@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DynamicMarkersComponent implements OnInit {
 
-  longitude = 20.728218;
+longitude = 20.728218;
 latitude = 52.128973;
 
 markers = [

@@ -28,7 +28,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
 import { ActivityComponent } from './components/activity/activity.component';
-
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -62,7 +62,8 @@ import { ActivityComponent } from './components/activity/activity.component';
     FormsModule,
     NgbModule,
     NgbModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule,
 
   ],
   providers: [
