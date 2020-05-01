@@ -27,10 +27,12 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 
 @NgModule({
@@ -54,6 +56,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DynamicMarkersComponent,
     ActivityComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -66,8 +69,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     AgmCoreModule,
     BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatSliderModule,
 
   ],
+
   providers: [
     EventService,
     ResourceService,
@@ -77,6 +84,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EventCommentService
 
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
