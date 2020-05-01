@@ -29,11 +29,12 @@ export class AuthService {
     return this.http
       .get<User>(this.baseUrl + 'authenticate', httpOptions)
       .pipe(
-        tap((res) => {
+        tap((user) => {
           localStorage.setItem('credentials' , credentials);
-          localStorage.setItem('currentUserId' , res.id+"");
+          localStorage.setItem('currentUserId' , user.id+"");
+          localStorage.setItem('currentUserRole' , user.role+"");
           //console.log(res);
-          return res;
+          return user;
         }),
         catchError((err: any) => {
           console.log(err);
@@ -58,9 +59,14 @@ export class AuthService {
     return localStorage.getItem('currentUserId');
   }
 
+  getCurrentUserRole(){
+    return localStorage.getItem('currentUserRole');
+  }
+
   logout() {
     localStorage.removeItem('credentials');
     localStorage.removeItem('currentUserId');
+    localStorage.removeItem('currentUserRole');
   }
 
   checkLogin() {
