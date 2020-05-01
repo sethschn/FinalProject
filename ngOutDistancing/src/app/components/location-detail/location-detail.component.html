@@ -1,1 +1,78 @@
 <h1> Location Details</h1>
+
+<div *ngIf="!selected">
+  <form class="form form-group inline">
+    <input class="form-control" type="text" name="street" [(ngModel)]="newLocation.street" placeholder="Street"/><br>
+    <input class="form-control" type="text" name="city" [(ngModel)]="newLocation.city" placeholder="City"/><br>
+    <input class="form-control" type="text" name="state" [(ngModel)]="newLocation.state" placeholder="State"/><br>
+    <input class="form-control" type="text" name="country" [(ngModel)]="newLocation.country" placeholder="Country"/> <br>
+    <input class="form-control" type="text" name="postalCode" [(ngModel)]="newLocation.postalCode" placeholder="Postal Code"/> <br>
+    <input class="form-control" type="text" name="title" [(ngModel)]="newLocation.title" placeholder="Location Title"/> <br>
+    <input class="form-control" type="text" name="" [(ngModel)]="newLocation.locationUrl" placeholder="Location URL"/> <br>
+    <input class="btn btn-info" type="submit" (click)="createLocation(newLocation)" value="Add A Location"/><br>
+  </form>
+
+  <hr>
+
+  <table class="table table-info table-hover">
+    <thead class="thead thead-primary">
+     <tr>
+        <th>ID</th>
+        <th>Street </th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Postal Code</th>
+        <th>Title</th>
+        <th>Location URL</th>
+       </tr>
+    </thead>
+    <tbody>
+   <tr *ngFor="let location of locationList" (click)="displayLocation(location)">
+       <td><input type="number" name="id" [(ngModel)]="location.id"></td>
+       <td><input type="text" name="city" [(ngModel)]="location.city"></td>
+       <td><input type="text" name="street" [(ngModel)]="location.street"></td>
+       <td><input type="text" name="state" [(ngModel)]="location.state"></td>
+       <td><input type="text" name="country" [(ngModel)]="location.country"></td>
+       <td><input type="text" name="postalCode" [(ngModel)]="location.postalCode"></td>
+       <td><input type="text" name="title" [(ngModel)]="location.title"></td>
+       <td><input type="text" name="locationUrl" [(ngModel)]="location.locationUrl"></td>
+     <td><input class="btn btn-danger" type="submit" (click)="deleteLocation(location.id)" value="Delete Location"></td>
+   </tr>
+  </tbody>
+  </table>
+</div>
+
+
+    <div *ngIf="selected">
+    <br>
+   <p> ID: {{selected.id}}<br>
+    City: {{selected.city}}<br>
+    Street: {{selected.street}}<br>
+    State: {{selected.state}}<br>
+    Country: {{selected.country}}<br>
+    Postal Code: {{selected.postalCode}}<br>
+    Title: {{selected.title}}<br>
+    <a href="{{selected.locationUrl}}"> {{selected.locationUrl}}</a><br>
+    <br>
+    <input class="btn btn-info" type="submit" (click)="setEditLocation()" value="Edit"/><br>
+    <button class="btn btn-dark" (click)="displayTable()">Display Table</button><br>
+<hr>
+    <form *ngIf="editLocation">
+      <input type="text" name="city" [(ngModel)]="editLocation.city" placeholder="City"/><br>
+      <input type="text" name="street" [(ngModel)]="editLocation.street" placeholder="Street"/><br>
+      <input type="text" name="state" [(ngModel)]="editLocation.state" placeholder="State"/><br>
+      <input type="text" name="country" [(ngModel)]="editLocation.country" placeholder="Country"/><br>
+      <input type="text" name="postalCode" [(ngModel)]="editLocation.postalCode" placeholder="Postal Code"/><br>
+      <input type="text" name="title" [(ngModel)]="editLocation.title" placeholder="Title"/><br>
+      <input type="text" name="locationUrl" [(ngModel)]="editLocation.locationUrl" placeholder="Location URL"/><br>
+
+      <input class="btn btn-info" type="submit" (click)="updateLocation(editLocation)" value="Save"/>
+      <input class="btn btn-dark" type="submit" (click)="editLocation = null" value="Cancel"/><br>
+    </form>
+    </div>
+
+
+
+
+

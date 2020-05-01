@@ -4,25 +4,21 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Location } from '../models/location';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api/locations';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient, private authService: AuthService
   ) { }
 
-  private url = environment.baseUrl + 'api/locations';
 
-  indexLocation() {
+  public indexLocation() {
     return this.http.get<Location[]>(this.url + '?sorted=true')
       .pipe(
         catchError((err: any) => {
@@ -32,47 +28,62 @@ export class LocationService {
       );
   }
 
-  public showLocation(id: number) {
+  public showLocation(id) {
     return this.http.get<Location>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('show method in location service failed');
+      })
+    );
+  }
+
+
+  public createLocation(location: Location) {
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.post<Location>(this.url, location, httpOptions)
+      .pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('show method in location service failed');
+          return throwError('create method in location service failed');
         })
       );
-  }
-
-  deleteLocation(id: number) {
-    return this.http.delete<Location>(this.url + '/' + id)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('error deleting resource');
-      })
-    );
-  }
-
-  createLocation(data: Location) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    return this.http.post<any>(this.url, data, httpOptions)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('create method in location service failed');
-      })
-    );
+    }
   }
 
   public updateLocation(location: Location) {
-    return this.http.put<Location>(`${this.url}/${location.id}`, location)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('update method in location service failed');
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.put<Location>(`${this.url}/${location.id}`, location, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('update method in location service failed');
+        })
+      );
+    }
+  }
+
+  public deleteLocation(id: number) {
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+    return this.http.delete<Location>(`${this.url}/${id}`, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('error deleting location');
+        })
+      );
+    }
+  }
+
+  private getHttpOptions() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${this.authService.getCredentials()}`,
+        'X-Requested-With': 'XMLHttpRequest'
       })
-    );
+    };
+    return httpOptions;
   }
 }
