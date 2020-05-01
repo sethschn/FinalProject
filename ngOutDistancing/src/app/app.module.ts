@@ -29,6 +29,7 @@ import { ModalFormComponent } from './components/modal-form/modal-form.component
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -64,6 +65,7 @@ import { AgmCoreModule } from '@agm/core';
     NgbModalModule,
     ReactiveFormsModule,
     AgmCoreModule,
+    BrowserAnimationsModule,
 
   ],
   providers: [
