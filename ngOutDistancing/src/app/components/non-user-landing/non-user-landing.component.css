@@ -14,10 +14,12 @@ img {
   max-width: 100%;
   width: auto   9;
   height: auto;
+  /* object-fit: contain; */
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
+
 
 .picsum-img-wrapper {
     outline: none;
