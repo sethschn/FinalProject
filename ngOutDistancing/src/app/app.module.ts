@@ -35,6 +35,7 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
 import { CardDisplayComponent } from './components/card-display/card-display.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,8 +71,10 @@ import { CardDisplayComponent } from './components/card-display/card-display.com
     ReactiveFormsModule,
     AgmCoreModule,
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule,
+    MatCardModule,
+    MatButtonModule,
     MatSliderModule,
+
   ],
 
   providers: [
