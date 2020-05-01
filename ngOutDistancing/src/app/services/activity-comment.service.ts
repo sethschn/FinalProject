@@ -39,6 +39,8 @@ export class ActivityCommentService {
 
   createComment(data: ActivityComment, activityId: number) {
     const httpOptions = this.getHttpOptions();
+    console.log(data);
+    console.log(activityId);
     if (this.auth.checkLogin()){
     return this.http.post<ActivityComment>(this.url + `activities/${activityId}/activitycomments`, data, httpOptions)
     .pipe(

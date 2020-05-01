@@ -49,7 +49,11 @@ public class ActivityCommentController {
 		@PostMapping("activities/{actId}/activitycomments")
 		public ActivityComment createActivityComment(@RequestBody ActivityComment comment, @PathVariable("actId")int actId, HttpServletRequest request,
 				HttpServletResponse response, Principal principal) {
+			System.out.println("************************");
+			System.out.println(comment);
+			System.out.println(actId);
 			try {
+				comment.setEnabled(true);
 				ActivityComment newComment = comSvc.addActivityComment(comment, actId, principal.getName());
 				response.setStatus(201);
 				StringBuffer url = request.getRequestURL();
