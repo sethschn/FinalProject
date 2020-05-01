@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
@@ -15,7 +15,7 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ActivityService } from './services/activity.service';
 import { EventCommentService } from './services/event-comment.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -25,6 +25,9 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ModalFormComponent } from './components/modal-form/modal-form.component';
+import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
+
 
 
 
@@ -44,7 +47,9 @@ import { ContactComponent } from './components/contact/contact.component';
     ResourceDetailComponent,
     LocationDetailComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    ModalFormComponent,
+    DynamicMarkersComponent,
 
   ],
   imports: [
@@ -53,7 +58,10 @@ import { ContactComponent } from './components/contact/contact.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    NgbModalModule,
+    ReactiveFormsModule
+
   ],
   providers: [
     EventService,

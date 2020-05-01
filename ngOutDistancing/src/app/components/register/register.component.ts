@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   newUser = new User();
-  constructor(private auth: AuthService, private router: Router) { }
+
+
+  constructor(private auth: AuthService, private router: Router, private userSvc: UserService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +30,6 @@ export class RegisterComponent implements OnInit {
       bad => {
         console.log("Error registering new User:" + bad);
       }
-  }
+    }
 
 }
