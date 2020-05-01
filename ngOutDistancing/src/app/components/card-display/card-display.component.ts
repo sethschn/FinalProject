@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardDisplayComponent implements OnInit {
 
+  activities:Array<string>= ['','','','','','','','','','','','']
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,3 +1,10 @@
+
+/* .jumbotron {
+  background-image: url(/assets/outdistancinglogo.jpg);
+  background-size: cover;
+  height: 100%;
+width: 100%;} */
+
 .picsum-img-wrapper {
     margin-top: 2%;
    width: max-content;
@@ -9,4 +16,3 @@
     height: 70vh;
     max-width: 100%;
   }
-
