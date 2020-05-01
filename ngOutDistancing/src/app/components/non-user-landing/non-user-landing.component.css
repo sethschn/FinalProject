@@ -1,18 +1,12 @@
- /* .picsum-img-wrapper {
-  background-size: cover;
-  background-position: center;
-  width: 100%;} */
-
-  .picsum-img-wrapper {
-    display: flex;
+.picsum-img-wrapper {
     margin-top: 2%;
-    /* margin-bottom: 20px; */
-    height: 70vh;
-    max-width: 100%;
-    background-position: center;
-    background-size: cover;
- }
- .ngb-carousel {
    width: max-content;
    height: max-content;
- }
+   background-position: center;
+  background-size: cover;
+    display: flex;
+    margin-bottom: 20px;
+    height: 70vh;
+    max-width: 100%;
+  }
+
