@@ -1,3 +1,6 @@
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -74,6 +77,9 @@ import { CardDisplayComponent } from './components/card-display/card-display.com
     MatCardModule,
     MatButtonModule,
     MatSliderModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
 
   ],
 
