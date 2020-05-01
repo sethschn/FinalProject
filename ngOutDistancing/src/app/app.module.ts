@@ -70,8 +70,8 @@ import { AgmCoreModule } from '@agm/core';
     BrowserAnimationsModule,
     MatCardModule, MatButtonModule,
     MatSliderModule,
-
   ],
+
   providers: [
     EventService,
     ResourceService,
