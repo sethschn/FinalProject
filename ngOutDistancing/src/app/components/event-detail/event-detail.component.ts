@@ -9,7 +9,7 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.css']
 })
-export class EventDetailComponent implements OnInit {
+export class EventDetailComponent implements OnInit{
 
 
   selected = null;
