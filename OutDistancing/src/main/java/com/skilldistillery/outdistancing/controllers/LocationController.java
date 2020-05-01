@@ -50,7 +50,7 @@ public class LocationController {
 	public Location createNewLocation(@RequestBody Location resource, HttpServletRequest request,
 			HttpServletResponse response, Principal principal) {
 		try {
-			Location addLocation = locationSvc.createLocation(resource, principal.getName());
+			Location addLocation = locationSvc.createLocation(resource, "");
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(resource.getId());
