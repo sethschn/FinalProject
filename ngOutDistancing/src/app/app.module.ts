@@ -71,11 +71,7 @@ import { AgmCoreModule } from '@agm/core';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-<<<<<<< HEAD
-    MatSliderModule
-=======
     MatSliderModule,
->>>>>>> d8e3a45986aa5ee11c0f82848f9c8a730899c90c
 
   ],
 
