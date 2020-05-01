@@ -24,8 +24,8 @@ export class ResourceDetailComponent implements OnInit {
           this.selected = data;
         },
         bad => {
-          this.router.navigateByUrl('eventDetail')
-          console.error('EventDetailComponent.reload(): error retrieving event detail list');
+          this.router.navigateByUrl('resourceDetail')
+          console.error('ResourceDetailComponent.reload(): error retrieving resource list');
           console.error(bad);
         }
         );
@@ -64,7 +64,7 @@ loadResources(){
 }
 
 createResource(resource: Resource){
-  console.log(event);
+  console.log(resource);
   this.resourceSvc.createResource(resource).subscribe(
     good => {
       this.loadResources();
@@ -81,7 +81,7 @@ setEditResource(){
 }
 
 updateResource(resource: Resource){
-  console.log(event);
+  console.log(resource);
  this.resourceSvc.updateResource(resource).subscribe(
    good =>{
      this.loadResources();

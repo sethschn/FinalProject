@@ -1,9 +1,8 @@
-import { Location } from './../../models/location';
 import { AuthService } from './../../services/auth.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-user-landing',
