@@ -67,8 +67,9 @@ import { ActivityComponent } from './components/activity/activity.component';
     NgbModalModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule,
-    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatSliderModule
 
   ],
   providers: [
