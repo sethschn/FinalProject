@@ -13,6 +13,7 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
+import { ModalFormComponent } from './components/modal-form/modal-form.component';
 
 
 
@@ -24,7 +25,6 @@ const routes: Routes = [
   { path: 'profile', component: UserprofileComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'about', component: AboutComponent},
-  { path: 'register', component: RegisterComponent},
   { path: 'event/:id', component: EventDetailComponent},
   { path: 'activities/:id', component: NonUserLandingComponent},
   { path: 'resources/:id', component: ResourceDetailComponent},

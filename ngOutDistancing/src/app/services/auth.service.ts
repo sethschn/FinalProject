@@ -40,7 +40,8 @@ export class AuthService {
           return throwError('AuthService.login(): Error logging in.');
         })
       );
-  }
+      }
+
 
   register(user: User) {
     // create request to register a new account
