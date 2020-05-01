@@ -1,4 +1,17 @@
-.navbar {
+.navbar{
   background: #2E8B57   !important;
   color: #AAB2B3;
+  font-size: large;
+}
+
+.navbar li {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 1em;
+  margin-right: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  text-align: right;
 }
