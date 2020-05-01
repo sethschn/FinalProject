@@ -37,7 +37,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
 import { CardDisplayComponent } from './components/card-display/card-display.component';
-import { ActivityCategoryPipe } from './activity-category.pipe';
+import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
 
 
 @NgModule({

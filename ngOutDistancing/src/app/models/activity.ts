@@ -1,3 +1,4 @@
+import { Category } from './category';
 export class Activity {
 
 
@@ -10,6 +11,7 @@ export class Activity {
   imageUrl: string;
   equipmentLevel: string;
   equipmentDescription: string;
+  categories: Category[];
 
 
 
@@ -22,7 +24,8 @@ export class Activity {
   description?: string,
   imageUrl?: string,
   equipmentLevel?: string,
-  equipmentDescription?: string
+  equipmentDescription?: string,
+  categories?: Category[],
   ){
   this.id = id;
   this.title = title;
@@ -33,5 +36,6 @@ export class Activity {
   this.imageUrl = imageUrl;
   this.equipmentLevel = equipmentLevel;
   this.equipmentDescription = equipmentDescription;
+  this.categories = categories?categories:[];
   }
 }
