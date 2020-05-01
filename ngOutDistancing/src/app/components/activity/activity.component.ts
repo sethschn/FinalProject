@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
 import { ActivityCommentService } from 'src/app/services/activity-comment.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-activity',
@@ -14,18 +16,22 @@ export class ActivityComponent implements OnInit {
   activity = new Activity();
   activities: Activity[] = [];
   activityComments: ActivityComment[] = [];
+  closeResult = '';
   comment = new ActivityComment();
-  newComment = new ActivityComment();
-  editActivity = null;
-  newActivity = new Activity();
-  selected = null;
   currentActivityId = null;
+  editCurrentActivity = null;
+  newActivity = new Activity();
+  newComment = new ActivityComment();
+  selected = null;
+
+
 
   constructor(
     private activitySvc: ActivityService,
     private commentSvc: ActivityCommentService,
     private currentRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -89,7 +95,7 @@ export class ActivityComponent implements OnInit {
     );
   }
 
-  addActivity(activity: Activity){
+  addNewActivity(activity: Activity){
     this.activitySvc.create(activity).subscribe(
       good => {
         this.reload();
@@ -102,11 +108,11 @@ export class ActivityComponent implements OnInit {
     );
   }
 
-  updateActivity(activity: Activity){
+  updateCurrentActivity(activity: Activity){
     this.activitySvc.update(activity, activity.id).subscribe(
       yay => {
         this.reload();
-        this.editActivity = null;
+        this.editCurrentActivity = null;
       },
       boo => {
       console.error('workoutlistComp updating workout error');
@@ -115,7 +121,7 @@ export class ActivityComponent implements OnInit {
   }
 
   setEditActivity(){
-    this.editActivity = Object.assign({}, this.selected);
+    this.editCurrentActivity = Object.assign({}, this.selected);
   }
 
   displayTable(activities){
@@ -141,6 +147,24 @@ export class ActivityComponent implements OnInit {
         console.error(bad);
       }
     );
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 

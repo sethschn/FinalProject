@@ -12,6 +12,7 @@ export class Activity {
   equipmentDescription: string;
 
 
+
   constructor(
   id?: number,
   title?: string,
