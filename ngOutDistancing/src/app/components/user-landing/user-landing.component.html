@@ -1,12 +1,9 @@
-<h1>Activities</h1>
+<h1 style="text-align:center">Activities</h1>
 
 
   <div class="row card-group">
-
-
-    <mat-card class="col-4" *ngFor="let activity of activities">
+    <mat-card class="col-3" *ngFor="let activity of activities" style="text-align:center">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{activity.title}}</mat-card-title>
         <!-- <mat-card-subtitle>{{ activity.shortDescription }}</mat-card-subtitle> -->
       </mat-card-header>
@@ -14,13 +11,33 @@
       <mat-card-content>
         <p>
           <strong>{{ activity.shortDescription }}</strong></p>
-         <p> Equipment Level: {{activity.equipmentLevel}} </p>
-        <p>Equipment Desceiption: {{activity.equipmentDescription}}
+         <p> Equipment Level: {{activity.equipmentLevel}} <br>{{activity.equipmentDescription}}
         </p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button>Activity Detail</button>
         <button mat-button>Add Event</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <h1 style="text-align:center">Events</h1>
+
+  <div class="row card-group">
+    <mat-card class="col-3" *ngFor="let event of events" style="text-align:center">
+      <mat-card-header>
+        <mat-card-title>{{event.title}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{ activity.shortDescription }}</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image src="{{event.imageUrl}}">
+      <mat-card-content>
+        <p>
+          <strong>{{ event.shortDescription }}</strong></p>
+         <p> Event Time and Date: {{event.eventDate}} {{event.eventTime}} </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Event Detail</button>
+        <!-- <button mat-button>Add Event</button> -->
       </mat-card-actions>
     </mat-card>
   </div>
