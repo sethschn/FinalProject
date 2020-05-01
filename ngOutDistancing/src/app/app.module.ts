@@ -27,6 +27,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
+import { ActivityComponent } from './components/activity/activity.component';
 
 
 
@@ -50,6 +51,7 @@ import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-ma
     ContactComponent,
     ModalFormComponent,
     DynamicMarkersComponent,
+    ActivityComponent,
 
   ],
   imports: [
