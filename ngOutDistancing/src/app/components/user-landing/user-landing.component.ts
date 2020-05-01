@@ -1,3 +1,4 @@
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { EventService } from './../../services/event.service';
 import { AuthService } from './../../services/auth.service';
 import { UserService } from './../../services/user.service';
@@ -21,8 +22,17 @@ export class UserLandingComponent implements OnInit {
 
   event = new Event();
   events: Event[] = [];
-  category = new Category();
-  categories: Category[] = [];
+  selectedCategory = 'all';
+  categories = [
+    'all',
+    'mountain',
+    'forest',
+    'water',
+    'adventure',
+    'scenic',
+    'urban'
+  ]
+
 
 
 
@@ -56,8 +66,6 @@ export class UserLandingComponent implements OnInit {
     );
   }
 
-  applyFilter(categoryValue: string) {
-    // this.data
-  }
+
 
 }
