@@ -33,6 +33,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
+import { CardDisplayComponent } from './components/card-display/card-display.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AgmCoreModule } from '@agm/core';
     ModalFormComponent,
     DynamicMarkersComponent,
     ActivityComponent,
+    CardDisplayComponent,
 
 
   ],
