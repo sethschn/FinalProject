@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from './../../services/activity.service';
 import { Activity } from 'src/app/models/activity';
 import { Event } from 'src/app/models/event';
+import { Category } from 'src/app/models/category';
 
 
 @Component({
@@ -20,6 +21,10 @@ export class UserLandingComponent implements OnInit {
 
   event = new Event();
   events: Event[] = [];
+  category = new Category();
+  categories: Category[] = [];
+
+
 
   constructor(private userService: UserService,private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService,
     private activitySvc: ActivityService, private eventSvc: EventService
@@ -49,6 +54,10 @@ export class UserLandingComponent implements OnInit {
         console.error('Error in our loadActivities() method. ' + err);
       }
     );
+  }
+
+  applyFilter(categoryValue: string) {
+    // this.data
   }
 
 }

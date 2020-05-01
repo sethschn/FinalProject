@@ -12,5 +12,6 @@ constructor(id?: number, name?: string, description?: string, link?: string, ima
   this.description = description;
   this.link = link;
   this.imageUrl = imageUrl;
+
 }
 }
