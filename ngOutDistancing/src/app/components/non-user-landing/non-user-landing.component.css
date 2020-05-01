@@ -1,5 +1,6 @@
 .carousel {
   outline: none !important;
+  margin-top: 2% !important;
 }
 
 .carousel img {
@@ -23,7 +24,6 @@ img {
 
 .picsum-img-wrapper {
     outline: none;
-    margin-top: 2%;
     width: 100%;
     height: max-content;
     background-position: center;
