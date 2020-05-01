@@ -69,8 +69,8 @@ import { ActivityComponent } from './components/activity/activity.component';
     BrowserAnimationsModule,
     MatCardModule, MatButtonModule,
     MatSliderModule,
-
   ],
+
   providers: [
     EventService,
     ResourceService,
