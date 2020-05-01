@@ -15,9 +15,11 @@ export class ActivityComponent implements OnInit {
   activities: Activity[] = [];
   activityComments: ActivityComment[] = [];
   comment = new ActivityComment();
+  newComment = new ActivityComment();
   editActivity = null;
   newActivity = new Activity();
   selected = null;
+  currentActivityId = null;
 
   constructor(
     private activitySvc: ActivityService,
@@ -27,8 +29,11 @@ export class ActivityComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const activityIdStr = this.currentRoute.snapshot.paramMap.get('id')
+    const activityIdStr = this.currentRoute.snapshot.paramMap.get('id');
+    console.log('selected:' + this.selected);
+    console.log('activityIdStr: ' + activityIdStr);
     if (!this.selected && activityIdStr) {
+      this.currentActivityId = activityIdStr;
       const activityId = Number.parseInt(activityIdStr,10);
       this.activitySvc.show(activityId).subscribe(
         activity =>{
@@ -75,6 +80,9 @@ export class ActivityComponent implements OnInit {
 
   loadActivities(){
     this.activitySvc.index().subscribe(
+      data => {
+        this.activities = data;
+      },
       err => {
         console.error('Error in our loadActivities() method. ' + err);
       }
@@ -119,14 +127,17 @@ export class ActivityComponent implements OnInit {
     this.router.navigateByUrl(`/activities/${activity.id}`);
   }
 
-  addComment(comment: ActivityComment, activity: Activity){
-    this.commentSvc.createComment(comment, activity.id).subscribe(
+  addComment(comment: ActivityComment){
+    this.commentSvc.createComment(comment, this.currentActivityId).subscribe(
       good => {
-        this.reload();
-        this.newActivity = new Activity();
+        this.newComment= new ActivityComment();
+        // this.selected = null;
+        console.log(this.currentActivityId);
+        // this.router.navigateByUrl(`/activities/${this.currentActivityId}`);
+        this.loadComments();
       },
       bad =>{
-        console.error('workoutListComponent.addWorkout(): error adding workout')
+        console.error('activity.component.ts addComment(): error adding comment')
         console.error(bad);
       }
     );
