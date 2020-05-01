@@ -17,6 +17,4 @@ export class NonUserLandingComponent implements OnInit {
   }
 
 
-
-
 }

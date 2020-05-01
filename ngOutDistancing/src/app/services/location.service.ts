@@ -40,15 +40,15 @@ export class LocationService {
 
   public createLocation(location: Location) {
     const httpOptions = this.getHttpOptions();
-    if (this.authService.checkLogin()){
-    return this.http.post<Location>(this.url, location, httpOptions)
+    // if (this.authService.checkLogin()){
+    return this.http.post<Location>(this.url, location)
       .pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('create method in location service failed');
         })
       );
-    }
+    // }
   }
 
   public updateLocation(location: Location) {
