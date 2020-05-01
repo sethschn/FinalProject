@@ -27,6 +27,10 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -51,6 +55,7 @@ import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-ma
     ModalFormComponent,
     DynamicMarkersComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,10 @@ import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-ma
     FormsModule,
     NgbModule,
     NgbModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule, MatButtonModule,
+    MatSliderModule,
 
   ],
   providers: [
@@ -72,6 +80,7 @@ import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-ma
     EventCommentService
 
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
