@@ -34,6 +34,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,8 +69,10 @@ import { AgmCoreModule } from '@agm/core';
     ReactiveFormsModule,
     AgmCoreModule,
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule,
+    MatCardModule,
+    MatButtonModule,
     MatSliderModule,
+
   ],
 
   providers: [
