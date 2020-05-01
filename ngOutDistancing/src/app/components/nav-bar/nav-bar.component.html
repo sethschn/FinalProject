@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class= "navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/nonUserLanding']">HOME</a>
   <a class= "navbar-brand" *ngIf="loggedIn()" [routerLink]="['/userLanding']">HOME</a>
-  <a class="nav-item" *ngIf="loggedIn()" [routerLink]="['/profile']" align="right">
+  <a class="profile" *ngIf="loggedIn()" [routerLink]="['/profile']" text-align="right">
     <img src="{{userImg}}" alt="Profile Image" style="width:50px;" class="rounded-circle">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
