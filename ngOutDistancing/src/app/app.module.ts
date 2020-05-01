@@ -32,6 +32,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -66,12 +67,18 @@ import { ActivityComponent } from './components/activity/activity.component';
     NgbModule,
     NgbModalModule,
     ReactiveFormsModule,
+    AgmCoreModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
+<<<<<<< HEAD
     MatSliderModule
+=======
+    MatSliderModule,
+>>>>>>> d8e3a45986aa5ee11c0f82848f9c8a730899c90c
 
   ],
+
   providers: [
     EventService,
     ResourceService,
