@@ -109,6 +109,7 @@ export class ActivityComponent implements OnInit {
   }
 
   updateCurrentActivity(activity: Activity){
+    console.log('update activity: ' + activity)
     this.activitySvc.update(activity, activity.id).subscribe(
       yay => {
         this.reload();
