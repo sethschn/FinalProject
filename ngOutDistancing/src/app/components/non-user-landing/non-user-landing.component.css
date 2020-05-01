@@ -5,10 +5,14 @@
 
   .picsum-img-wrapper {
     display: flex;
-    margin-top: 15px;
+    margin-top: 2%;
     /* margin-bottom: 20px; */
     height: 70vh;
     max-width: 100%;
-    background-position: center 20%;
+    background-position: center;
     background-size: cover;
+ }
+ .ngb-carousel {
+   width: max-content;
+   height: max-content;
  }
