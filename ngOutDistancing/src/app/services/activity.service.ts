@@ -65,7 +65,7 @@ export class ActivityService {
     )
   }
 
-  update(data: Activity, todoId : number) {
+  update(activity: Activity) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export class ActivityService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Activity>(this.url +'/'+ todoId, data, httpOptions)
+    return this.http.put<Activity>(`${this.url}/${activity.id}`, activity, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);

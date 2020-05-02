@@ -17,6 +17,8 @@ export class AuthService {
   login(username, password) {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
+    console.log(username+" "+password);
+    console.log(credentials);
     // Send credentials as Authorization header (this is spring security convention for basic auth)
     const httpOptions = {
       headers: new HttpHeaders({

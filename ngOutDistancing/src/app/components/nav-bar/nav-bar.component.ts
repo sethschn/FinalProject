@@ -26,8 +26,12 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getLoggedInUser();
-    console.log(this.currUser);
+    console.log("ngOnInit");
+
+    if (this.loggedIn()){
+      console.log("logged in");
+      this.getLoggedInUser();
+    }
   }
 
   loggedIn(){
@@ -71,7 +75,7 @@ export class NavBarComponent implements OnInit {
     this.authService.login(user.username, user.password).subscribe(
       good => {
         console.log(good);
-        this.userImg = good.imageUrl;
+        this.currUser = good;
         this.router.navigateByUrl("/userLanding");
         //this.newUser = new User();
       },

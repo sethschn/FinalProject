@@ -42,12 +42,12 @@ export class UserService {
     public showLoggedInUser(){
       const id = this.authService.getCurrentUserId();
       const httpOptions = this.getHttpOptions();
-
+      console.log(id);
         return this.http.get<User>(`${this.url}/${id}`, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
-            return throwError('show single id in user service failed');
+            return throwError('show logged in user in user service failed');
           })
         );
       }

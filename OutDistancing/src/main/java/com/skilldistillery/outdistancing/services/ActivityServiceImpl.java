@@ -57,7 +57,7 @@ public class ActivityServiceImpl implements ActivityService {
 			managedActivity.setEnabled(activity.getEnabled());
 			managedActivity.setImageUrl(activity.getImageUrl());
 			managedActivity.setEquipmentLevel(activity.getEquipmentLevel());
-			managedActivity.setEquipmentDescription(activity.getDescription());
+			managedActivity.setEquipmentDescription(activity.getEquipmentDescription());
 			return activityRepo.saveAndFlush(managedActivity);
 		}
 		return null;
