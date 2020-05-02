@@ -110,14 +110,15 @@ export class ActivityComponent implements OnInit {
 
   updateCurrentActivity(activity: Activity){
     console.log('update activity: ' + activity)
-    this.activitySvc.update(activity, activity.id).subscribe(
+    this.activitySvc.update(activity).subscribe(
       yay => {
         this.reload();
-        this.editCurrentActivity = null;
+        // this.editCurrentActivity = null;
+        this.selected = this.editCurrentActivity;
       },
       boo => {
-      console.error('workoutlistComp updating workout error');
-      }
+      console.error('activity component updating activity error');
+    }
     );
   }
 
@@ -131,6 +132,8 @@ export class ActivityComponent implements OnInit {
   }
 
   displayActivity(activity){
+    console.log('--------------------');
+    console.log(activity);
     this.router.navigateByUrl(`/activities/${activity.id}`);
   }
 
