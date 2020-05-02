@@ -1,18 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class= "navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/nonUserLanding']">HOME</a>
   <a class= "navbar-brand" *ngIf="loggedIn()" [routerLink]="['/userLanding']">HOME</a>
-  <a class="profile" *ngIf="loggedIn()" [routerLink]="['/profile']" text-align="right">
-    <img src="{{userImg}}" alt="Profile Image" style="width:50px;" class="rounded-circle">
-  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
-    (click)="isCollapsed = !isCollapsed"
-    [attr.aria-expanded]="!isCollapsed">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  data-target="#navbarNavAltMarkup"
+  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+  (click)="isCollapsed = !isCollapsed"
+  [attr.aria-expanded]="!isCollapsed">
+  <span class="navbar-toggler-icon"></span>
+</button>
 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]='isCollapsed'>
   <ul class="navbar-nav">
+        <li class="nav-item" >
+        <a class="nav-link" *ngIf="loggedIn()" [routerLink]="['/profile']">
+          <img src="{{currUser.imageUrl}}" *ngIf="loggedIn()" alt="Profile Image" style="width:50px;" class="rounded-circle">
+        </a>
+        </li>
         <li class="nav-item">
           <a class= "nav-link" *ngIf="adminLoggedIn()" [routerLink]="['/admin']">ADMIN</a>
         </li>

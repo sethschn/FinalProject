@@ -27,6 +27,8 @@ export class UserLandingComponent implements OnInit {
   selectedCategory:Category = new Category(0, "All");
   categories: Category[] = [];
 
+  selectedActivity = null;
+
 
   constructor(private userService: UserService,private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService,
     private activitySvc: ActivityService, private eventSvc: EventService, private catSvc: CategoryService
@@ -73,6 +75,10 @@ export class UserLandingComponent implements OnInit {
         console.error('Error in our loadActivities() method. ' + err);
       }
     );
+  }
+
+  displayActivity(activity: Activity){
+    this.router.navigateByUrl(`/activities/${activity.id}`);
   }
 
 
