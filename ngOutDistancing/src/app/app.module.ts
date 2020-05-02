@@ -31,8 +31,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { DynamicMarkersComponent } from './components/dynamic-markers/dynamic-markers.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
@@ -84,7 +85,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-
+    MatCarouselModule,
   ],
 
   providers: [
