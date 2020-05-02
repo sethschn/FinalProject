@@ -38,6 +38,7 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
 import { CardDisplayComponent } from './components/card-display/card-display.component';
 import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
     ActivityComponent,
     CardDisplayComponent,
     ActivityCategoryPipe,
+    FooterComponent,
 
 
   ],
@@ -81,7 +83,7 @@ import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
 
   ],
 
