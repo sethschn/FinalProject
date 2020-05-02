@@ -1,3 +1,6 @@
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,6 +37,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AgmCoreModule } from '@agm/core';
 import { CardDisplayComponent } from './components/card-display/card-display.component';
+import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
 
 
 @NgModule({
@@ -57,6 +61,7 @@ import { CardDisplayComponent } from './components/card-display/card-display.com
     DynamicMarkersComponent,
     ActivityComponent,
     CardDisplayComponent,
+    ActivityCategoryPipe,
 
 
   ],
@@ -74,6 +79,9 @@ import { CardDisplayComponent } from './components/card-display/card-display.com
     MatCardModule,
     MatButtonModule,
     MatSliderModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
 
   ],
 

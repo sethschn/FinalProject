@@ -74,7 +74,7 @@ public class Activity {
 	@OneToMany(mappedBy = "activity")
 	private List<ActivityComment> activityComments;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "activity_category", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;

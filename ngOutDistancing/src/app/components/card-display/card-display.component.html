@@ -1,71 +1,51 @@
-<div class="card-deck-container">
-<mat-card *ngFor="let activity of activities"  class="card-item"></mat-card>
+<!-- <h1 style="text-align:center">Activities</h1>
+
+  <div style="text-align:center">
+<button type="button" class="btn btn-info" *ngFor="let category of categories" (click)="selectedCategory = category">{{category.type}}</button>
 </div>
-
-
-<!-- <div *ngFor="let activity of activities">
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{activity.title}}</mat-card-title>
-    <mat-card-subtitle>{{ activity.shortDescription }}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="activity.imageUrl">>
-  <mat-card-content>
-    <p>
-    {{activity.description}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
-</div> -->
-
-
-<!-- <mat-card>
-
-
-  <img md-card-image [src]="cardImagePath">
-
-  <mat-card-content>
-    <div class="card-text-content">
-      {{cardShortDescription}}
-    </div>
-  </mat-card-content>
-
-  <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
-    <button md-button (click)="addProductToCart()">ADAUGA IN COS</button>
-    <button md-button (click)="openDialog()">DETALII</button>
-  </mat-card-actions>
-
-</mat-card>
-
-<div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
-  <div fxFlex *ngFor="let event of events" class="card-item">
-    <mat-card [ngStyle]="{'width':'300' + 'px'}" [event]="event"></mat-card>
+  <div class="row card-group">
+    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory:selectedCategory" style="text-align:center">
+      <mat-card-header>
+        <mat-card-title>{{activity.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{activity.imageUrl}}">
+      <mat-card-content>
+        <p>
+          <strong>{{ activity.shortDescription }}</strong></p>
+         <p> Equipment Level: {{activity.equipmentLevel}} <br>{{activity.equipmentDescription}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Activity Detail</button>
+        <button mat-button>Add Event</button>
+      </mat-card-actions>
+    </mat-card>
   </div> -->
+<!--
+  <h1 style="text-align:center">Events</h1>
+  <div class="row card-group">
+    <mat-card class="col-3" *ngFor="let event of events" style="text-align:center">
+      <mat-card-header>
+        <mat-card-title>{{event.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{event.imageUrl}}">
+      <mat-card-content>
+        <p>
+          <strong>{{ event.shortDescription }}</strong></p>
+         <p> Event Time and Date: {{event.eventDate}} {{event.eventTime}} </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Event Detail</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+ -->
 
 
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+
+
+
+
+
 
 
