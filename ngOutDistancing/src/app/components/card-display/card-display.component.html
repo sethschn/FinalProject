@@ -1,8 +1,10 @@
 <!-- <h1 style="text-align:center">Activities</h1>
 
-
+  <div style="text-align:center">
+<button type="button" class="btn btn-info" *ngFor="let category of categories" (click)="selectedCategory = category">{{category.type}}</button>
+</div>
   <div class="row card-group">
-    <mat-card class="col-3" *ngFor="let activity of activities" style="text-align:center">
+    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory:selectedCategory" style="text-align:center">
       <mat-card-header>
         <mat-card-title>{{activity.title}}</mat-card-title>
       </mat-card-header>
@@ -18,10 +20,9 @@
         <button mat-button>Add Event</button>
       </mat-card-actions>
     </mat-card>
-  </div>
-
+  </div> -->
+<!--
   <h1 style="text-align:center">Events</h1>
-
   <div class="row card-group">
     <mat-card class="col-3" *ngFor="let event of events" style="text-align:center">
       <mat-card-header>
@@ -35,7 +36,16 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-button>Event Detail</button>
-        <button mat-button>Add Event</button>
       </mat-card-actions>
     </mat-card>
-  </div> -->
+  </div>
+ -->
+
+
+
+
+
+
+
+
+
