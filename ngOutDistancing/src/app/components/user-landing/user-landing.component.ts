@@ -77,7 +77,7 @@ export class UserLandingComponent implements OnInit {
     );
   }
 
-  displayActivity(activity){
+  displayActivity(activity: Activity){
     this.router.navigateByUrl(`/activities/${activity.id}`);
   }
 
