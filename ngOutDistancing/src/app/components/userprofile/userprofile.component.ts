@@ -15,30 +15,33 @@ export class UserprofileComponent implements OnInit {
   closeResult = '';
 
   currentUser = null;
+  editUser = null;
 
   constructor(private userService: UserService,private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   ngOnInit(): void {
     this.reload();
+  }
+
+  setEditUser(){
+    this.editUser = Object.assign({}, this.currentUser);
+  }
+
+  updateUser(user: User){
+    this.userService.update(user).subscribe(
+      yes => {
+        this.reload();
+        //this.currentUser = yes;
+        this.editUser = null;
+      },
+      no => {
+        console.error('UserProfileComponent.updateUser(): error');
+        console.error(no);
+
+      }
+    );
+    //this.todos = this.todoService.index();
   }
 
   reload(){
@@ -51,17 +54,6 @@ export class UserprofileComponent implements OnInit {
         console.log("error inside show logged in user");
       }
     );
-    // this.userService.index().subscribe(
-    //   data => {
-    //     this.users = data;
-    //   },
-    //   bad => {
-    //     //this.router.navigateByUrl('/login')
-    //     console.error('TodoListComponent.reload(): error retrieving todo list');
-    //     console.error(bad);
-
-    //   }
-    // );
   }
 
 }
