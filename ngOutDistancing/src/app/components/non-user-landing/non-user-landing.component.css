@@ -11,12 +11,12 @@
   height: 600px;
   max-width: none;
 }
-.img {
+img {
   max-width: 100%;
   width: auto   9;
   height: auto;
-  /* object-fit: contain; */
   vertical-align: middle;
+  text-align: center !important;
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
