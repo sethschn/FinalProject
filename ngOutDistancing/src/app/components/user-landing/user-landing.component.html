@@ -1,8 +1,10 @@
 <h1 style="text-align:center">Activities</h1>
 
-<button type="button" class="btn btn-info">
-<span *ngFor="let category of categories" (click)="selectedCategory = category">{{category.type}} | </span>
-</button>
+<!-- <button type="button" class="btn btn-info"> -->
+  <div style="text-align:center">
+<button type="button" class="btn btn-info" *ngFor="let category of categories" (click)="selectedCategory = category">{{category.type}}</button>
+</div>
+<!-- </button> -->
   <div class="row card-group">
     <mat-card class="col-3" *ngFor="let activity of activities | activityCategory:selectedCategory" style="text-align:center">
       <mat-card-header>
