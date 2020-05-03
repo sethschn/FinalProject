@@ -1,3 +1,4 @@
+
 <ngb-carousel [interval]=1900>
   <ng-template ngbSlide>
     <div class="logo" >
@@ -36,3 +37,93 @@
     </div>
   </ng-template>
 </ngb-carousel>
+
+
+<div class="container-fluid py-2">
+  <div class="scrolling-wrapper">
+  <h2 class="font-weight-light">Activities</h2>
+  <div class="d-flex flex-row flex-nowrap" >
+      <div class="card card-body" *ngFor="let activity of activities; let i = index">
+        <img src="{{activity.imageUrl}}"> <br>
+          <br>
+         <p> <b>{{activity.title}}</b> <br>
+          {{activity.shortDescription}}
+      </p>
+      </div>
+    </div>
+      </div>
+  </div>
+
+
+
+<!-- STARTS CAROUSEL MULTIPLES ACTIVITIES -->
+
+<!-- <ngb-carousel activities>
+  <ng-template ngbSlide *ngFor="let activity of activities">
+      <img src="{{activity.imageUrl}}" alt="Angular Carousel 1">
+    <div class="carousel-caption">
+      <h3>{{activity.title}}</h3>
+      <p>{{activity.shortDescription}}</p>
+      <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
+    </div>
+  </ng-template>
+</ngb-carousel> -->
+
+
+
+<!-- TRYING TO DISPLAY 3 CARDS AT ONCE -->
+<!-- <mat-card class="mat-parent">
+  <ngb-carousel>
+      <div class="carousel-inner" text-align="center" role="listbox">
+          <ng-template ngbslide *ngFor="let activity of activities; let i = index" >
+              <div class="carousel-item" style="display: block; width: 100%;"   >
+                  <div class="col-md-4" ng-repeat>
+                      <mat-card class="example-card">
+                          <img mat-card-image src="{{activities[i].imageUrl}}" alt="Photo of a Shiba Inu">
+                          <mat-card-content>
+                              <div class="card-body">
+                                  <h4 class="card-title">{{activities[i].title}}</h4>
+                                  <p>
+                                  </p>
+                                  <button mat-raised-button color="primary" (click)="displayActivity(activity)">Activity Detail</button>
+                              </div>
+                          </mat-card-content>
+                      </mat-card>
+                  </div>
+                  <div class="col-md-4" *ngIf="activities[i+1]">
+                          <mat-card class="example-card">
+                              <img mat-card-image src="{{activities[i].imageUrl}}" alt="Photo of a Shiba Inu">
+                              <mat-card-content>
+                                  <div class="card-body">
+                                      <h4 class="card-title">{{activities[i+1].title}}</h4>
+                                      <p>{{activities[i+1].shortDescription}}
+                                      </p>
+                                      <button mat-raised-button color="primary" (click)="displayActivity(activity)">Activity Detail</button>
+                                  </div>
+                              </mat-card-content>
+                          </mat-card>
+                      </div>
+                <div class="col-md-4" *ngIf="activities[i+2]" >
+                      <mat-card class="example-card">
+                          <img mat-card-image src="{{activities[i].imageUrl}}" alt="Photo of a Shiba Inu">
+                          <mat-card-content>
+                              <div class="card-body">
+                                  <h4 class="card-title">{{activities[i+2].title}}</h4>
+                                  <p>{{activities[i+2].shortDescription}}
+                                  </p>
+                                  <button mat-raised-button color="primary" (click)="displayActivity(activity)">Activity Detail</button>
+                              </div>
+                          </mat-card-content>
+                      </mat-card>
+                  </div>
+            </div>
+          </ng-template>
+</div>
+  </ngb-carousel>
+</mat-card> -->
+
+
+
+
+
+
