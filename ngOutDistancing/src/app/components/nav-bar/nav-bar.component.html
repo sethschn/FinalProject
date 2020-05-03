@@ -142,7 +142,7 @@
           <div class="invalid-feedback">Oops, you missed this one.</div>
       </div>
 
-        <button type="submit"  (click)="updateUser(editUser)" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
+        <button type="submit"  (click)="updateUser(editUser); modal.close()" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
       </form>
       </div>
       <!--/card-block-->
@@ -218,7 +218,7 @@
               <div class="invalid-feedback">Oops, you missed this one.</div>
           </div>
 
-            <button type="submit"  (click)="register(newUser,userLocation)" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
+            <button type="submit"  (click)="register(newUser,userLocation); modal.close()" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
           </form>
       </div>
       <!--/card-block-->
