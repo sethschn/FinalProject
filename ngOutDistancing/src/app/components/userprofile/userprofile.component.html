@@ -14,8 +14,9 @@
   </div>
 </div> -->
 
-<!-- <div class="bg"></div> -->
 
+<!-- <div class="bg"></div> -->
+<div class="panel panel-default" [ngStyle]="{'background-image': getUrl()}"></div>
 
 <div *ngIf="currentUser">
   Id: {{currentUser.id}} <br>

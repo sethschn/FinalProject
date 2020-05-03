@@ -94,7 +94,7 @@ updateLocation(location: Location){
 }
 
 deleteLocation(locationId){
-  this.locationSvc.deleteLocation(locationId).subscribe(
+  this.locationSvc.deleteALocation(locationId).subscribe(
 
     data => {
       this.loadLocations();

@@ -44,8 +44,6 @@ export class UserprofileComponent implements OnInit {
     //this.todos = this.todoService.index();
   }
 
-
-
   reload(){
     this.userService.showLoggedInUser().subscribe(
       data => {
