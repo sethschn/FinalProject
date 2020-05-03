@@ -1,4 +1,3 @@
-import { ActivityComponent } from './../activity/activity.component';
 import { Component, OnInit } from '@angular/core';
 import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
@@ -6,6 +5,10 @@ import { ActivityService } from 'src/app/services/activity.service';
 import { ActivityCommentService } from 'src/app/services/activity-comment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Resource } from 'src/app/models/resource';
+import { ResourceService } from 'src/app/services/resource.service';
+import { Location } from 'src/app/models/location';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-admin',
@@ -25,19 +28,33 @@ export class AdminComponent implements OnInit {
   newComment = new ActivityComment();
   selectedActivity = null;
 
+  selectedResource = null;
+  newResource = new Resource();
+  editResource = null;
+  resourceList: Resource[] = [];
+
+  selectedLocation = null;
+  newLocation = new Location();
+  editLocation = null;
+  locationList: Location[] = [];
+
   constructor(
 
     private activitySvc: ActivityService,
     private commentSvc: ActivityCommentService,
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private resourceSvc: ResourceService,
+    private locationSvc: LocationService,
   ) { }
 
   ngOnInit(): void {
     const activityIdStr = this.currentRoute.snapshot.paramMap.get('id');
     console.log('selected:' + this.selectedActivity);
     console.log('activityIdStr: ' + activityIdStr);
+    this.loadResources();
+    this.loadLocations();
     if (!this.selectedActivity && activityIdStr) {
       this.currentActivityId = activityIdStr;
       const activityId = Number.parseInt(activityIdStr,10);
@@ -182,5 +199,150 @@ export class AdminComponent implements OnInit {
       }
     )
   }
+
+  displayResource(resource){
+    this.router.navigateByUrl(`/resources/${resource.id}`);
+ }
+
+ showResource(id){
+  this.resourceSvc.showResource((this.currentRoute.snapshot.paramMap.get('id'))).subscribe(
+    good => {
+      this.loadResources();
+    },
+    bad => {
+      console.error("Admin.show(): error")
+    }
+  )
+};
+
+displayResourceTable(){
+  this.selectedResource = null;
+}
+
+loadResources(){
+  this.resourceSvc.indexResource().subscribe(
+    data => {this.resourceList = data;
+    },
+    bad => {
+      console.error("EventDetailComponent.loadEvents(): error loading");
+      console.error(bad);
+    }
+  );
+}
+
+createResource(resource: Resource){
+  console.log(resource);
+  this.resourceSvc.createResource(resource).subscribe(
+    good => {
+      this.loadResources();
+      this.newResource = new Resource();
+    },
+    bad => {
+      console.error("AdminComponent.createResource(): error adding");
+      console.error(bad);
+    })
+}
+
+setEditResource(){
+  this.editResource = Object.assign({}, this.selectedResource)
+}
+
+updateResource(resource: Resource){
+  console.log(resource);
+ this.resourceSvc.updateResource(resource).subscribe(
+   good =>{
+     this.loadResources();
+     this.editResource= null;
+     this.selectedResource = this.editResource;
+   },
+   bad => {
+     console.error("AdminComponent.updateResource(): error updating");
+     console.error(bad);
+   })
+}
+
+deleteResource(resourceId){
+  this.resourceSvc.deleteResource(resourceId).subscribe(
+
+    data => {
+      this.loadResources();
+      this.selectedResource = null;
+
+    },
+    err => {
+      console.error("Delete Resource in Admin(): error deleting" + err);
+    })
+  };
+
+  displayLocation(location){
+    this.router.navigateByUrl(`/locations/${location.id}`);
+ }
+
+ showLocation(id){
+  this.locationSvc.showLocation((this.currentRoute.snapshot.paramMap.get('id'))).subscribe(
+    good => {
+      this.loadLocations();
+    },
+    bad => {
+      console.error("Location.show(): error")
+    }
+  )
+};
+
+displayLocationTable(){
+  this.selectedLocation = null;
+}
+
+loadLocations(){
+  this.locationSvc.indexLocation().subscribe(
+    data => {this.locationList = data;
+    },
+    bad => {
+      console.error("LocationDetailComponent.loadLocations(): error loading");
+      console.error(bad);
+    }
+  );
+}
+createLocation(location: Location){
+  console.log(location);
+  this.locationSvc.createLocation(location).subscribe(
+    good => {
+      this.loadLocations();
+      this.newLocation = new Location();
+    },
+    bad => {
+      console.error("LocationComponent.createLocation(): error adding");
+      console.error(bad);
+    })
+}
+
+setEditLocation(){
+  this.editLocation = Object.assign({}, this.selectedLocation)
+}
+
+updateLocation(location: Location){
+  console.log(location);
+ this.locationSvc.updateLocation(location).subscribe(
+   good =>{
+     this.loadLocations();
+     this.editLocation = null;
+     this.selectedLocation = this.editLocation;
+   },
+   bad => {
+     console.error("LocationComponent.updateLocation(): error updating");
+     console.error(bad);
+   })
+}
+
+deleteALocation(locationId){
+  this.locationSvc.deleteALocation(locationId).subscribe(
+    data => {
+      this.loadLocations();
+      this.selectedLocation = null;
+    },
+    err => {
+      console.error("LocationDetailListComponent.deleteLocation(): error deleting" + err);
+    })
+  };
 
 }

@@ -44,11 +44,6 @@ export class UserprofileComponent implements OnInit {
     //this.todos = this.todoService.index();
   }
 
-  getUrl()
-{
-  return "url('http://estringsoftware.com/wp-content/uploads/2017/07/estring-header-lowsat.jpg')";
-}
-
   reload(){
     this.userService.showLoggedInUser().subscribe(
       data => {
