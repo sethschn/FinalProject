@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
@@ -9,6 +10,7 @@ import { Resource } from 'src/app/models/resource';
 import { ResourceService } from 'src/app/services/resource.service';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -38,6 +40,11 @@ export class AdminComponent implements OnInit {
   editLocation = null;
   locationList: Location[] = [];
 
+
+  selectedUser = null;
+  newUser = new User();
+  users: User[] = [];
+
   constructor(
 
     private activitySvc: ActivityService,
@@ -47,6 +54,7 @@ export class AdminComponent implements OnInit {
     private modalService: NgbModal,
     private resourceSvc: ResourceService,
     private locationSvc: LocationService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +63,7 @@ export class AdminComponent implements OnInit {
     console.log('activityIdStr: ' + activityIdStr);
     this.loadResources();
     this.loadLocations();
+    this.loadUsers();
     if (!this.selectedActivity && activityIdStr) {
       this.currentActivityId = activityIdStr;
       const activityId = Number.parseInt(activityIdStr,10);
@@ -334,15 +343,43 @@ updateLocation(location: Location){
    })
 }
 
-deleteALocation(locationId){
-  this.locationSvc.deleteALocation(locationId).subscribe(
-    data => {
-      this.loadLocations();
-      this.selectedLocation = null;
-    },
-    err => {
-      console.error("LocationDetailListComponent.deleteLocation(): error deleting" + err);
-    })
+  deleteALocation(locationId) {
+    this.locationSvc.deleteALocation(locationId).subscribe(
+      data => {
+        this.loadLocations();
+        this.selectedLocation = null;
+      },
+      err => {
+        console.error("LocationDetailListComponent.deleteLocation(): error deleting" + err);
+      })
   };
+
+
+
+
+  loadUsers(){
+    this.userService.index().subscribe(
+      data => {this.users = data;
+      },
+      bad => {
+        console.error("loadUsers in admin(): error loading");
+        console.error(bad);
+      }
+    );
+  }
+
+  deleteUser(id: number) {
+    this.userService.disableUser(id).subscribe(
+      data=> {
+        this.loadUsers();
+        this.selectedUser = null;
+      },
+      err => {
+        console.error('error in deleting user component')
+      }
+    )
+  }
+
+
 
 }
