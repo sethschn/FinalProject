@@ -14,11 +14,12 @@ import { LocationService } from 'src/app/services/location.service';
 })
 export class NavBarComponent implements OnInit {
   closeResult = '';
+  editUser = null;
   currUser = null;
   newUser = new User();
   selected = null;
   isCollapsed = true;
-  userImg = null;
+  userImg = "https://www.w3schools.com/bootstrap4/bird.jpg"
   userLocation = new Location();
   returnedLocation = null;
   constructor(
@@ -32,7 +33,6 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("NavBar ngOnInit");
-
     if (this.loggedIn()){
       console.log("logged in");
       this.getLoggedInUser();
@@ -47,7 +47,12 @@ export class NavBarComponent implements OnInit {
   getLoggedInUser(){
     this.userService.showLoggedInUser().subscribe(
       data => {
+        console.log("GetLoggedInUser")
         this.currUser = data;
+        this.userImg = data.imageUrl;
+      },
+      err => {
+        console.log("Error in getLoggedInUser "+err);
       }
     )
   }
@@ -60,26 +65,13 @@ export class NavBarComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {centered: true, ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService.open(content, {centered: true, ariaLabelledBy: 'modal-basic-title'});
   }
 
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
   login(user:User){
     this.authService.login(user.username, user.password).subscribe(
@@ -126,6 +118,39 @@ export class NavBarComponent implements OnInit {
       },
       err =>{
         console.log("Error creating location in user register "+err);
+      }
+    );
+  }
+
+  setEditUser(){
+    this.editUser = Object.assign({}, this.currUser);
+  }
+
+  updateUser(user: User){
+    this.userService.update(user).subscribe(
+      yes => {
+        this.reload();
+        //this.currentUser = yes;
+        this.editUser = null;
+      },
+      no => {
+        console.error('UserProfileComponent.updateUser(): error');
+        console.error(no);
+
+      }
+    );
+    //this.todos = this.todoService.index();
+  }
+
+  reload(){
+    this.userService.showLoggedInUser().subscribe(
+      data => {
+        this.currUser = data;
+        this.userImg = data.imageUrl;
+        console.log(data);
+      },
+      error =>{
+        console.log("error inside show logged in user");
       }
     );
   }
