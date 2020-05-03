@@ -65,7 +65,7 @@ export class UserService {
     }
   }
 
-  public destroy(id: number){
+  public disableUser(id: number){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
         return this.http.delete<User>(`${this.url}/${id}`, httpOptions)

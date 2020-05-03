@@ -1,10 +1,21 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1>Bootstrap Tutorial</h1>
-    <p>Bootstrap is the most popular HTML, CSS...</p>
+<!-- <div class="hero-image">
+  <div class="hero-text">
+    <img src="/assets/mountainJumbo.jpg">
+    <h1>I am John Doe</h1>
+    <p>And I'm a Photographer</p>
+    <button>Hire me</button>
   </div>
-</div>
+</div> -->
 
+<!-- <div class="jumbotron jumbotron-profile">
+  <div class="container" *ngIf="currentUser">
+    <h1>{{currentUser.username}}</h1>
+    <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+  </div>
+</div> -->
+
+<!-- <div class="bg"></div> -->
+<div class="panel panel-default" [ngStyle]="{'background-image': getUrl()}"></div>
 
 <div *ngIf="currentUser">
   Id: {{currentUser.id}} <br>
