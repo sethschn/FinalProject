@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { Location } from './../../models/location';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,24 +17,28 @@ export class NavBarComponent implements OnInit {
   currUser = null;
   newUser = new User();
   selected = null;
-  isCollapsed = false;
+  isCollapsed = true;
   userImg = null;
+  userLocation = new Location();
+  returnedLocation = null;
   constructor(
 
     private authService: AuthService,
     private userService: UserService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private locaSvc: LocationService
   ) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit");
+    console.log("NavBar ngOnInit");
 
     if (this.loggedIn()){
       console.log("logged in");
       this.getLoggedInUser();
     }
   }
+
 
   loggedIn(){
     return this.authService.checkLogin();
@@ -61,6 +67,10 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -82,6 +92,42 @@ export class NavBarComponent implements OnInit {
       bad => {
         console.log("Error logging in User:" + bad);
       });
+  }
+
+
+  register(user: User, location: Location){
+    console.log(user);
+    console.log(location);
+    this.locaSvc.createLocation(location).subscribe(
+      location => {
+        console.log("Create location");
+        console.log(location);
+        this.returnedLocation = location;
+        user.location = this.returnedLocation;
+        this.authService.register(user).subscribe(
+          good => {
+            this.authService.login(user.username,user.password).subscribe(
+              great =>{
+                this.router.navigateByUrl("/userLanding");
+                console.log(great);
+              },
+              terrible => {
+                console.error("RegisterComponent.login() Error in login after register");
+                console.error(terrible);
+              }
+            );
+          },
+          bad => {
+            console.error("RegisterComponent.register() method error");
+            console.error(bad);
+          }
+        );
+
+      },
+      err =>{
+        console.log("Error creating location in user register "+err);
+      }
+    );
   }
 
 }
