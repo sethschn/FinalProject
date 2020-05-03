@@ -1,4 +1,3 @@
-<p>activity works!</p>
 
 <!-- Displays individual data -->
 <div *ngIf="selected">
@@ -11,13 +10,20 @@
       </div>
     </div>
     <hr />
-
+    <div class="row justify-content-center">
+          <img [src]="selected.imageUrl" image-resizing
+          image-Height="200px" image-Width="200px" />
+  </div>
     <hr />
+    <div class="col text-center">
+      {{ selected.description }}
+    </div>
+    <hr>
     <div class="row">
       <div class="col-4 mx-auto">
         <div class="card card-body mb-2">
           <h6>Resources</h6>
-          <code>Image: <img [src]="selected.imageUrl" /></code>
+          <code>resources</code>
         </div>
       </div>
       <div class="col-4 mx-auto">
@@ -28,8 +34,12 @@
       </div>
       <div class="col-4 mx-auto">
         <div class="card card-body mb-2">
-          <h6>Notes</h6>
-          <code>text</code>
+          <h6>Events</h6>
+          <button
+              class="btn btn-primary btn-sm"
+            >
+              View Events
+            </button>
         </div>
       </div>
     </div>
@@ -37,30 +47,22 @@
     <div class="container bg-faded py-3">
       <div class="row">
         <div class="col text-center">
-          Completed on: {{ selected.title }} || Records:
-          {{ selected.title }}
-        </div>
-      </div>
-      <hr />
-      <div class="container bg-faded py-3">
-        <div class="row">
-          <div class="col text-center">
-            <button
-              class="btn btn-primary btn-sm"
-              (click)="setEditActivity(); open(editActivity)"
-            >
-              Edit Activity
-            </button>
-            <button
-              class="btn btn-primary btn-sm"
-              (click)="displayTable(activities)"
-            >
-              Show All Activities
-            </button>
-          </div>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="setEditActivity(); open(editActivity)"
+          >
+            Edit Activity
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="displayTable(activities)"
+          >
+            Show All Activities
+          </button>
         </div>
       </div>
     </div>
+    <hr>
   </div>
   <!-- comment box code start -->
   <div class="container py-2">
