@@ -14,8 +14,8 @@ export class ActivityService {
   // private activities: Activity[] = [];
 
   constructor(
-    private auth : AuthService,
-    private http : HttpClient
+    private auth: AuthService,
+    private http: HttpClient
   ) { }
 
   private url = environment.baseUrl + 'api/activities';
@@ -39,15 +39,15 @@ export class ActivityService {
       })
     };
     return this.http.post<Activity>(this.url, data, httpOptions)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('create method in activity service failed');
-      })
-    );
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('create method in activity service failed');
+        })
+      );
   }
 
-  show(id:number){
+  show(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -55,14 +55,14 @@ export class ActivityService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    console.log("show todo with id: "+ id);
+    console.log("show todo with id: " + id);
     return this.http.get<Activity>(`${this.url}/${id}`)
-    .pipe(
-      catchError((err: any) => {
-      console.log(err);
-      return throwError('show single method in activity service failed');
-    })
-    )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('show single method in activity service failed');
+        })
+      )
   }
 
   update(activity: Activity) {
@@ -74,18 +74,42 @@ export class ActivityService {
       })
     };
     return this.http.put<Activity>(`${this.url}/${activity.id}`, activity, httpOptions)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('update method in activity service failed');
-      })
-    );
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('update method in activity service failed');
+        })
+      );
   }
 
+  disableActivity(id: number) {
+    const httpOptions = this.getHttpOptions();
+    if (this.auth.checkLogin()) {
+      return this.http.delete<Activity>(`${this.url}/${id}`, httpOptions)
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('error deleting activity');
+          })
+        );
+    }
+  }
 
-
-
-
-
-
+  private getHttpOptions() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${this.auth.getCredentials()}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return httpOptions;
+  }
 }
+
+
+
+
+
+
+
+
