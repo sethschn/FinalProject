@@ -8,6 +8,7 @@ export class Event {
   description: string;
   imageUrl: string;
 
+
   constructor(id?:number,title?: string,eventTime?: string,
     eventDate?: string,shortDescription?: string,enabled?: boolean,
     description?: string,imageUrl?: string){

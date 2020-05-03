@@ -1,4 +1,3 @@
-
 <!-- Displays individual data -->
 <div *ngIf="selected">
   <br /><br /><br />
@@ -11,14 +10,18 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-          <img [src]="selected.imageUrl" image-resizing
-          image-Height="200px" image-Width="200px" />
-  </div>
+      <img
+        [src]="selected.imageUrl"
+        image-resizing
+        image-Height="200px"
+        image-Width="200px"
+      />
+    </div>
     <hr />
     <div class="col text-center">
       {{ selected.description }}
     </div>
-    <hr>
+    <hr />
     <div class="row">
       <div class="col-4 mx-auto">
         <div class="card card-body mb-2">
@@ -35,11 +38,9 @@
       <div class="col-4 mx-auto">
         <div class="card card-body mb-2">
           <h6>Events</h6>
-          <button
-              class="btn btn-primary btn-sm"
-            >
-              View Events
-            </button>
+          <button class="btn btn-primary btn-sm">
+            View Events
+          </button>
         </div>
       </div>
     </div>
@@ -62,7 +63,7 @@
         </div>
       </div>
     </div>
-    <hr>
+    <hr />
   </div>
   <!-- comment box code start -->
   <div class="container py-2">
@@ -100,10 +101,7 @@
         </div>
       </div>
     </div>
-    <button
-      class="btn btn-lg btn-outline-primary"
-      (click)="open(content)"
-    >
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
       Leave A Comment
     </button>
   </div>
@@ -195,7 +193,7 @@
 </ng-template>
 
 <!-- Displays All Activities -->
-<div *ngIf="!selected">
+<!-- <div *ngIf="!selected">
   <table class="table table-striped table-hover">
     <thead class="thead thead-dark">
       <tr>
@@ -215,7 +213,36 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
+
+<div *ngIf="!selected">
+  <h1 style="text-align:center">Activities</h1>
+
+  <div style="text-align:center">
+    <button mat-button type="button" class="btn btn-info" *ngFor="let category of categories"
+      (click)="selectedCategory = category">{{category.type}}</button>
+  </div>
+  <br>
+  <div class="row card-group">
+    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory:selectedCategory"
+      style="text-align:center">
+      <mat-card-header>
+        <mat-card-title>{{activity.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{activity.imageUrl}}">
+      <mat-card-content>
+        <p>
+          <strong>{{ activity.shortDescription }}</strong></p>
+        <p> Equipment Level: {{activity.equipmentLevel}} <br>{{activity.equipmentDescription}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
+        <button class="btn btn-info" mat-button>Add Event</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  </div>
 
 <!-- Add activities -->
 <button class="btn btn-lg btn-outline-primary" (click)="open(addActivity)">
@@ -336,7 +363,9 @@
               name="title"
               [(ngModel)]="editCurrentActivity.title"
             /><br />
-            <label class="text-left" for="editCurrentActivity">Short Description </label>
+            <label class="text-left" for="editCurrentActivity"
+              >Short Description
+            </label>
             <input
               class="form-control"
               type="text"
@@ -344,7 +373,9 @@
               [(ngModel)]="editCurrentActivity.shortDescription"
               placeholder="Short Description"
             /><br />
-            <label class="text-left" for="editCurrentActivity">Full Description </label>
+            <label class="text-left" for="editCurrentActivity"
+              >Full Description
+            </label>
             <input
               class="form-control"
               type="text"
@@ -352,7 +383,9 @@
               [(ngModel)]="editCurrentActivity.description"
               placeholder="Description"
             /><br />
-            <label class="text-left" for="editCurrentActivity">Image Url </label>
+            <label class="text-left" for="editCurrentActivity"
+              >Image Url
+            </label>
             <input
               class="form-control"
               type="text"
@@ -360,7 +393,9 @@
               [(ngModel)]="editCurrentActivity.imageUrl"
               placeholder="Image URL"
             /><br />
-            <label class="text-left" for="editCurrentActivity">Equipment Level </label>
+            <label class="text-left" for="editCurrentActivity"
+              >Equipment Level
+            </label>
             <input
               class="form-control"
               type="text"
@@ -368,7 +403,9 @@
               [(ngModel)]="editCurrentActivity.equipmentLevel"
               placeholder="Equipment Level"
             /><br />
-            <label class="text-left" for="editCurrentActivity">Equipment Description </label>
+            <label class="text-left" for="editCurrentActivity"
+              >Equipment Description
+            </label>
             <input
               class="form-control"
               type="text"

@@ -5,6 +5,8 @@ import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
 import { ActivityCommentService } from 'src/app/services/activity-comment.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 
 @Component({
@@ -16,6 +18,10 @@ export class ActivityComponent implements OnInit {
   activity = new Activity();
   activities: Activity[] = [];
   activityComments: ActivityComment[] = [];
+
+  categories: Category[] = [];
+  selectedCategory:Category = new Category(0, "All");
+
   closeResult = '';
   comment = new ActivityComment();
   currentActivityId = null;
@@ -25,19 +31,20 @@ export class ActivityComponent implements OnInit {
   selected = null;
 
 
-
   constructor(
     private activitySvc: ActivityService,
     private commentSvc: ActivityCommentService,
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private catSvc: CategoryService
   ) { }
 
   ngOnInit(): void {
     const activityIdStr = this.currentRoute.snapshot.paramMap.get('id');
     console.log('selected:' + this.selected);
     console.log('activityIdStr: ' + activityIdStr);
+    this.loadCategories();
     if (!this.selected && activityIdStr) {
       this.currentActivityId = activityIdStr;
       const activityId = Number.parseInt(activityIdStr,10);
@@ -153,6 +160,23 @@ export class ActivityComponent implements OnInit {
     );
   }
 
+  loadCategories(){
+    this.catSvc.indexCategory().subscribe(
+      data => {
+        const cat = new Category();
+        cat.type = "All";
+        this.selectedCategory = cat;
+        this.categories = data;
+        this.categories.unshift(cat);
+
+      },
+      err => {
+        console.error('Error in our loadActivities() method. ' + err);
+      }
+    );
+  }
+
+  // Opens Modal
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -161,6 +185,7 @@ export class ActivityComponent implements OnInit {
     });
   }
 
+  // Close Modal
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
