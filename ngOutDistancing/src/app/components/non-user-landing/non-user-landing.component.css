@@ -52,8 +52,10 @@
     margin-right: 10px;
     width: 300px;
     margin-bottom: 10px;
+    max-width:100%;
     margin-left: 10px;
-    /* text-align: left; */
+    text-align: center;
+
 
 
   }
@@ -74,7 +76,9 @@
 
 }
 
-
+button {
+  background-color:#F7DC6F   ;
+}
 
 
 
