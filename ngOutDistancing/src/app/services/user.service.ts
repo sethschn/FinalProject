@@ -42,7 +42,7 @@ export class UserService {
     public showLoggedInUser(){
       const id = this.authService.getCurrentUserId();
       const httpOptions = this.getHttpOptions();
-      console.log(id);
+      console.log("ShowLoggedInUser "+id);
         return this.http.get<User>(`${this.url}/${id}`, httpOptions)
         .pipe(
           catchError((err: any) => {
