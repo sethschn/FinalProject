@@ -2,7 +2,7 @@
  @import "~bootstrap/dist/css/bootstrap.css";
 
 
-html, body, button {
+html, body, button, p {
   font-family: Futura !important;
   margin-right: auto;
   margin-left: auto;
