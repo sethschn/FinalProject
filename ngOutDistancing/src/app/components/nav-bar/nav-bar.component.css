@@ -1,5 +1,6 @@
 .navbar{
-  background: #2E8B57   !important;
+  background: #2E8B57;
+  background-image: linear-gradient(#2E8B57, teal);
   color: #AAB2B3;
   font-size: large;
 }

@@ -52,12 +52,13 @@
     margin-right: 10px;
     width: 300px;
     margin-bottom: 10px;
+    margin-left: 10px;
     /* text-align: left; */
 
 
   }
   .card-body img{
-  margin-right: 20px;
+  margin-right: 10px;
   object-fit: cover; /*this makes the image in src fit to the size specified below*/
   width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
   height: 80%;
