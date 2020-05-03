@@ -2,7 +2,7 @@
   <h1 style="text-align:center">Activities</h1>
 
   <div style="text-align:center">
-    <button mat-button type="button" class="btn btn-info" *ngFor="let category of categories"
+    <button mat-button type="button" style="margin: 3px;" class="btn btn-info" *ngFor="let category of categories"
       (click)="selectedCategory = category">{{category.type}}</button>
   </div>
   <br>
@@ -25,6 +25,9 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+
+
 
   <h1 style="text-align:center">Events</h1>
   <div class="row card-group">
@@ -103,45 +106,6 @@
   </div>
 </div>
 
-<mat-card class="mat-parent">
-  <ngb-carousel>
-    <ng-template ngbSlide *ngFor="let activity of activities">
-      <div class="carousel-item" style="display: block; width: 100%;">
-        <mat-card style="text-align:center">
-          <img mat-card-image src="{{activity.imageUrl}}">
-          <mat-card-content>
-            <mat-card-title>
-              <h4>{{activity.title}}</h4>
-            </mat-card-title>
-            <p>{{activity.shortDescription}}</p>
-            <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
-            <br>
-            <br>
-            <br>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </ng-template>
-  </ngb-carousel>
-</mat-card>
 
 
 
-<!-- <ngb-carousel>
-    <ng-template ngbSlide *ngFor="let activity of activities">
-      <div class="carousel-item" style="display: block; width: 100%;">
-        <div class="col-md-4">
-          <mat-card style="text-align:center">
-            <img mat-card-image src="{{activity.imageUrl}}">
-            <mat-card-content>
-              <mat-card-title>
-                <h4>{{activity.title}}</h4>
-              </mat-card-title>
-              <p>{{activity.shortDescription}}</p>
-              <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-    </ng-template>
-  </ngb-carousel> -->

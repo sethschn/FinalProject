@@ -1,10 +1,18 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1>Bootstrap Tutorial</h1>
-    <p>Bootstrap is the most popular HTML, CSS...</p>
+<!-- <div class="hero-image">
+  <div class="hero-text">
+    <img src="/assets/mountainJumbo.jpg">
+    <h1>I am John Doe</h1>
+    <p>And I'm a Photographer</p>
+    <button>Hire me</button>
   </div>
-</div>
+</div> -->
 
+<!-- <div class="jumbotron jumbotron-profile">
+  <div class="container" *ngIf="currentUser">
+    <h1>{{currentUser.username}}</h1>
+    <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+  </div>
+</div> -->
 
 <div *ngIf="currentUser">
   Id: {{currentUser.id}} <br>
@@ -18,7 +26,7 @@
 <br>
 </div>
 <div>
-  <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" *ngIf="editUser">
+  <form class="form" role="form" novalidate="" *ngIf="editUser">
     <!-- <div class="form-group">
         <label for="uname1">Username</label>
         <input type="text" [(ngModel)]="editUser.username" class="form-control form-control-lg rounded-0" name="username" id="uname1" required="">

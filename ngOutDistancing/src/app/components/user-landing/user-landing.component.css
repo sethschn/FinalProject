@@ -5,6 +5,7 @@
 mat-card {
   background-color: whitesmoke;
   color: black;
+  margin: 5px;
 }
 
 .example-header-image {
@@ -16,6 +17,12 @@ mat-card img{
   text-align:center;
   height: 50%;
 }
+
+button {
+  background-color:#F7DC6F   ;
+}
+
+
 
 
 

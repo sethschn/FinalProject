@@ -28,14 +28,14 @@ html {
   background-image: url('/assets/outdistancinglogo.jpg');
   background-size: cover;
   margin-top: 1%;
-  background-attachment: fixed;
+  background-attachment: scroll;
   max-width: 100%;
   height: 60vh;
   text-align: "center";
   text-shadow: 1px 1px #094654 ;
   background-color: #4CC3CD   ;
   color: white;
-  font-family: Roboto;
+  background-position: center;
 }
 
 img {
@@ -45,6 +45,7 @@ img {
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+  background-position: center;
 }
 
 .container {

@@ -1,5 +1,4 @@
 import { CategoryService } from './../../services/category.service';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { EventService } from './../../services/event.service';
 import { AuthService } from './../../services/auth.service';
 import { UserService } from './../../services/user.service';
@@ -9,6 +8,7 @@ import { ActivityService } from './../../services/activity.service';
 import { Activity } from 'src/app/models/activity';
 import { Event } from 'src/app/models/event';
 import { Category } from 'src/app/models/category';
+
 
 
 @Component({

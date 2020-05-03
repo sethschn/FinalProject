@@ -1,1 +1,415 @@
-<p>admin-detail works!</p>
+<h1 style="text-align:center">Current Users in the Database </h1>
+<table class="table table-striped table-hover">
+  <thead class="thead thead-dark">
+    <tr>
+      <th>ID </th>
+      <th>Username </th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Enabled</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.enabled}}</td>
+      <!-- <td (click)="displayResource(resource)">{{resource.imageUrl}}</td> -->
+      <td><input class="btn btn-danger" type="submit" (click)="deleteUser(user.id)" value="Disable">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<!-- Displays individual data -->
+<h1 style="text-align:center">Current Activities in the Database </h1>
+<div *ngIf="selectedActivity">
+  <br /><br /><br />
+  <div class="container bg-faded py-3">
+    <h1 class="text-center">{{ selectedActivity.title }}</h1>
+    <div class="row">
+      <div class="col text-center">
+        {{ selectedActivity.shortDescription }}
+      </div>
+    </div>
+    <hr />
+    <div class="row justify-content-center">
+      <img [src]="selectedActivity.imageUrl" image-resizing image-Height="200px" image-Width="200px" />
+    </div>
+    <hr />
+    <div class="col text-center">
+      {{ selectedActivity.description }}
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-4 mx-auto">
+        <div class="card card-body mb-2">
+          <h6>Resources</h6>
+          <code>resources</code>
+        </div>
+      </div>
+      <div class="col-4 mx-auto">
+        <div class="card card-body mb-2">
+          <h6>EquipmentLevel: {{ selectedActivity.equipmentLevel }}</h6>
+          <code>{{ selectedActivity.equipmentDescription }}</code>
+        </div>
+      </div>
+      <div class="col-4 mx-auto">
+        <div class="card card-body mb-2">
+          <h6>Events</h6>
+          <button class="btn btn-primary btn-sm">
+            View Events
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container bg-faded py-3">
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-primary btn-sm" (click)="setEditActivity(); open(editActivity)">
+            Edit Activity
+          </button>
+          <button class="btn btn-primary btn-sm" (click)="displayActivityTable(activities)">
+            Show All Activities
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <!-- comment box code start -->
+  <div class="container py-2">
+    <div class="row">
+      <div class="comments col-md-9" id="comments">
+        <h3 class="mb-4 font-weight-light">Comments</h3>
+        <!-- comment -->
+        <div class="comment mb-2 row" *ngFor="let comment of activityComments">
+          <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+            <a href=""><img class="mx-auto rounded-circle img-fluid" src="{{ comment.user.imageUrl }}"
+                alt="avatar" /></a>
+          </div>
+          <div class="comment-content col-md-11 col-sm-10">
+            <h6 class="small comment-meta">
+              <a href="#">{{ comment.user.username }}</a>
+              {{ comment.createDate }}
+            </h6>
+            <h6 class="small comment-meta" *ngIf="comment.parentComment">
+              In Reply To: {{ comment.parentComment.user.username }}
+              {{ comment.parentComment.createDate }}
+            </h6>
+            <div class="comment-body">
+              <p>
+                {{ comment.content }}<br />
+                <a href="" class="text-right small" (click)="open(reply)"><i class="ion-reply"></i> Reply</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+      Leave A Comment
+    </button>
+  </div>
+</div>
+
+<!-- Comment box modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Leave a Comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- comment box code start -->
+    <div class="container py-2">
+      <div class="row">
+        <div class="comments col-md-9" id="comments">
+          <!-- <h3 class="mb-4 font-weight-light">Comments</h3> -->
+          <!-- comment box -->
+          <div class="row pt-2">
+            <div class="col-12">
+              <textarea class="form-control" rows="5" placeholder="Your Comment Please....."
+                [(ngModel)]="newComment.content"></textarea>
+              <br />
+              <!-- <button class="btn btn-success pull-right" (click)="addComment(newComment)">Comment.</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success pull-right" (click)="addComment(newComment)">
+      Submit
+    </button>
+  </div>
+</ng-template>
+
+<!-- REPLY box modal -->
+<ng-template #reply let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Reply To A Comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- REPLY box code start -->
+    <div class="container py-2">
+      <div class="row">
+        <div class="comments col-md-9" id="comments">
+          <!-- <h3 class="mb-4 font-weight-light">Comments</h3> -->
+          <!-- REPLY box -->
+          <div class="row pt-2">
+            <div class="col-12">
+              <textarea class="form-control" rows="5" placeholder="....." [(ngModel)]="newComment.content"></textarea>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success pull-right" (click)="addComment(newComment)">
+      Submit
+    </button>
+  </div>
+</ng-template>
+
+<!-- Displays All Activities -->
+<div *ngIf="!selectedActivity">
+  <table class="table table-striped table-hover">
+    <thead class="thead thead-dark">
+      <tr>
+        <td>ID</td>
+        <td>Activity</td>
+        <td>Short Description</td>
+        <td>Enabled</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of activities">
+        <td (click)="displayActivity(activity)">{{ activity.id }}</td>
+        <td (click)="displayActivity(activity)">{{ activity.title }}</td>
+        <td (click)="displayActivity(activity)">{{ activity.shortDescription }}</td>
+        <td (click)="displayActivity(activity)">{{ activity.enabled }}</td>
+        <td><button class="btn btn-danger" (click)="deleteActivity(activity.id)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add activities -->
+<button class="btn btn-lg btn-outline-primary" (click)="open(addActivity)">
+  Add Activity
+</button>
+
+<!-- add activity box modal -->
+<ng-template #addActivity let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Activity</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- add activity box code start -->
+    <div class="container py-2">
+      <div class="row">
+        <div class="comments col-md-9" id="newActivity">
+          <!-- add activity box -->
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
+            <input class="form-control" type="text" name="title" [(ngModel)]="newActivity.title"
+              placeholder="Title" /><br />
+            <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newActivity.shortDescription"
+              placeholder="Short Description" /><br />
+            <input class="form-control" type="text" name="description" [(ngModel)]="newActivity.description"
+              placeholder="Description" /><br />
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newActivity.imageUrl"
+              placeholder="Image URL" /><br />
+            <input class="form-control" type="text" name="equipmentLevel" [(ngModel)]="newActivity.equipmentLevel"
+              placeholder="Equipment Level" /><br />
+            <input class="form-control" type="text" name="equipmentDescription"
+              [(ngModel)]="newActivity.equipmentDescription" placeholder="Equipment Description" /><br />
+            <button class="btn btn-success pull-right" type="submit" (click)="this.addNewActivity(newActivity)">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+<!-- edit activity box modal -->
+<ng-template #editActivity let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Activity</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- edit activity box code start -->
+    <div class="container py-2">
+      <div class="row">
+        <div class="comments col-md-9" id="editActivity">
+          <!-- edit activity box -->
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
+            <label class="text-left" for="editCurrentActivity">Title </label>
+            <input class="form-control" type="text" name="title" [(ngModel)]="editCurrentActivity.title" /><br />
+            <label class="text-left" for="editCurrentActivity">Short Description </label>
+            <input class="form-control" type="text" name="shortDescription"
+              [(ngModel)]="editCurrentActivity.shortDescription" placeholder="Short Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Full Description </label>
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCurrentActivity.description"
+              placeholder="Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Image Url </label>
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCurrentActivity.imageUrl"
+              placeholder="Image URL" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Level </label>
+            <input class="form-control" type="text" name="equipmentLevel"
+              [(ngModel)]="editCurrentActivity.equipmentLevel" placeholder="Equipment Level" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Description </label>
+            <input class="form-control" type="text" name="equipmentDescription"
+              [(ngModel)]="editCurrentActivity.equipmentDescription" placeholder="Equipment Description" /><br />
+            <button class="btn btn-success pull-right" type="submit"
+              (click)="this.updateCurrentActivity(editCurrentActivity)">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+
+
+<h1 style="text-align:center">Current Resources in the Database </h1>
+
+
+<div *ngIf="!selectedResource">
+  <table class="table table-striped table-hover">
+    <thead class="thead thead-dark">
+      <tr>
+        <th>ID </th>
+        <th>Name </th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let resource of resourceList">
+        <td (click)="displayResource(resource)">{{resource.id}}</td>
+        <td (click)="displayResource(resource)">{{resource.name}}</td>
+        <!-- <td (click)="displayResource(resource)">{{resource.description}}</td> -->
+        <td (click)="displayResource(resource)">{{resource.link}}</td>
+        <!-- <td (click)="displayResource(resource)">{{resource.imageUrl}}</td> -->
+        <td><input class="btn btn-danger" type="submit" (click)="deleteResource(resource.id)" value="Delete Resource">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div *ngIf="selectedResource">
+  <br>
+  <p> Id: {{selectedResource.id}}<br>
+    Name: {{selectedResource.name}}<br>
+    Description: {{selectedResource.description}}<br>
+    <a href="{{selectedResource.link}}"> {{selectedResource.link}}</a><br>
+    <img [src]="selectedResource.imageUrl"><br>
+    <br>
+    <input class="btn btn-info" type="submit" (click)="setEditResource()" value="Edit" /><br>
+    <button class="btn btn-dark" (click)="displayResourceTable()">Display Table</button><br>
+    <hr>
+    <form *ngIf="editResource">
+      <input type="text" name="name" [(ngModel)]="editResource.name" placeholder="Name" /><br>
+      <input type="text" name="description" [(ngModel)]="editResource.description"
+        placeholder="Resource Description" /><br>
+      <input type="text" name="link" [(ngModel)]="editResource.link" placeholder="Link" /><br>
+      <input type="text" name="imageUrl" [(ngModel)]="editResource.imageUrl" placeholder="Image URL" /><br>
+
+      <input class="btn btn-info" type="submit" (click)="updateResource(editResource)" value="Save" />
+      <input class="btn btn-dark" type="submit" (click)="editResource = null" value="Cancel" /><br>
+    </form>
+</div>
+
+<h1 style="text-align:center">Current Events in the Database </h1>
+<h1 style="text-align:center">Current Groups in the Database </h1>
+<h1 style="text-align:center">Current Comments in the Database </h1>
+<h1 style="text-align:center">Current Locations in the Database </h1>
+
+<div *ngIf="!selectedLocation">
+  <table class="table table-striped table-hover">
+    <thead class="thead thead-dark">
+     <tr>
+        <th>ID</th>
+        <th>Street </th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Postal Code</th>
+        <th>Title</th>
+        <th>Location URL</th>
+       </tr>
+    </thead>
+    <tbody>
+   <tr *ngFor="let location of locationList">
+    <td (click)="displayLocation(location)">{{location.id}}</td>
+    <td (click)="displayLocation(location)">{{location.city}}</td>
+    <td (click)="displayLocation(location)">{{location.street}}</td>
+    <td (click)="displayLocation(location)">{{location.state}}</td>
+    <td (click)="displayLocation(location)">{{location.country}}</td>
+    <td (click)="displayLocation(location)">{{location.postalCode}}</td>
+    <td (click)="displayLocation(location)">{{location.title}}</td>
+    <td (click)="displayLocation(location)">{{location.locationUrl}}</td>
+     <td><input class="btn btn-danger" type="submit" (click)="deleteALocation(location.id)" value="Delete Location"></td>
+   </tr>
+  </tbody>
+  </table>
+</div>
+
+
+    <div *ngIf="selectedLocation">
+    <br>
+   <p> ID: {{selectedLocation.id}}<br>
+    City: {{selectedLocation.city}}<br>
+    Street: {{selectedLocation.street}}<br>
+    State: {{selectedLocation.state}}<br>
+    Country: {{selectedLocation.country}}<br>
+    Postal Code: {{selectedLocation.postalCode}}<br>
+    Title: {{selectedLocation.title}}<br>
+    <a href="{{selectedLocation.locationUrl}}"> {{selectedLocation.locationUrl}}</a><br>
+    <br>
+    <input class="btn btn-info" type="submit" (click)="setEditLocation()" value="Edit"/><br>
+    <button class="btn btn-dark" (click)="displayLocationTable()">Display Table</button><br>
+<hr>
+    <form *ngIf="editLocation">
+
+
+      <input type="text" name="city" [(ngModel)]="editLocation.city" placeholder="City"/><br>
+      <input type="text" name="street" [(ngModel)]="editLocation.street" placeholder="Street"/><br>
+      <input type="text" name="state" [(ngModel)]="editLocation.state" placeholder="State"/><br>
+      <input type="text" name="country" [(ngModel)]="editLocation.country" placeholder="Country"/><br>
+      <input type="text" name="postalCode" [(ngModel)]="editLocation.postalCode" placeholder="Postal Code"/><br>
+      <input type="text" name="title" [(ngModel)]="editLocation.title" placeholder="Title"/><br>
+      <input type="text" name="locationUrl" [(ngModel)]="editLocation.locationUrl" placeholder="Location URL"/><br>
+
+      <input class="btn btn-info" type="submit" (click)="updateLocation(editLocation)" value="Save"/>
+      <input class="btn btn-dark" type="submit" (click)="editLocation = null" value="Cancel"/><br>
+    </form>
+    </div>
+

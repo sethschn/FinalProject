@@ -64,7 +64,7 @@ export class LocationService {
     }
   }
 
-  public deleteLocation(id: number) {
+  public deleteALocation(id: number) {
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
     return this.http.delete<Location>(`${this.url}/${id}`, httpOptions)
