@@ -84,13 +84,17 @@ export class UsergroupComponent implements OnInit {
         if (user.id === group.creator.id){
           console.log("Already in the group as creator");
         }else {
+          console.log("Group ID "+group.id);
           this.groupService.joinGroup(group.id).subscribe(
             good => {
+              //this.loadGroups();
+              // this.updateGroup(good);
               console.log("Success "+good);
+              console.log(good);
 
             },
             err => {
-              console.log("Error in joinGroup "+err);
+              console.log("Error in joinGroup usergroupComponent "+err);
             }
           )
         }

@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { EventCommentService } from './../../services/event-comment.service';
 import { Event } from './../../models/event';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { EventService } from 'src/app/services/event.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Eventcomment } from 'src/app/models/eventcomment';
 import { Activity } from 'src/app/models/activity';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class EventDetailComponent implements OnInit {
   currentEventId = null;
   event = new Event();
   eventActivity = new Activity();
+  user = new User();
 
 
   constructor(
@@ -33,7 +36,8 @@ export class EventDetailComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private commentSvc: EventCommentService
+    private commentSvc: EventCommentService,
+    private authSvc: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +66,8 @@ export class EventDetailComponent implements OnInit {
     this.router.navigateByUrl(`/event/${event.id}`);
   }
 
-  showEvent(id) {
+  showEvent(event) {
+    console.log(event);
     this.eventSvc.show(this.currentRoute.snapshot.paramMap.get('id')).subscribe(
       (good) => {
         this.loadEvents();
@@ -183,6 +188,27 @@ export class EventDetailComponent implements OnInit {
 
 
   }
+
+  checkIfAdmin(user: User){
+    if (this.authSvc.getCurrentUserRole() == 'admin'){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  deleteComment(eventComment: Eventcomment, event: Event){
+    this.commentSvc.disableEventComment(event, eventComment).subscribe(
+      data=> {
+        this.loadComments();
+      },
+      err => {
+        console.error('error in deleting activity component')
+      }
+    )
+  }
+
 
 
 }

@@ -14,7 +14,7 @@ public interface EventCommentService {
 
 	EventComment updateEventComment(int evtId , EventComment eventCmt, String username);
 
-	Boolean deleteById(int eventCommentId, String username);
+	Boolean changeEventCommentEnabled(int eventCommentId, String username);
 
 	List<EventComment> findByEventId(int id);
 	

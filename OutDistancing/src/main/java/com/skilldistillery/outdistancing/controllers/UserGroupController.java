@@ -79,12 +79,13 @@ public class UserGroupController {
 		return userGroup;
 	}
 	
-	@PostMapping("usergroups/{userGroupId}/joingroup")
+	@PutMapping("usergroups/{userGroupId}/joingroup")
 	public UserGroup addUserToGroup(@PathVariable("userGroupId") int userGroupId,
 			HttpServletResponse resp, Principal principal) {
 			UserGroup userGroup = null;
 		try {
 			userGroup = usergroupSvc.addUserGroup(userGroupId, principal.getName());
+			System.out.println("addUserToGroup "+userGroup);
 			if (userGroup == null) {
 				resp.setStatus(400);
 			}
