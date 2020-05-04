@@ -50,6 +50,7 @@ export class UsergroupService {
   public create(usergroup: Usergroup){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
+      usergroup.enabled = true;
       return this.http.post<Usergroup>(this.url, usergroup, httpOptions)
         .pipe(
           catchError((err: any) => {
