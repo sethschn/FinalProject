@@ -9,7 +9,7 @@ section{
   background: #fff;  /* fallback for old browsers */
   padding:30px 0;
 }
-h1{float:center; width:100%; color:#232323; margin-bottom:30px; font-size: 14px;}
+h1{float:center; width:100%; color:#232323; margin-bottom:30px; font-size: 18px;}
 h1 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px; font-weight:700}
 h1 a{color:#131313; font-weight:bold;}
 
@@ -38,7 +38,7 @@ h1 a{color:#131313; font-weight:bold;}
   font-weight:600;
 }
 .profile-card-5 p{
-  font-size:14px;
+  font-size:18px;
   font-weight:300;
 }
 .profile-card-5 .btn-primary{
