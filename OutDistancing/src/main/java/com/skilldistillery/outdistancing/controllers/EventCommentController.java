@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.outdistancing.entities.ActivityComment;
 import com.skilldistillery.outdistancing.entities.Event;
 import com.skilldistillery.outdistancing.entities.EventComment;
 import com.skilldistillery.outdistancing.services.EventCommentService;
@@ -46,11 +47,16 @@ public class EventCommentController {
 		}
 		return evtCmt;
 	}
+	
+	// find all by event & activity ID
+		@GetMapping("activities/{actId}/events/{evtId}/eventcomments")
+		public List<EventComment> findAll(@PathVariable Integer actId, @PathVariable("evtId") Integer evtId) {
+			return eventCmtSvc.findByEventId(evtId);
+		}
 
-	@PostMapping("events/{evtId}/eventcomments")
-	public EventComment addEventComment(@PathVariable("evtId") Integer evtId, @RequestBody EventComment eventCmt,
+	@PostMapping("activities/{actId}/events/{evtId}/eventcomments")
+	public EventComment addEventComment(@PathVariable("actId")int actId, @PathVariable("evtId") Integer evtId, @RequestBody EventComment eventCmt,
 			HttpServletRequest req, HttpServletResponse resp, Principal principal) {
-
 		try {
 			EventComment addEventCmt = eventCmtSvc.createEventComment(eventCmt, evtId, principal.getName());
 			resp.setStatus(201);

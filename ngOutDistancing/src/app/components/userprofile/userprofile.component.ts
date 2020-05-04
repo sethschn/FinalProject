@@ -44,6 +44,10 @@ export class UserprofileComponent implements OnInit {
     //this.todos = this.todoService.index();
   }
 
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   reload(){
     this.userService.showLoggedInUser().subscribe(
       data => {

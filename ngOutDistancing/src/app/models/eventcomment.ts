@@ -7,6 +7,7 @@ export class Eventcomment {
   inReplyId: number;
   user: User;
   createDate: string;
+  event: Event;
 
 
   constructor(
@@ -15,8 +16,8 @@ export class Eventcomment {
     enabled?:boolean,
     inReplyId?: number,
     user?: User,
-    createDate?: string
-
+    createDate?: string,
+    event?: Event
   ){
   this.id=id;
   this.content= content;
@@ -24,5 +25,6 @@ export class Eventcomment {
   this.inReplyId= inReplyId;
   this.user = user;
   this.createDate = createDate;
+  this.event = event;
   }
 }

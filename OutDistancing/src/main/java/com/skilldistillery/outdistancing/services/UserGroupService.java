@@ -11,6 +11,7 @@ public interface UserGroupService {
 	UserGroup findById(int userGroupId);
 	UserGroup createGroup(UserGroup userGroup, String username);
 	UserGroup updateGroup (int userGroupId, UserGroup userGroup, String username);
+	UserGroup addUserGroup (int userGroupId, String username);
 	Boolean deleteGroup(int userGroupId, String username);
 	Boolean changeGroupEnabled(int userGroupId, String username);
 }

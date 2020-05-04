@@ -1,19 +1,9 @@
-<div *ngIf="currentUser">
-  Id: {{currentUser.id}} <br>
-  Username: {{currentUser.username}} <br>
-  Name: {{currentUser.firstName}} {{currentUser.lastName}} <br>
-  Location: {{currentUser.location.state}} <br>
-  Email: {{currentUser.email}} <br>
-  <input type="submit" (click)="setEditUser()" value="Edit" />
-  <!--<button (click)="displayTable()">Back</button> -->
-<br>
-<br>
-</div>
+
 
 <!-- MODAL POPUP TO EDIT USER PROFILE -->
 <!-- <div>
   <form class="form" role="form" novalidate="" *ngIf="editUser">
-    <!-- <div class="form-group">
+     <div class="form-group">
         <label for="uname1">Username</label>
         <input type="text" [(ngModel)]="editUser.username" class="form-control form-control-lg rounded-0" name="username" id="uname1" required="">
         <div class="invalid-feedback">Oops, you missed this one.</div>
@@ -70,5 +60,112 @@
     <button type="submit"  (click)="updateUser(editUser)" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
   </form>
 </div> -->
+<!-- <div *ngIf="currentUser">
+  Id: {{currentUser.id}} <br>
+  Username: {{currentUser.username}} <br>
+  Name: {{currentUser.firstName}} {{currentUser.lastName}} <br>
+  Location: {{currentUser.location.state}} <br>
+  Email: {{currentUser.email}} <br>
+  <input type="submit" (click)="setEditUser()" value="Edit" /> -->
+  <!--<button (click)="displayTable()">Back</button> -->
+<!-- <br>
+<br>
+</div> -->
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mt-4">
+          <div class="card profile-card-5">
+              <div class="card-img-block" *ngIf="currentUser">
+                  <img class="card-img-top" src="{{currentUser.imageUrl}}" alt="Card image cap">
+              </div>
+                  <div class="card-body pt-0">
+
+                  <h5 class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</h5>
+                  <h5 class="card-title">{{currentUser.location.city}}, {{currentUser.location.state}}</h5>
+                  <p class="card-text">{{currentUser.description}}</p>
+                  <a class="btn btn-primary" (click)="openLg(editProfile);setEditUser()">Edit Profile</a>
+                </div>
+              </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #editProfile let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <form class="form" role="form" novalidate="" *ngIf="editUser">
+        <!-- <div class="form-group">
+            <label for="uname1">Username</label>
+            <input type="text" [(ngModel)]="editUser.username" class="form-control form-control-lg rounded-0" name="username" id="uname1" required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div> -->
+        <!-- <div class="form-group">
+            <label>Password</label>
+            <input type="password" [(ngModel)]="editUser.password" name="password" class="form-control form-control-lg rounded-0" id="pwd1" required="" autocomplete="new-password">
+            <div class="invalid-feedback">Enter your password too!</div>
+        </div> -->
+        <div class="form-group">
+          <label for="uname1">Email</label>
+          <input type="text" [(ngModel)]="editUser.email" class="form-control form-control-lg rounded-0" name="email" id="email1" required="">
+          <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+          <div class="form-group">
+            <label for="uname1">First Name</label>
+            <input type="text" [(ngModel)]="editUser.firstName" class="form-control form-control-lg rounded-0" name="firstName" required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+        <div class="form-group">
+          <label for="uname1">Last Name</label>
+          <input type="text" [(ngModel)]="editUser.lastName" class="form-control form-control-lg rounded-0" name="lastName" required="">
+          <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description/Bio</label>
+          <textarea class="form-control" type="text" name="description" [(ngModel)]="editUser.description" rows="3"></textarea>
+        </div>
+        <!-- <div class="form-group">
+          <label for="uname1">Description/Bio</label>
+          <input type="text" [(ngModel)]="newUser.description" class="form-control form-control-lg rounded-0" name="description" required="">
+          <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div> -->
+        <div class="form-group">
+          <label for="uname1">Profile Image URL</label>
+          <input type="text" [(ngModel)]="editUser.imageUrl" class="form-control form-control-lg rounded-0" name="imageUrl" required="">
+          <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+        <div class="form-group">
+          <label for="uname1">Street</label>
+          <input type="text" [(ngModel)]="editUser.location.street" name="street" class="form-control form-control-lg rounded-0"  required="">
+        <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+        <div class="form-group">
+          <label for="uname1">City</label>
+          <input type="text" [(ngModel)]="editUser.location.city" name="city" class="form-control form-control-lg rounded-0"  required="">
+        <div class="invalid-feedback">Oops, you missed this one.</div>
+        </div>
+        <div class="form-group">
+          <label for="uname1">State</label>
+          <input type="text" [(ngModel)]="editUser.location.state" name="state" class="form-control form-control-lg rounded-0"  required="">
+          <div class="invalid-feedback">Oops, you missed this one.</div>
+      </div>
+
+        <button type="submit"  (click)="updateUser(editUser); modal.close()" class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
+      </form>
+      </div>
+      <!--/card-block-->
+    </div>
+    <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+  </div>
+</ng-template>
 
 
