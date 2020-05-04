@@ -1,8 +1,10 @@
 package com.skilldistillery.outdistancing.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +48,7 @@ public class UserGroup {
 	private User creator;
 	
 //	@JsonIgnore
-	@ManyToMany(mappedBy="groups")
+	@ManyToMany(mappedBy="groups", cascade = {CascadeType.ALL})
 	private List<User> users;
 	
 	
@@ -156,6 +158,16 @@ public class UserGroup {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public void addUser(User user) {
+		if (this.users == null) {
+			this.users = new ArrayList<User>();
+		}
+		if (!this.users.contains(user)) {
+			this.users.add(user);
+			user.addGroup(this);
+		}
 	}
 
 	@Override
