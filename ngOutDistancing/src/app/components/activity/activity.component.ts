@@ -10,6 +10,8 @@ import { CategoryService } from 'src/app/services/category.service';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from './../../models/event';
 import { Location } from './../../models/location';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -29,6 +31,8 @@ export class ActivityComponent implements OnInit {
   newEvent = new Event();
   newLocation = new Location();
 
+  user = new User();
+
 
   closeResult = '';
   comment = new ActivityComment();
@@ -46,7 +50,8 @@ export class ActivityComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private catSvc: CategoryService,
-    private eventSvc: EventService
+    private eventSvc: EventService,
+    private authSvc: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -212,6 +217,15 @@ export class ActivityComponent implements OnInit {
         console.error(bad);
       }
     );
+  }
+
+  checkIfAdmin(user: User){
+    if (this.authSvc.getCurrentUserRole() == 'admin'){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   // Opens Modal
