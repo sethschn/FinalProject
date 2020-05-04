@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.outdistancing.entities.ActivityComment;
 import com.skilldistillery.outdistancing.entities.Event;
 import com.skilldistillery.outdistancing.entities.EventComment;
 import com.skilldistillery.outdistancing.entities.User;
@@ -47,10 +48,14 @@ public class EventCommentServiceImpl implements EventCommentService {
 		Optional<Event> optEvent = eventRepo.findById(evtId);
 		User currentUser = userRepo.findByUsername(username);
 		if (optEvent.isPresent() && currentUser != null) {
+			Event event = optEvent.get();
 			eventCmt.setEvent(optEvent.get());
 			eventCmt.setUser(currentUser);
+			eventCmt.setEnabled(true);
 			try {
 				eventCmt = eventCmtRepo.saveAndFlush(eventCmt);
+				event.getEventCmts().add(eventCmt);
+				eventRepo.saveAndFlush(event);
 				return eventCmt;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -94,6 +99,11 @@ public class EventCommentServiceImpl implements EventCommentService {
 
 		}
 		return false;
+	}
+	
+	@Override
+	public List<EventComment> findByEventId(int id) {
+		return eventCmtRepo.findByEvent_Id(id);
 	}
 
 }
