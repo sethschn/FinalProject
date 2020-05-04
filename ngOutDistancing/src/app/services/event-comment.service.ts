@@ -19,7 +19,7 @@ export class EventCommentService {
 
   private url = environment.baseUrl + 'api/';
 
-  index(activityId: number) {
+  index(activityId: number, eventId: number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export class EventCommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.get<Eventcomment[]>(this.url + `activities/${activityId}/activitycomments`,httpOptions)
+    return this.http.get<Eventcomment[]>(this.url + `activities/${activityId}/events/${eventId}/eventcomments`,httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -36,12 +36,12 @@ export class EventCommentService {
       );
   }
 
-  createComment(data: Eventcomment, activityId: number) {
+  createComment(data: Eventcomment, activityId: number, eventId: number) {
     const httpOptions = this.getHttpOptions();
     console.log(data);
     console.log(activityId);
     if (this.auth.checkLogin()){
-    return this.http.post<Eventcomment>(this.url + `activities/${activityId}/activitycomments`, data, httpOptions)
+    return this.http.post<Eventcomment>(this.url + `activities/${activityId}/events/${eventId}/eventcomments`, data, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);

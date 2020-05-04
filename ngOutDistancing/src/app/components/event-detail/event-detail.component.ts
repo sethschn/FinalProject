@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Eventcomment } from 'src/app/models/eventcomment';
+import { Activity } from 'src/app/models/activity';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class EventDetailComponent implements OnInit {
   eventList: Event[] = [];
   newComment = new Eventcomment();
   currentEventId = null;
+  event = new Event();
+  eventActivity = new Activity();
 
 
   constructor(
@@ -35,11 +38,13 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.selected && this.currentRoute.snapshot.paramMap.get('id')) {
+      this.currentEventId = this.currentRoute.snapshot.paramMap.get('id')
       this.eventSvc
         .show(this.currentRoute.snapshot.paramMap.get('id'))
         .subscribe(
           (data) => {
             this.selected = data;
+            this.loadComments();
           },
           (bad) => {
             this.router.navigateByUrl('eventDetail');
@@ -150,24 +155,22 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
-  addComment(comment: Eventcomment){
-    this.commentSvc.createComment(comment, this.currentEventId).subscribe(
+  addEventComment(comment: Eventcomment){
+    this.commentSvc.createComment(comment, this.selected.activity.id, this.currentEventId).subscribe(
       good => {
         this.newComment= new Eventcomment();
-        // this.selected = null;
         console.log(this.currentEventId);
-        // this.router.navigateByUrl(`/activities/${this.currentActivityId}`);
         this.loadComments();
       },
       bad =>{
-        console.error('activity.component.ts addComment(): error adding comment')
+        console.error('event-detail.component.ts addComment(): error adding comment')
         console.error(bad);
       }
     );
   }
 
   loadComments(){
-    this.commentSvc.index(this.selected.id).subscribe(
+    this.commentSvc.index(this.selected.activity.id, this.selected.id).subscribe(
       comments =>{
         this.eventComments = comments;
         console.log(comments);
