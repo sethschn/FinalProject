@@ -64,9 +64,10 @@ export class UsergroupService {
   public joinGroup(id: number){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-      return this.http.post<Usergroup>(`${this.url}/${id}/joingroup`, httpOptions)
+      return this.http.put<Usergroup>(`${this.url}/${id}/joingroup`, {}, httpOptions)
         .pipe(
           catchError((err: any) => {
+            console.log("******");
             console.log(err);
             return throwError('joinGroup method in usergroup service failed');
           })

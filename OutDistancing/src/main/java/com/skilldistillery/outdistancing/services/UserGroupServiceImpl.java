@@ -101,13 +101,23 @@ public class UserGroupServiceImpl implements UserGroupService {
 	public UserGroup addUserGroup(int userGroupId, String username) {
 		User user = userRepo.findByUsername(username);
 		Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
+//		System.out.println("User "+user);
         if (optUserGroup.isPresent() && user != null) {
+//        	System.out.println("group present and user not null");
         	UserGroup updateUserGroup = optUserGroup.get();
-        	List<User> groupUsers = updateUserGroup.getUsers();
-        	groupUsers.add(user);
-        	updateUserGroup.setUsers(groupUsers);
+//        	List<User> groupUsers = updateUserGroup.getUsers();
+//        	groupUsers.add(user);
+//        	updateUserGroup.setUsers(groupUsers);
+        	updateUserGroup.addUser(user);
+//        	System.out.println("****************************");
+//        	System.out.println("Get Users "+updateUserGroup.getUsers());
+//        	System.out.println("Save and Flush");
+        	//UserGroup test = usergroupRepo.saveAndFlush(updateUserGroup);
+        	//System.out.println("Test print "+test.getUsers());
+        	userRepo.saveAndFlush(user);
         	return usergroupRepo.saveAndFlush(updateUserGroup);
         }
+//        System.out.println("Returning null");
 		return null;
 	}
 
