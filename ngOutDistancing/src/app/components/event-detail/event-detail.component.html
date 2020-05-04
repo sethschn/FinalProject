@@ -1,24 +1,27 @@
-
 <div *ngIf="!selected">
-  <h1 style="text-align:center">Events</h1>
+  <h1 style="text-align: center;">Events</h1>
   <div class="row card-group">
-    <mat-card class="col-3" *ngFor="let event of eventList" style="text-align:center">
+    <mat-card
+      class="col-3"
+      *ngFor="let event of eventList"
+      style="text-align: center;"
+    >
       <mat-card-header>
-        <mat-card-title>{{event.title}}</mat-card-title>
+        <mat-card-title>{{ event.title }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{event.imageUrl}}">
+      <img mat-card-image src="{{ event.imageUrl }}" />
       <mat-card-content>
         <p>
-          <strong>{{ event.shortDescription }}</strong></p>
-        <p> Event Time and Date: {{event.eventDate}} {{event.eventTime}} </p>
+          <strong>{{ event.shortDescription }}</strong>
+        </p>
+        <p>Event Time and Date: {{ event.eventDate }} {{ event.eventTime }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Event Detail</button>
+        <button mat-button (click)="displayEvent(event)">Event Detail</button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
-
 
 <!-- Displays individual data -->
 <div *ngIf="selected">
@@ -131,6 +134,14 @@
             <a href="#">{{ comment.user.username }}</a>
             {{ comment.createDate }}
           </h6>
+          <h6 *ngIf="checkIfAdmin(this.user)">
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="deleteComment(this.selected, this.comment)"
+            >
+              Disable
+            </button>
+          </h6>
           <!-- fix backend before implementing replies -->
           <!-- backend needs inreplyid -->
           <!-- <h6 class="small comment-meta" *ngIf="comment.inReplyId">
@@ -192,7 +203,10 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-success pull-right" (click)="addEventComment(newComment)">
+    <button
+      class="btn btn-success pull-right"
+      (click)="addEventComment(newComment)"
+    >
       Submit
     </button>
   </div>
@@ -296,4 +310,3 @@
   <div class="modal-footer"></div>
 </ng-template>
 <!-- end edit modal -->
-

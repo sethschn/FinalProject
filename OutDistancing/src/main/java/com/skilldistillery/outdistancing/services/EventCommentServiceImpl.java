@@ -87,13 +87,14 @@ public class EventCommentServiceImpl implements EventCommentService {
 	}
 
 	@Override
-	public Boolean deleteById(int eventCommentId, String username) {
+	public Boolean changeEventCommentEnabled(int eventCommentId, String username) {
 		Optional<EventComment> optEventCmt = eventCmtRepo.findById(eventCommentId);
 		User currentUser = userRepo.findByUsername(username);
 		if (optEventCmt.isPresent() && currentUser != null) {
-			EventComment deleteEventCmt = optEventCmt.get();
-			if (deleteEventCmt != null) {
-				eventCmtRepo.deleteById(eventCommentId);
+			EventComment disableEventCmt = optEventCmt.get();
+			if (disableEventCmt != null) {
+				disableEventCmt.setEnabled(!disableEventCmt.isEnabled());
+				eventCmtRepo.save(disableEventCmt);
 				return true;
 			}
 

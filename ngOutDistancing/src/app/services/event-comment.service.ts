@@ -5,6 +5,8 @@ import { Eventcomment } from '../models/eventcomment';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Event } from '../models/event';
+
 
 
 @Injectable({
@@ -50,6 +52,20 @@ export class EventCommentService {
     );
     }
   }
+
+  disableEventComment(event: Event, eventComment: Eventcomment){
+    const httpOptions = this.getHttpOptions();
+    if (this.auth.checkLogin()) {
+      return this.http.delete<Eventcomment>(`${this.url}events/${event.id}/eventcomments/${eventComment.id}`, httpOptions)
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('error deleting activity');
+          })
+        );
+    }
+  }
+
 
 
   private getHttpOptions() {

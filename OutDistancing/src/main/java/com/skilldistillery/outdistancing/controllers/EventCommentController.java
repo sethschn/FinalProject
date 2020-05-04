@@ -91,22 +91,31 @@ public class EventCommentController {
 	}
 	
 	@DeleteMapping("events/{evtId}/eventcomments/{evtCmtId}")
-	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtCmtId") Integer evtCmtId,
-			@PathVariable("evtId") Integer evtId, Principal principal) {
-
-		try {
-			if (eventCmtSvc.deleteById(evtCmtId, principal.getName())) {
-				res.setStatus(200);
-				return true;
-			} else {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(409);
+	public void deactivateEventComment(@PathVariable("evtId") Integer eventId, @PathVariable("evtCmtId") Integer evtCmtId, HttpServletResponse resp, Principal principal) {
+		if (eventCmtSvc.changeEventCommentEnabled(evtCmtId, principal.getName())) {
+			resp.setStatus(200);
+		} else {
+			resp.setStatus(404);
 		}
-		return false;
 	}
+	
+//	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtCmtId") Integer evtCmtId,
+//			@PathVariable("evtId") Integer evtId, Principal principal) {
+//
+//		try {
+//			if (eventCmtSvc.deleteById(evtCmtId, principal.getName())) {
+//				res.setStatus(200);
+//				return true;
+//			} else {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			res.setStatus(409);
+//		}
+//		return false;
+//	}
+		
 
 
 }
