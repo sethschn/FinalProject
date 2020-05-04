@@ -1,3 +1,4 @@
+import { UsergroupComponent } from './components/usergroup/usergroup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'resources/:id', component: ResourceDetailComponent},
   { path: 'locations/:id', component: LocationDetailComponent},
   { path: 'users/:id', component: UserLandingComponent},
+  { path: 'groups', component: UsergroupComponent},
   { path: 'eventDetail', component: EventDetailComponent},
   { path: 'resourceDetail', component: ResourceDetailComponent},
   { path: 'locationDetail', component: LocationDetailComponent},
