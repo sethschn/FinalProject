@@ -84,19 +84,19 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
-  addNewEvent(event: Event) {
-    console.log(event);
-    this.eventSvc.create(event).subscribe(
-      (good) => {
-        this.loadEvents();
-        this.newEvent = new Event();
-      },
-      (bad) => {
-        console.error('EventDetailListComponent.createEvent(): error adding');
-        console.error(bad);
-      }
-    );
-  }
+  // addNewEvent(event: Event) {
+  //   console.log(event);
+  //   this.eventSvc.create(event).subscribe(
+  //     (good) => {
+  //       this.loadEvents();
+  //       this.newEvent = new Event();
+  //     },
+  //     (bad) => {
+  //       console.error('EventDetailListComponent.createEvent(): error adding');
+  //       console.error(bad);
+  //     }
+  //   );
+  // }
 
   setEditEvent() {
     this.editCurrentEvent = Object.assign({}, this.selected);

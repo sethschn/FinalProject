@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Activity } from '../models/activity';
 
 
 @Injectable({
@@ -13,6 +14,8 @@ import { AuthService } from './auth.service';
 export class EventService {
   private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api'
+  activity = new Activity();
+
 
 
 
@@ -29,7 +32,7 @@ export class EventService {
   }
 
   public index() {
-    return this.http.get<Event[]>(this.url).pipe(
+    return this.http.get<Event[]>(this.url + '/events').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('EventService.index: error retrieving events: ' + err);
@@ -45,11 +48,11 @@ export class EventService {
       })
     );
   }
-  public create(event: Event){
+  public create(event: Event, activity: Activity){
     const httpOptions = this.getHttpOptions();
     console.log(event);
     if (this.auth.checkLogin()){
-      return this.http.post<Event>(`${this.url}/activities/${event.activity.id}/events`, event, httpOptions)
+      return this.http.post<Event>(`${this.url}/activities/${activity.id}/events`, event, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
