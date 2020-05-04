@@ -1,4 +1,6 @@
 import { Activity } from './activity';
+import { Location } from './location';
+
 
 export class Event {
   id:number;
@@ -9,11 +11,12 @@ export class Event {
   enabled: boolean;
   description: string;
   imageUrl: string;
-activity: Activity;
+  activity: Activity;
+  location: Location;
 
   constructor(id?:number,title?: string,eventTime?: string,
     eventDate?: string,shortDescription?: string,enabled?: boolean,
-    description?: string,imageUrl?: string, activity?: Activity){
+    description?: string,imageUrl?: string, activity?: Activity, location?: Location){
     this.id= id;
     this.title= title;
     this.eventTime= eventTime;
@@ -23,6 +26,7 @@ activity: Activity;
     this.description= description;
     this.imageUrl= imageUrl;
     this.activity= activity;
+    this.location = location;
     }
 
 }

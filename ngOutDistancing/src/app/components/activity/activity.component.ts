@@ -7,6 +7,9 @@ import { ActivityCommentService } from 'src/app/services/activity-comment.servic
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { EventService } from 'src/app/services/event.service';
+import { Event } from './../../models/event';
+import { Location } from './../../models/location';
 
 
 @Component({
@@ -21,6 +24,11 @@ export class ActivityComponent implements OnInit {
 
   categories: Category[] = [];
   selectedCategory:Category = new Category(0, "All");
+
+  eventList: Event[] = [];
+  newEvent = new Event();
+  newLocation = new Location();
+
 
   closeResult = '';
   comment = new ActivityComment();
@@ -37,7 +45,8 @@ export class ActivityComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private catSvc: CategoryService
+    private catSvc: CategoryService,
+    private eventSvc: EventService
   ) { }
 
   ngOnInit(): void {
@@ -174,6 +183,33 @@ export class ActivityComponent implements OnInit {
       },
       err => {
         console.error('Error in our loadActivities() method. ' + err);
+      }
+    );
+  }
+
+  addNewEvent(event: Event, activity: Activity, newLocation: Location) {
+    console.log(event);
+    event.location = newLocation;
+    this.eventSvc.create(event, activity).subscribe(
+      (good) => {
+        // this.loadEvents();
+        this.newEvent = new Event();
+      },
+      (bad) => {
+        console.error('EventDetailListComponent.createEvent(): error adding');
+        console.error(bad);
+      }
+    );
+  }
+
+  loadEvents() {
+    this.eventSvc.index().subscribe(
+      (data) => {
+        this.eventList = data;
+      },
+      (bad) => {
+        console.error('EventDetailComponent.loadEvents(): error loading');
+        console.error(bad);
       }
     );
   }
