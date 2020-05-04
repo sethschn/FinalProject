@@ -452,6 +452,10 @@ updateLocation(location: Location){
       }
     )
   }
+public navigateToSection(section: string) {
+      window.location.hash = '';
+      window.location.hash = section;
+}
 
 
 
