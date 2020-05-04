@@ -1,0 +1,22 @@
+.example-card {
+  max-width: 400px;
+}
+
+mat-card {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+mat-card img{
+  width: 100%;
+  text-align:center;
+  height: 50%;
+}
+
+button {
+  background-color:#F7DC6F   ;
+}
