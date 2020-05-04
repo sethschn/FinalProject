@@ -10,9 +10,11 @@ export class User {
   imageUrl: string;
   location: Location;
   role: string;
+  events: Event[];
 
-  constructor(id?: number, username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string){
+  constructor(id?: number, events?: Event[],username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string){
     this.id = id;
+    this.events = events;
     this.username = username;
     this.password = password;
     this.email = email;
