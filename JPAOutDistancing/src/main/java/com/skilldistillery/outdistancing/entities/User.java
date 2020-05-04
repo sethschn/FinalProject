@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -55,7 +56,7 @@ public class User {
 	@CreationTimestamp
 	private LocalDate createDate;
 
-//	@JsonIgnore
+	@JsonIgnoreProperties(value = "creator")
 	@ManyToMany
 	@JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> userEvents;
