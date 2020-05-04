@@ -45,7 +45,9 @@ img {
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+  object-fit:cover;
   background-position: center;
+  height: 35vh !important;
 }
 
 .container {

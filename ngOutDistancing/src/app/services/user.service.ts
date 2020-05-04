@@ -1,3 +1,4 @@
+import { Event } from './../models/event';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
@@ -5,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { throwError } from 'rxjs';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ export class UserService {
   private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api/users';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  events: Event[]= [];
+
+  constructor(private http: HttpClient, private eventSvc: EventService, private authService: AuthService) { }
 
   index() {
     const httpOptions = this.getHttpOptions();
@@ -90,4 +95,16 @@ export class UserService {
     return httpOptions;
   }
 
-}
+  private showUserEvents(){
+    const httpOptions = this.getHttpOptions();
+      return this.http.get<Event[]>(this.url, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('index method in user service failed');
+        })
+        );
+      }
+  }
+
+
