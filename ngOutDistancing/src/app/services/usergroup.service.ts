@@ -2,7 +2,6 @@ import { Usergroup } from './../models/usergroup';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -15,7 +14,7 @@ export class UsergroupService {
   private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api/usergroups';
 
-  constructor(private http: HttpClient, private datePipe: DatePipe, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   index() {
     const httpOptions = this.getHttpOptions();

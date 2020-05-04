@@ -73,6 +73,7 @@ img {
   text-align: center;
   cursor: pointer;
   width: 100%;
+
 }
 
 .button:hover {
@@ -86,3 +87,4 @@ img {
     display: block;
   }
 }
+
