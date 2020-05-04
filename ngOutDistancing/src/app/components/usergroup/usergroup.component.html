@@ -1,1 +1,46 @@
 <p>usergroup works!</p>
+
+<div *ngIf="!selected">
+<div class="row card-group">
+  <mat-card class="col-3" *ngFor="let group of groups"
+    style="text-align:center">
+    <mat-card-header>
+      <mat-card-title>{{group.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{group.imageUrl}}">
+    <mat-card-content>
+      <p>
+        <strong>{{ group.shortDescription }}</strong></p>
+      <p> Description: {{group.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="btn btn-info" mat-button (click)="displayGroup(group)">Group Detail</button>
+      <button class="btn btn-info" mat-button (click)="joinGroup(group)">Join group</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="selected">
+  Id: {{selected.id}} <br>
+  Group name: {{selected.name}} <br>
+  Creator: {{selected.creator.username}} <br>
+  Short Description: {{selected.shortDescription}}
+  Description: {{selected.description}} <br>
+  Image:  <img src="{{selected.imageUrl}}" style="width:200px;height:200px;"> <br>
+  <!-- <input type="submit" (click)="" value="Edit" /> -->
+  <button (click)="displayTable()">Back</button>
+<br>
+<br>
+  <!-- <form *ngIf="editTodo">
+    <label for="task">Task:</label>
+    <input type="text" name="task" [(ngModel)]="editTodo.task" placeholder="Task" /><br />
+    <label for="completed">Completed:</label>
+    <input type="checkbox" name="completed" [(ngModel)]="editTodo.completed"/><br />
+    <label for="description">Description:</label>
+    <input type="text" name="description" [(ngModel)]="editTodo.description" /><br />
+    <input type="submit" (click)="editTodo = null" value="Cancel" />
+    <input type="submit" (click)="updateTodo(editTodo)" value="Save" />
+  </form> -->
+</div>
