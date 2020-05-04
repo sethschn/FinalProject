@@ -40,6 +40,7 @@ import { AgmCoreModule } from '@agm/core';
 import { CardDisplayComponent } from './components/card-display/card-display.component';
 import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { UsergroupComponent } from './components/usergroup/usergroup.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { FooterComponent } from './components/footer/footer.component';
     CardDisplayComponent,
     ActivityCategoryPipe,
     FooterComponent,
+    UsergroupComponent,
 
 
   ],
