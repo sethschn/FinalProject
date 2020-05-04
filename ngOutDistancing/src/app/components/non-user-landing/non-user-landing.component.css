@@ -1,6 +1,6 @@
  .carousel {
   outline: none !important;
-  margin-top: 2% !important;
+  margin-top: 1% !important;
 
 }
 
@@ -51,6 +51,7 @@
     margin-bottom: 20px;
     height: 70vh;
     max-width: 100%;
+
   }
 
   .card-body {
@@ -67,6 +68,7 @@
 
 
 
+
   }
   .card-body img{
 
@@ -77,6 +79,7 @@
 }
 
 .scrolling-wrapper {
+  margin-top: 2%;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -87,6 +90,10 @@
 button {
   background-color:#F7DC6F   ;
 }
+
+
+
+
 
 
 

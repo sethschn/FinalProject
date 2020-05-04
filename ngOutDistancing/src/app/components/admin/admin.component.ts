@@ -1,4 +1,9 @@
+import { EventCommentService } from './../../services/event-comment.service';
+import { Eventcomment } from './../../models/eventcomment';
+import { UsergroupService } from './../../services/usergroup.service';
+import { Usergroup } from './../../models/usergroup';
 import { User } from 'src/app/models/user';
+import { Event } from 'src/app/models/event';
 import { Component, OnInit } from '@angular/core';
 import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
@@ -11,6 +16,7 @@ import { ResourceService } from 'src/app/services/resource.service';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 import { UserService } from 'src/app/services/user.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,13 +27,12 @@ export class AdminComponent implements OnInit {
 
   activity = new Activity();
   activities: Activity[] = [];
-  activityComments: ActivityComment[] = [];
   closeResult = '';
   comment = new ActivityComment();
   currentActivityId = null;
   editCurrentActivity = null;
   newActivity = new Activity();
-  newComment = new ActivityComment();
+
   selectedActivity = null;
 
   selectedResource = null;
@@ -45,6 +50,23 @@ export class AdminComponent implements OnInit {
   newUser = new User();
   users: User[] = [];
 
+  selectedEvent = null;
+  newEvent = new Event();
+  events: Event[] = [];
+
+  selectedGroup = null;
+  newGroup = new Usergroup();
+  groups: Usergroup[] = [];
+
+  selectedEventComment = null;
+  newEventComment = new Eventcomment();
+  eventComments: Eventcomment[] = [];
+
+  selectedActivityComment = null;
+  newComment = new ActivityComment();
+  activityComments: ActivityComment[] = [];
+
+
   constructor(
 
     private activitySvc: ActivityService,
@@ -55,6 +77,10 @@ export class AdminComponent implements OnInit {
     private resourceSvc: ResourceService,
     private locationSvc: LocationService,
     private userService: UserService,
+    private eventService: EventService,
+    private groupService: UsergroupService,
+    private evCommentSvc: EventCommentService
+
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +90,8 @@ export class AdminComponent implements OnInit {
     this.loadResources();
     this.loadLocations();
     this.loadUsers();
+    this.loadEvents();
+    this.loadGroups();
     if (!this.selectedActivity && activityIdStr) {
       this.currentActivityId = activityIdStr;
       const activityId = Number.parseInt(activityIdStr,10);
@@ -379,6 +407,52 @@ updateLocation(location: Location){
       }
     )
   }
+  loadEvents(){
+    this.eventService.index().subscribe(
+      data => {this.events = data;
+      },
+      bad => {
+        console.error("loadEvents in admin(): error loading");
+        console.error(bad);
+      }
+    );
+  }
+
+  deleteEvent(id: number) {
+    this.eventService.destroy(id).subscribe(
+      data=> {
+        this.loadEvents();
+        this.selectedEvent = null;
+      },
+      err => {
+        console.error('error in deleting event component')
+      }
+    )
+  }
+
+  loadGroups(){
+    this.groupService.index().subscribe(
+      data => {this.groups = data;
+      },
+      bad => {
+        console.error("loadGroups in admin(): error loading");
+        console.error(bad);
+      }
+    );
+  }
+
+  deleteGroup(id: number) {
+    this.groupService.destroy(id).subscribe(
+      data=> {
+        this.loadGroups();
+        this.selectedGroup = null;
+      },
+      err => {
+        console.error('error in deleting group component')
+      }
+    )
+  }
+
 
 
 
