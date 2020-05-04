@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Activity {
@@ -58,7 +59,7 @@ public class Activity {
 	@CreationTimestamp
 	private LocalDate createDate;
 
-	@JsonIgnore
+	@JsonIgnoreProperties(value = "activities")
 	@ManyToMany(mappedBy = "activities")
 	private List<Resource> resources;
 	
