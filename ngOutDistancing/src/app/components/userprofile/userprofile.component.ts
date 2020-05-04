@@ -18,6 +18,8 @@ export class UserprofileComponent implements OnInit {
   currentUser = null;
   editUser = null;
 
+  isOpen = false;
+
   constructor(private userService: UserService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
 
