@@ -26,7 +26,11 @@
       <div class="col-4 mx-auto">
         <div class="card card-body mb-2">
           <h6>Resources</h6>
-          <code>resources</code>
+          <ul>
+            <li *ngFor="let resource of selected.resources">
+                <a href=“{{resource.link}}“> {{resource.name}}</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="col-4 mx-auto">

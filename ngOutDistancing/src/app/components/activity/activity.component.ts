@@ -51,7 +51,9 @@ export class ActivityComponent implements OnInit {
       this.activitySvc.show(activityId).subscribe(
         activity =>{
           this.selected = activity;
+          console.log(this.selected);
           this.loadComments();
+
         },
         fail => {
           console.error(fail);
