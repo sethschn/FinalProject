@@ -12,7 +12,7 @@
           <a class= "navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/nonUserLanding']">HOME</a>
         </li>
         <li class="nav-item" >
-          <a class= "navbar-brand" *ngIf="loggedIn()" [routerLink]="['/userLanding']">HOME</a>
+          <a class= "navbar-brand" *ngIf="loggedIn()" [routerLink]="['/profile']">HOME</a>
         </li>
         <li class="nav-item">
           <a class= "nav-link" *ngIf="adminLoggedIn()" [routerLink]="['/admin']">ADMIN</a>
