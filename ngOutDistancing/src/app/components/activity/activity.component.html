@@ -10,12 +10,7 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <img
-        [src]="selected.imageUrl"
-        image-resizing
-        image-Height="200px"
-        image-Width="200px"
-      />
+      <img [src]="selected.imageUrl" image-resizing image-Height="200px" image-Width="200px" />
     </div>
     <hr />
     <div class="col text-center">
@@ -28,7 +23,7 @@
           <h6>Resources</h6>
           <ul>
             <li *ngFor="let resource of selected.resources">
-                <a href="{{resource.link}}"> {{resource.name}}</a>
+              <a href="{{resource.link}}"> {{resource.name}}</a>
             </li>
           </ul>
         </div>
@@ -45,6 +40,10 @@
           <button class="btn btn-primary btn-sm">
             View Events
           </button>
+          <!-- Add Event -->
+          <button class="btn btn-lg btn-outline-primary" (click)="open(addEvent)">
+            Add Event
+          </button>
         </div>
       </div>
     </div>
@@ -52,16 +51,10 @@
     <div class="container bg-faded py-3">
       <div class="row">
         <div class="col text-center">
-          <button
-            class="btn btn-primary btn-sm"
-            (click)="setEditActivity(); open(editActivity)"
-          >
+          <button class="btn btn-primary btn-sm" (click)="setEditActivity(); open(editActivity)">
             Edit Activity
           </button>
-          <button
-            class="btn btn-primary btn-sm"
-            (click)="displayTable(activities)"
-          >
+          <button class="btn btn-primary btn-sm" (click)="displayTable(activities)">
             Show All Activities
           </button>
         </div>
@@ -77,12 +70,8 @@
         <!-- comment -->
         <div class="comment mb-2 row" *ngFor="let comment of activityComments">
           <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-            <a href=""
-              ><img
-                class="mx-auto rounded-circle img-fluid"
-                src="{{ comment.user.imageUrl }}"
-                alt="avatar"
-            /></a>
+            <a href=""><img class="mx-auto rounded-circle img-fluid" src="{{ comment.user.imageUrl }}"
+                alt="avatar" /></a>
           </div>
           <div class="comment-content col-md-11 col-sm-10">
             <h6 class="small comment-meta">
@@ -96,9 +85,7 @@
             <div class="comment-body">
               <p>
                 {{ comment.content }}<br />
-                <a href="" class="text-right small" (click)="open(reply)"
-                  ><i class="ion-reply"></i> Reply</a
-                >
+                <a href="" class="text-right small" (click)="open(reply)"><i class="ion-reply"></i> Reply</a>
               </p>
             </div>
           </div>
@@ -115,12 +102,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Leave a Comment</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -133,12 +115,8 @@
           <!-- comment box -->
           <div class="row pt-2">
             <div class="col-12">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="Your Comment Please....."
-                [(ngModel)]="newComment.content"
-              ></textarea>
+              <textarea class="form-control" rows="5" placeholder="Your Comment Please....."
+                [(ngModel)]="newComment.content"></textarea>
               <br />
               <!-- <button class="btn btn-success pull-right" (click)="addComment(newComment)">Comment.</button> -->
             </div>
@@ -158,12 +136,7 @@
 <ng-template #reply let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Reply To A Comment</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -176,12 +149,7 @@
           <!-- REPLY box -->
           <div class="row pt-2">
             <div class="col-12">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="....."
-                [(ngModel)]="newComment.content"
-              ></textarea>
+              <textarea class="form-control" rows="5" placeholder="....." [(ngModel)]="newComment.content"></textarea>
               <br />
             </div>
           </div>
@@ -196,57 +164,43 @@
   </div>
 </ng-template>
 
-<!-- Displays All Activities -->
-<!-- <div *ngIf="!selected">
-  <table class="table table-striped table-hover">
-    <thead class="thead thead-dark">
-      <tr>
-        <td>ID</td>
-        <td>Activity</td>
-        <td>Short Description</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let activity of activities"
-        (click)="displayActivity(activity)"
-      >
-        <td>{{ activity.id }}</td>
-        <td>{{ activity.title }}</td>
-        <td>{{ activity.shortDescription }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
-
+<!-- DISPLAY ALL ACTIVITIES -->
 <div *ngIf="!selected">
-  <h1 style="text-align:center">Activities</h1>
+  <h1 style="text-align: center;">Activities</h1>
 
-  <div style="text-align:center">
+  <div style="text-align: center;">
     <button mat-button type="button" class="btn btn-info" *ngFor="let category of categories"
-      (click)="selectedCategory = category">{{category.type}}</button>
+      (click)="selectedCategory = category">
+      {{ category.type }}
+    </button>
   </div>
-  <br>
+  <br />
   <div class="row card-group">
-    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory:selectedCategory"
-      style="text-align:center">
+    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory: selectedCategory"
+      style="text-align: center;">
       <mat-card-header>
-        <mat-card-title>{{activity.title}}</mat-card-title>
+        <mat-card-title>{{ activity.title }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{activity.imageUrl}}">
+      <img mat-card-image src="{{ activity.imageUrl }}" />
       <mat-card-content>
         <p>
-          <strong>{{ activity.shortDescription }}</strong></p>
-        <p> Equipment Level: {{activity.equipmentLevel}} <br>{{activity.equipmentDescription}}
+          <strong>{{ activity.shortDescription }}</strong>
+        </p>
+        <p>
+          Equipment Level: {{ activity.equipmentLevel }} <br />{{
+            activity.equipmentDescription
+          }}
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
+        <button class="btn btn-info" mat-button (click)="displayActivity(activity)">
+          Activity Detail
+        </button>
         <button class="btn btn-info" mat-button>Add Event</button>
       </mat-card-actions>
     </mat-card>
   </div>
-  </div>
+</div>
 
 <!-- Add activities -->
 <button class="btn btn-lg btn-outline-primary" (click)="open(addActivity)">
@@ -257,12 +211,7 @@
 <ng-template #addActivity let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add New Activity</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -272,59 +221,20 @@
       <div class="row">
         <div class="comments col-md-9" id="newActivity">
           <!-- add activity box -->
-          <form
-            #activityForm="ngForm"
-            ngNativeValidate
-            id="add-activity-form"
-            class="text-center"
-          >
-            <input
-              class="form-control"
-              type="text"
-              name="title"
-              [(ngModel)]="newActivity.title"
-              placeholder="Title"
-            /><br />
-            <input
-              class="form-control"
-              type="text"
-              name="shortDescription"
-              [(ngModel)]="newActivity.shortDescription"
-              placeholder="Short Description"
-            /><br />
-            <input
-              class="form-control"
-              type="text"
-              name="description"
-              [(ngModel)]="newActivity.description"
-              placeholder="Description"
-            /><br />
-            <input
-              class="form-control"
-              type="text"
-              name="imageUrl"
-              [(ngModel)]="newActivity.imageUrl"
-              placeholder="Image URL"
-            /><br />
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentLevel"
-              [(ngModel)]="newActivity.equipmentLevel"
-              placeholder="Equipment Level"
-            /><br />
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentDescription"
-              [(ngModel)]="newActivity.equipmentDescription"
-              placeholder="Equipment Description"
-            /><br />
-            <button
-              class="btn btn-success pull-right"
-              type="submit"
-              (click)="this.addNewActivity(newActivity)"
-            >
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
+            <input class="form-control" type="text" name="title" [(ngModel)]="newActivity.title"
+              placeholder="Title" /><br />
+            <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newActivity.shortDescription"
+              placeholder="Short Description" /><br />
+            <input class="form-control" type="text" name="description" [(ngModel)]="newActivity.description"
+              placeholder="Description" /><br />
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newActivity.imageUrl"
+              placeholder="Image URL" /><br />
+            <input class="form-control" type="text" name="equipmentLevel" [(ngModel)]="newActivity.equipmentLevel"
+              placeholder="Equipment Level" /><br />
+            <input class="form-control" type="text" name="equipmentDescription"
+              [(ngModel)]="newActivity.equipmentDescription" placeholder="Equipment Description" /><br />
+            <button class="btn btn-success pull-right" type="submit" (click)="this.addNewActivity(newActivity)">
               Submit
             </button>
           </form>
@@ -339,12 +249,7 @@
 <ng-template #editActivity let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Edit Activity</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -354,74 +259,83 @@
       <div class="row">
         <div class="comments col-md-9" id="editActivity">
           <!-- edit activity box -->
-          <form
-            #activityForm="ngForm"
-            ngNativeValidate
-            id="add-activity-form"
-            class="text-center"
-          >
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
             <label class="text-left" for="editCurrentActivity">Title </label>
-            <input
-              class="form-control"
-              type="text"
-              name="title"
-              [(ngModel)]="editCurrentActivity.title"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Short Description
+            <input class="form-control" type="text" name="title" [(ngModel)]="editCurrentActivity.title" /><br />
+            <label class="text-left" for="editCurrentActivity">Short Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="shortDescription"
-              [(ngModel)]="editCurrentActivity.shortDescription"
-              placeholder="Short Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Full Description
+            <input class="form-control" type="text" name="shortDescription"
+              [(ngModel)]="editCurrentActivity.shortDescription" placeholder="Short Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Full Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="description"
-              [(ngModel)]="editCurrentActivity.description"
-              placeholder="Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Image Url
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCurrentActivity.description"
+              placeholder="Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Image Url
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="imageUrl"
-              [(ngModel)]="editCurrentActivity.imageUrl"
-              placeholder="Image URL"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Equipment Level
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCurrentActivity.imageUrl"
+              placeholder="Image URL" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Level
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentLevel"
-              [(ngModel)]="editCurrentActivity.equipmentLevel"
-              placeholder="Equipment Level"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Equipment Description
+            <input class="form-control" type="text" name="equipmentLevel"
+              [(ngModel)]="editCurrentActivity.equipmentLevel" placeholder="Equipment Level" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Description
             </label>
-            <input
+            <input class="form-control" type="text" name="equipmentDescription"
+              [(ngModel)]="editCurrentActivity.equipmentDescription" placeholder="Equipment Description" /><br />
+            <button class="btn btn-success pull-right" type="submit"
+              (click)="this.updateCurrentActivity(editCurrentActivity)">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+<!-- add event box modal -->
+<ng-template #addEvent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- add event box code start -->
+    <div class="container py-2">
+      <div class="row">
+        <div class="comments col-md-9" id="newActivity">
+          <!-- add event box -->
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
+            <input class="form-control" type="text" name="title" [(ngModel)]="newEvent.title"
+              placeholder="Title" /><br />
+            <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newEvent.shortDescription"
+              placeholder="Short Description" /><br />
+            <input class="form-control" type="text" name="description" [(ngModel)]="newEvent.description"
+              placeholder="Description" /><br />
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newEvent.imageUrl"
+              placeholder="Image URL" /><br />
+            <input class="form-control" type="text" name="eventDate" [(ngModel)]="newEvent.eventDate"
+              placeholder="Event Date" /><br />
+            <input class="form-control" type="text" name="eventTime" [(ngModel)]="newEvent.eventTime"
+              placeholder="Event Time" /><br />
+            <input class="form-control" type="text" name="location.street" [(ngModel)]="newLocation.street"
+              placeholder="Event Time" /><br />
+            <input class="form-control" type="text" name="location.city" [(ngModel)]="newLocation.city"
+              placeholder="city" /><br />
+            <input class="form-control" type="text" name="location.state" [(ngModel)]="newLocation.state"
+              placeholder="state" /><br />
+            <!-- <input
               class="form-control"
               type="text"
-              name="equipmentDescription"
-              [(ngModel)]="editCurrentActivity.equipmentDescription"
-              placeholder="Equipment Description"
-            /><br />
-            <button
-              class="btn btn-success pull-right"
-              type="submit"
-              (click)="this.updateCurrentActivity(editCurrentActivity)"
-            >
+              name="eventActivity"
+              [(ngModel)]="newEvent.activity"
+              placeholder="Activity"
+            /><br /> -->
+            <button class="btn btn-success pull-right" type="submit"
+              (click)="this.addNewEvent(newEvent, selected, newLocation)">
               Submit
             </button>
           </form>
