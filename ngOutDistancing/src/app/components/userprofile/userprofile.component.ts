@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -17,7 +18,7 @@ export class UserprofileComponent implements OnInit {
   currentUser = null;
   editUser = null;
 
-  constructor(private userService: UserService,private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
 
   ngOnInit(): void {
@@ -44,9 +45,10 @@ export class UserprofileComponent implements OnInit {
     //this.todos = this.todoService.index();
   }
 
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
+  openMed(content) {
+    this.modalService.open(content, { size: 'md' });
   }
+
 
   reload(){
     this.userService.showLoggedInUser().subscribe(
