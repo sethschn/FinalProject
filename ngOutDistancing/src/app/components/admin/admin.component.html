@@ -1,15 +1,16 @@
+<a href="/admin#Test">Test</a>
 <div class="wrapper wrapper-content">
   <div class="row">
       <div class="col-lg-3">
           <div class="ibox float-e-margins">
               <div class="ibox-title">
                   <span class="label label-success pull-right">Monthly</span>
-                  <h5>Income</h5>
+                  <h5>Visitors</h5>
               </div>
               <div class="ibox-content">
-                  <h1 class="no-margins">40 886,200</h1>
-                  <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                  <small>Total income</small>
+                  <h1 class="no-margins">666</h1>
+                  <div class="stat-percent font-bold text-success">13% <i class="fa fa-bolt"></i></div>
+                  <small>Increase</small>
               </div>
           </div>
       </div>
@@ -232,34 +233,34 @@
                           <ul class="todo-list m-t small-list">
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
-                                  <span class="m-l-xs todo-completed">Buy a milk</span>
+                                  <span class="m-l-xs todo-completed">Update About Page</span>
 
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                  <span class="m-l-xs">Go to shop and find some products.</span>
+                                  <span class="m-l-xs">Audit New Comments</span>
 
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                  <span class="m-l-xs">Send documents to Mike</span>
+                                  <span class="m-l-xs">Audit User Accounts</span>
                                   <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                  <span class="m-l-xs">Go to the doctor dr Smith</span>
+                                  <span class="m-l-xs">Update SQL Database with New Activities</span>
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
-                                  <span class="m-l-xs todo-completed">Plan vacation</span>
+                                  <span class="m-l-xs todo-completed">Add COVID-19 Routing</span>
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                  <span class="m-l-xs">Create new stuff</span>
+                                  <span class="m-l-xs">Install New Patches</span>
                               </li>
                               <li>
                                   <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                  <span class="m-l-xs">Call to Anna for dinner</span>
+                                  <span class="m-l-xs">Change Passwords</span>
                               </li>
                           </ul>
                       </div>
@@ -375,7 +376,6 @@
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.enabled}}</td>
-      <!-- <td (click)="displayResource(resource)">{{resource.imageUrl}}</td> -->
       <td><input class="btn btn-danger" type="submit" (click)="deleteUser(user.id)" value="Disable">
       </td>
     </tr>
@@ -383,7 +383,8 @@
 </table>
 
 <!-- Displays individual data -->
-<h2 id ="Test" style="text-align:center">Current Activities in the Database </h2>
+<h2 style="text-align:center">Current Activities in the Database </h2>
+<a name="Test">Testing</a>
 <div *ngIf="selectedActivity">
   <br /><br /><br />
   <div class="container bg-faded py-3">
