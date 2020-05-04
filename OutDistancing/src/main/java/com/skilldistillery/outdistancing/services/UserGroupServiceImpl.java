@@ -58,7 +58,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 		Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
         if (optUserGroup.isPresent() && currentUser != null) {
             UserGroup updateUserGroup = optUserGroup.get();
-            updateUserGroup.setCreator(currentUser);
+            //updateUserGroup.setCreator(currentUser);
             updateUserGroup.setDescription(userGroup.getDescription());
             updateUserGroup.setImageUrl(userGroup.getImageUrl());
             updateUserGroup.setName(userGroup.getName());
@@ -95,6 +95,20 @@ public class UserGroupServiceImpl implements UserGroupService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public UserGroup addUserGroup(int userGroupId, String username) {
+		User user = userRepo.findByUsername(username);
+		Optional<UserGroup> optUserGroup = usergroupRepo.findById(userGroupId);
+        if (optUserGroup.isPresent() && user != null) {
+        	UserGroup updateUserGroup = optUserGroup.get();
+        	List<User> groupUsers = updateUserGroup.getUsers();
+        	groupUsers.add(user);
+        	updateUserGroup.setUsers(groupUsers);
+        	return usergroupRepo.saveAndFlush(updateUserGroup);
+        }
+		return null;
 	}
 
 }
