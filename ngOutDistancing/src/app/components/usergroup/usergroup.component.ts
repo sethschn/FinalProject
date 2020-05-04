@@ -13,11 +13,11 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./usergroup.component.css']
 })
 export class UsergroupComponent implements OnInit {
-  group = new Usergroup();
+  //group = new Usergroup();
   currentUser = null;
   groups: Usergroup[] = [];
   creator: User = null;
-  newGroup = null;
+  newGroup = new Usergroup();
   selected = null;
   editGroup = null;
 
@@ -106,9 +106,14 @@ export class UsergroupComponent implements OnInit {
 
   }
 
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   addNewGroup(userGroup: Usergroup){
     this.groupService.create(userGroup).subscribe(
       good => {
+        console.log(good);
         this.loadGroups();
         this.newGroup = new Usergroup();
       },
