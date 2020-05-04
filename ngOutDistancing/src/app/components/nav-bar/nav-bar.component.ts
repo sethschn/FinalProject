@@ -78,7 +78,7 @@ export class NavBarComponent implements OnInit {
       good => {
         console.log(good);
         this.currUser = good;
-        this.router.navigateByUrl("/userLanding");
+        this.router.navigateByUrl("/profile");
         //this.newUser = new User();
       },
       bad => {
