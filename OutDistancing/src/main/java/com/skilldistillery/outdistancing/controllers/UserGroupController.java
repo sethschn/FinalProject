@@ -17,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.outdistancing.entities.Category;
-import com.skilldistillery.outdistancing.entities.Event;
-import com.skilldistillery.outdistancing.entities.Resource;
+import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.entities.UserGroup;
-import com.skilldistillery.outdistancing.services.CategoryService;
-import com.skilldistillery.outdistancing.services.EventService;
 import com.skilldistillery.outdistancing.services.UserGroupService;
+import com.skilldistillery.outdistancing.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -32,6 +29,9 @@ public class UserGroupController {
 	
 	@Autowired
 	private UserGroupService usergroupSvc;
+	
+	@Autowired
+	private UserService userSvc;
 	
 	@GetMapping("usergroups")
 	public List<UserGroup> index(){
@@ -75,6 +75,23 @@ public class UserGroupController {
 			e.printStackTrace();
 			resp.setStatus(400);
 			userGroup = null;
+		}
+		return userGroup;
+	}
+	
+	@PostMapping("usergroups/{userGroupId}/joingroup")
+	public UserGroup addUserToGroup(@PathVariable("userGroupId") int userGroupId,
+			HttpServletResponse resp, Principal principal) {
+			UserGroup userGroup = null;
+		try {
+			userGroup = usergroupSvc.addUserGroup(userGroupId, principal.getName());
+			if (userGroup == null) {
+				resp.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(400);
+			return userGroup;
 		}
 		return userGroup;
 	}

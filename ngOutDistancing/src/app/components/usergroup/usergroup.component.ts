@@ -14,10 +14,12 @@ import { User } from 'src/app/models/user';
 })
 export class UsergroupComponent implements OnInit {
   group = new Usergroup();
+  currentUser = null;
   groups: Usergroup[] = [];
   creator: User = null;
   newGroup = null;
   selected = null;
+  editGroup = null;
 
   constructor( private authService: AuthService,
     private userService: UserService,
@@ -29,16 +31,42 @@ export class UsergroupComponent implements OnInit {
     this.loadGroups();
   }
 
+  createGroup(){
+
+  }
+
   loadGroups(){
     this.groupService.index().subscribe(
       data => {
-        console.log("----------------"+data);
+        console.log(data);
         this.groups = data;
       },
       err => {
         console.error('Error in our loadGroups() method. ' + err);
       }
     );
+  }
+
+
+  updateGroup(group: Usergroup){
+    console.log(group);
+    this.groupService.update(group).subscribe(
+      yes => {
+        this.selected = yes;
+        this.loadGroups();
+        this.editGroup = null;
+      },
+      no => {
+        console.error('UserGroupComponent.updateGroup(): error');
+        console.error(no);
+
+      }
+    );
+    //this.todos = this.todoService.index();
+  }
+
+  setEditGroup(){
+    this.editGroup = Object.assign({}, this.selected);
   }
 
   displayGroup(group: Usergroup){
@@ -50,6 +78,27 @@ export class UsergroupComponent implements OnInit {
   }
 
   joinGroup(group: Usergroup){
+    this.userService.showLoggedInUser().subscribe(
+      user => {
+        this.currentUser = user;
+        if (user.id === group.creator.id){
+          console.log("Already in the group as creator");
+        }else {
+          this.groupService.joinGroup(group.id).subscribe(
+            good => {
+              console.log("Success "+good);
+
+            },
+            err => {
+              console.log("Error in joinGroup "+err);
+            }
+          )
+        }
+      },
+      err => {
+        console.log("Error in JoinGroup "+err);
+      }
+    )
 
   }
 

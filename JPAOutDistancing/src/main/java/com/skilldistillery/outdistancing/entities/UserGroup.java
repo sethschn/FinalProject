@@ -45,7 +45,7 @@ public class UserGroup {
 //	@Column(name = "creator_id")
 	private User creator;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(mappedBy="groups")
 	private List<User> users;
 	

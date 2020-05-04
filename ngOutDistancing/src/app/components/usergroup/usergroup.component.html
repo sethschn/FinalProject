@@ -1,6 +1,7 @@
-<p>usergroup works!</p>
-
 <div *ngIf="!selected">
+  <button class="btn btn-info" mat-button (click)="createGroup()">Create Group</button>
+
+
 <div class="row card-group">
   <mat-card class="col-3" *ngFor="let group of groups"
     style="text-align:center">
@@ -25,22 +26,56 @@
 <div *ngIf="selected">
   Id: {{selected.id}} <br>
   Group name: {{selected.name}} <br>
+  Enabled: {{selected.enabled}} <br>
   Creator: {{selected.creator.username}} <br>
-  Short Description: {{selected.shortDescription}}
+  Date Created: {{selected.createDate | date:'longDate' }} <br>
+  Short Description: {{selected.shortDescription}} <br>
   Description: {{selected.description}} <br>
   Image:  <img src="{{selected.imageUrl}}" style="width:200px;height:200px;"> <br>
-  <!-- <input type="submit" (click)="" value="Edit" /> -->
+  <input type="submit" (click)="setEditGroup()" value="Edit" />
   <button (click)="displayTable()">Back</button>
 <br>
 <br>
-  <!-- <form *ngIf="editTodo">
-    <label for="task">Task:</label>
-    <input type="text" name="task" [(ngModel)]="editTodo.task" placeholder="Task" /><br />
-    <label for="completed">Completed:</label>
-    <input type="checkbox" name="completed" [(ngModel)]="editTodo.completed"/><br />
-    <label for="description">Description:</label>
-    <input type="text" name="description" [(ngModel)]="editTodo.description" /><br />
-    <input type="submit" (click)="editTodo = null" value="Cancel" />
-    <input type="submit" (click)="updateTodo(editTodo)" value="Save" />
-  </form> -->
+
+
+<form *ngIf="editGroup">
+  <label for="task">Name:</label>
+  <input type="text" name="task" [(ngModel)]="editGroup.name" placeholder="Name" /><br />
+  <label for="completed">Enabled:</label>
+  <input type="checkbox" name="completed" [(ngModel)]="editGroup.enabled"/><br>
+  <label for="description">Description:</label>
+  <input type="text" size="100" name="description" [(ngModel)]="editGroup.description" /><br />
+  <label for="shortdescription">Short description:</label>
+  <input type="text" size="100" name="shortDescription" [(ngModel)]="editGroup.shortDescription" /><br />
+  <input type="submit" (click)="editGroup = null" value="Cancel" />
+  <input type="submit" (click)="updateGroup(editGroup)" value="Save" />
+</form>
+
+<h1 style="text-align:center">User Members</h1>
+<div class="row card-group">
+  <mat-card class="col-3" style="text-align:center">
+    <mat-card-header>
+      <mat-card-title>Creator {{selected.creator.username}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image class="rounded-circle" src="{{selected.creator.imageUrl}}">
+    <mat-card-content>
+      <!-- <p>
+      <p> Description: {{selected.creator.description}}
+      </p> -->
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div class="row card-group">
+  <mat-card class="col-3" *ngFor="let user of selected.users"
+    style="text-align:center">
+    <mat-card-header>
+      <mat-card-title>{{user.username}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image class="rounded-circle" src="{{user.imageUrl}}">
+    </mat-card-content>
+  </mat-card>
+</div>
 </div>
