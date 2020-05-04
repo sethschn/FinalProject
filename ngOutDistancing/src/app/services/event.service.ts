@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 })
 export class EventService {
   private baseUrl = environment.baseUrl;
-  private url = this.baseUrl + 'api/events'
+  private url = this.baseUrl + 'api'
 
 
 
@@ -38,7 +38,7 @@ export class EventService {
   }
 
   public show(id) {
-    return this.http.get<Event>(`${this.url}/${id}`).pipe(
+    return this.http.get<Event>(`${this.url}/events/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('EventService.show: error retrieving event: ' + err);
@@ -47,8 +47,9 @@ export class EventService {
   }
   public create(event: Event){
     const httpOptions = this.getHttpOptions();
+    console.log(event);
     if (this.auth.checkLogin()){
-      return this.http.post<Event>(this.url, event, httpOptions)
+      return this.http.post<Event>(`${this.url}/activities/${event.activity.id}/events`, event, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
@@ -61,7 +62,7 @@ export class EventService {
   public update(event: Event){
     const httpOptions = this.getHttpOptions();
     if (this.auth.checkLogin()){
-    return this.http.put<Event>(`${this.url}/${event.id}`, event, httpOptions)
+    return this.http.put<Event>(`${this.url}/activities/${event.activity.id}/events/${event.id}`, event, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

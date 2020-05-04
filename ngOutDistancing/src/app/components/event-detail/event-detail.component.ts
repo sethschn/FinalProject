@@ -1,3 +1,4 @@
+import { EventCommentService } from './../../services/event-comment.service';
 import { Event } from './../../models/event';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,12 +21,16 @@ export class EventDetailComponent implements OnInit {
   editCurrentEvent = null;
   eventComments: Eventcomment[] = [];
   eventList: Event[] = [];
+  newComment = new Eventcomment();
+  currentEventId = null;
+
 
   constructor(
     private eventSvc: EventService,
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private commentSvc: EventCommentService
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +84,7 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
-  createEvent(event: Event) {
+  addNewEvent(event: Event) {
     console.log(event);
     this.eventSvc.create(event).subscribe(
       (good) => {
@@ -100,12 +105,12 @@ export class EventDetailComponent implements OnInit {
   updateCurrentEvent(event: Event) {
     console.log(event);
     this.eventSvc.update(event).subscribe(
-      (good) => {
+      good => {
         this.loadEvents();
         // this.editEvent = null;
         this.selected = this.editCurrentEvent;
       },
-      (bad) => {
+      bad => {
         console.error('EventDetailListComponent.updateEvent(): error updating');
         console.error(bad);
       }
@@ -126,6 +131,7 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
+  // open modal
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -133,7 +139,7 @@ export class EventDetailComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
+  // close modal
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -142,6 +148,37 @@ export class EventDetailComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  addComment(comment: Eventcomment){
+    this.commentSvc.createComment(comment, this.currentEventId).subscribe(
+      good => {
+        this.newComment= new Eventcomment();
+        // this.selected = null;
+        console.log(this.currentEventId);
+        // this.router.navigateByUrl(`/activities/${this.currentActivityId}`);
+        this.loadComments();
+      },
+      bad =>{
+        console.error('activity.component.ts addComment(): error adding comment')
+        console.error(bad);
+      }
+    );
+  }
+
+  loadComments(){
+    this.commentSvc.index(this.selected.id).subscribe(
+      comments =>{
+        this.eventComments = comments;
+        console.log(comments);
+      },
+      fail => {
+        console.error(fail);
+        // this.router.navigateByUrl(`/notFound`)
+      }
+    );
+
+
   }
 
 
