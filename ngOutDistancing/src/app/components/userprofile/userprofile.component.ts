@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from 'src/app/services/event.service';
+import { UsergroupService } from 'src/app/services/usergroup.service';
+import { Usergroup } from 'src/app/models/usergroup';
 
 @Component({
   selector: 'app-userprofile',
@@ -17,10 +19,11 @@ export class UserprofileComponent implements OnInit {
 
   currentUser = null;
   editUser = null;
+  selected= null;
 
-  isOpen = false;
 
-  constructor(private userService: UserService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
+
+  constructor(private userService: UserService, private group: UsergroupService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
 
   ngOnInit(): void {
@@ -49,6 +52,10 @@ export class UserprofileComponent implements OnInit {
 
   openMed(content) {
     this.modalService.open(content, { size: 'md' });
+  }
+
+  displayGroup(group: Usergroup){
+    this.selected = group;
   }
 
 

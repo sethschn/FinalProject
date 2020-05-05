@@ -34,13 +34,20 @@
   </ngb-accordion>
 <br>
 
-  <ngb-accordion>
-    <ngb-panel *ngFor="let group of currentUser.groups" title="{{group.name}}">
-      <ng-template ngbPanelContent>
-        <img src={{group.imageUrl}}><br>
-      {{group.description}}<br>
-  </ng-template></ngb-panel>
-  </ngb-accordion>
+  <div class="container-fluid py-2">
+    <div class="scrolling-wrapper">
+    <h2 class="font-weight-light"></h2>
+    <div class="d-flex flex-row flex-nowrap" >
+        <div class="card card-body" *ngFor="let group of currentUser.groups">
+          <img src="{{group.imageUrl}}"><br>
+           <p> <b>{{group.name}}</b> <br>
+            <!-- DO BUTTON TO LEAVE GROUP -->
+            <!-- <button class="btn btn-info" mat-button (click)="displayGroup(group)"> Group Detail</button> -->
+        </p>
+        </div>
+      </div>
+    </div>
+    </div>
 
 </div>
 </section>
