@@ -46,7 +46,6 @@ export class AdminComponent implements OnInit {
   editLocation = null;
   locationList: Location[] = [];
 
-
   selectedUser = null;
   newUser = new User();
   users: User[] = [];
