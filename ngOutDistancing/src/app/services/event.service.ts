@@ -77,8 +77,11 @@ export class EventService {
 
   public destroy(id: number){
     const httpOptions = this.getHttpOptions();
+    console.log(typeof id);
+    console.log(id);
+
     if (this.auth.checkLogin()){
-        return this.http.delete<Event>(`${this.url}/${id}`, httpOptions)
+        return this.http.delete<Event>(`${this.url}/events/${id}`, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);

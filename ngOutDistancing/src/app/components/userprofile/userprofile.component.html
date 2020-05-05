@@ -8,13 +8,13 @@
           <div class="card profile-card-5">
               <div class="card-img-block" *ngIf="currentUser">
                   <img class="card-img-top" src="{{currentUser.imageUrl}}" alt="Card image cap">
-              </div>
                   <div class="card-body pt-0">
 
-                  <h5 class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</h5>
-                  <h5 class="card-title">{{currentUser.location.city}}, {{currentUser.location.state}}</h5>
-                  <p class="card-text">{{currentUser.description}}</p>
-                  <a class="btn btn-primary" (click)="openMed(editProfile);setEditUser()">Edit Profile</a>
+                    <h5 class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</h5>
+                    <h5 class="card-title">{{currentUser.location.city}}, {{currentUser.location.state}}</h5>
+                    <p class="card-text">{{currentUser.description}}</p>
+                    <a class="btn btn-primary" (click)="openMed(editProfile);setEditUser()">Edit Profile</a>
+                  </div>
                 </div>
               </div>
       </div>
