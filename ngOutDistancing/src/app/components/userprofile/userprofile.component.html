@@ -41,6 +41,7 @@
         <div class="card card-body" *ngFor="let group of currentUser.groups | group">
           <img src="{{group.imageUrl}}"><br>
            <p> <b>{{group.name}}</b> <br>
+            <button type="button" (click)="leaveGroup(group)">LEAVE GROUP</button>
             <!-- DO BUTTON TO LEAVE GROUP -->
             <!-- <button class="btn btn-info" mat-button (click)="displayGroup(group)"> Group Detail</button> -->
         </p>
