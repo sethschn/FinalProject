@@ -41,6 +41,8 @@ import { CardDisplayComponent } from './components/card-display/card-display.com
 import { ActivityCategoryPipe } from './pipes/activity-category.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { UsergroupComponent } from './components/usergroup/usergroup.component';
+import { EventPipe } from './pipes/event.pipe';
+import { GroupPipe } from './pipes/group.pipe';
 
 
 @NgModule({
@@ -67,6 +69,8 @@ import { UsergroupComponent } from './components/usergroup/usergroup.component';
     ActivityCategoryPipe,
     FooterComponent,
     UsergroupComponent,
+    EventPipe,
+    GroupPipe,
 
 
   ],

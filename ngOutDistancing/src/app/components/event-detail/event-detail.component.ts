@@ -30,6 +30,8 @@ export class EventDetailComponent implements OnInit {
   eventActivity = new Activity();
   user = new User();
 
+  selectedEvent:Event = new Event(0, "All");
+
 
   constructor(
     private eventSvc: EventService,
