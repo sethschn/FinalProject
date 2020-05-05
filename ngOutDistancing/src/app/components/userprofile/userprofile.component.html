@@ -30,6 +30,9 @@
       {{event.eventDate}}<br>
       {{event.eventTime}}<br>
       {{event.description}}<br>
+      <button class="btn btn-sm" (click)="removeEventFromUser(this.event)">
+        Remove Event
+      </button>
   </ng-template></ngb-panel>
   </ngb-accordion>
 <br>
