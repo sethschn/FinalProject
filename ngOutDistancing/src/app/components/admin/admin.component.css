@@ -41,6 +41,27 @@ h5 {
   right: 6px;
   top: 12px;
 }
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: black;
+  font-weight: 700;
+}
+.mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: #1ab394;
+  font-weight: 700;
+}
+
+mat-tabs.mat-default-theme mat-ink-bar, mat-tabs mat-ink-bar {
+  color: blue !important;
+  background-color:blue !important;
+}
+
+
 
 .btn {
   border-radius: 3px;
