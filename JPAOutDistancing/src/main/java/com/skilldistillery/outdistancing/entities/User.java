@@ -290,6 +290,12 @@ public class User {
 			this.userEvents.add(events);
 		}
 	}
+	
+	public void removeEvent(Event events) {
+		if(this.userEvents.contains(events)) {
+			this.userEvents.remove(events);
+		}
+	}
 
 	@Override
 	public int hashCode() {
