@@ -170,6 +170,13 @@ public class UserGroup {
 			user.addGroup(this);
 		}
 	}
+	
+	public void removeUser(User user) {
+		if (this.users.contains(user)) {
+			this.users.remove(user);
+			user.removeGroup(this);
+		}
+	}
 
 	@Override
 	public String toString() {

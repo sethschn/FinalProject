@@ -79,7 +79,7 @@ export class UsergroupService {
   public leaveGroup(groupId: number){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-      return this.http.put<Usergroup>(`${this.url}/${groupId}/leavegroup`, {}, httpOptions)
+      return this.http.delete<Usergroup>(`${this.url}/${groupId}/leavegroup`, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log("******");
