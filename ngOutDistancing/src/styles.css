@@ -2,7 +2,7 @@
  @import "~bootstrap/dist/css/bootstrap.css";
 
 
-html, body, button, p {
+html, body, button, p, mat-card-title {
   font-family: Futura !important;
   margin-right: auto;
   margin-left: auto;

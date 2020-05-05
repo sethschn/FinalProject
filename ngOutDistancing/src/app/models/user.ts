@@ -15,9 +15,10 @@ export class User {
   role: string;
   events: Event[];
   groups: Usergroup[];
+  userEvents: Event[];
 
 
-  constructor(id?: number, groups?: Usergroup[],events?: Event[],username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string){
+  constructor(id?: number, groups?: Usergroup[],events?: Event[],username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string, userEvents?: Event[]){
     this.id = id;
     this.events = events;
     this.groups = groups;
@@ -31,5 +32,6 @@ export class User {
     this.imageUrl = imageUrl;
     this.location = location;
     this.role = role;
+    this.userEvents = userEvents? userEvents: [];
   }
 }

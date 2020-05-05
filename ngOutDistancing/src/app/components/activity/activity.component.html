@@ -23,16 +23,14 @@
           <mat-card-title>Resources</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <ul>
-            <li *ngFor="let resource of selected.resources">
+            <p *ngFor="let resource of selected.resources">
               <a href="{{ resource.link }}"> {{ resource.name }}</a>
-            </li>
-          </ul>
+            </p>
         </mat-card-content>
       </mat-card>
       <mat-card class="col-3" style="text-align: center;">
         <mat-card-header class="justify-content-center">
-          <mat-card-title>{{ selected.equipmentLevel }}</mat-card-title>
+          <mat-card-title>Equipment Level: {{ selected.equipmentLevel }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           {{ selected.equipmentDescription }}
@@ -58,11 +56,18 @@
             Show All Activities
           </button>
         </div>
-        <div *ngIf="checkIfAdmin(this.user)">
-          <button class="btn btn-sm" (click)="setEditActivity(); open(editActivity)">
+
+        <div class="col text-center" *ngIf="checkIfAdmin(this.user)">
+          <button
+            class="btn btn-sm"
+            (click)="setEditActivity(); open(editActivity)"
+          >
             Edit Activity
           </button>
-          <button class="btn btn-lg btn-outline-primary" (click)="open(addActivity)">
+          <button
+            class="btn btn-sm"
+            (click)="open(addActivity)"
+          >
             Add Activity
           </button>
         </div>
@@ -134,7 +139,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn pull-right" (click)="addComment(newComment)">
+    <button class="btn pull-right" (click)="addComment(newComment); modal.close()">
       Submit
     </button>
   </div>
@@ -166,7 +171,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-success pull-right" (click)="addComment(newComment)">
+    <button class="btn btn-success pull-right" (click)="addComment(newComment); modal.close()">
       Submit
     </button>
   </div>
@@ -180,6 +185,14 @@
     <button mat-button type="button" class="btn btn-info" *ngFor="let category of categories"
       (click)="selectedCategory = category">
       {{ category.type }}
+    </button>
+  </div>
+  <div class="col text-center" *ngIf="checkIfAdmin(this.user)">
+    <button
+      class="btn btn-sm"
+      (click)="open(addActivity)"
+    >
+      Add Activity
     </button>
   </div>
   <br />
@@ -225,20 +238,59 @@
       <div class="row">
         <div class="comments col-md-9" id="newActivity">
           <!-- add activity box -->
-          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
-            <input class="form-control" type="text" name="title" [(ngModel)]="newActivity.title"
-              placeholder="Title" /><br />
-            <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newActivity.shortDescription"
-              placeholder="Short Description" /><br />
-            <input class="form-control" type="text" name="description" [(ngModel)]="newActivity.description"
-              placeholder="Description" /><br />
-            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newActivity.imageUrl"
-              placeholder="Image URL" /><br />
-            <input class="form-control" type="text" name="equipmentLevel" [(ngModel)]="newActivity.equipmentLevel"
-              placeholder="Equipment Level" /><br />
-            <input class="form-control" type="text" name="equipmentDescription"
-              [(ngModel)]="newActivity.equipmentDescription" placeholder="Equipment Description" /><br />
-            <button class="btn pull-right" type="submit" (click)="this.addNewActivity(newActivity)">
+          <form
+            #activityForm="ngForm"
+            ngNativeValidate
+            id="add-activity-form"
+            class="text-center"
+          >
+            <input
+              class="form-control"
+              type="text"
+              name="title"
+              [(ngModel)]="newActivity.title"
+              placeholder="Title"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="shortDescription"
+              [(ngModel)]="newActivity.shortDescription"
+              placeholder="Short Description"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="description"
+              [(ngModel)]="newActivity.description"
+              placeholder="Description"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="imageUrl"
+              [(ngModel)]="newActivity.imageUrl"
+              placeholder="Image URL"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="equipmentLevel"
+              [(ngModel)]="newActivity.equipmentLevel"
+              placeholder="Equipment Level"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="equipmentDescription"
+              [(ngModel)]="newActivity.equipmentDescription"
+              placeholder="Equipment Description"
+            /><br />
+            <button
+              class="btn pull-right"
+              type="submit"
+              (click)="this.addNewActivity(newActivity); modal.close()"
+            >
               Submit
             </button>
           </form>
@@ -284,9 +336,18 @@
               [(ngModel)]="editCurrentActivity.equipmentLevel" placeholder="Equipment Level" /><br />
             <label class="text-left" for="editCurrentActivity">Equipment Description
             </label>
-            <input class="form-control" type="text" name="equipmentDescription"
-              [(ngModel)]="editCurrentActivity.equipmentDescription" placeholder="Equipment Description" /><br />
-            <button class="btn pull-right" type="submit" (click)="this.updateCurrentActivity(editCurrentActivity)">
+            <input
+              class="form-control"
+              type="text"
+              name="equipmentDescription"
+              [(ngModel)]="editCurrentActivity.equipmentDescription"
+              placeholder="Equipment Description"
+            /><br />
+            <button
+              class="btn pull-right"
+              type="submit"
+              (click)="this.updateCurrentActivity(editCurrentActivity); modal.close()"
+            >
               Submit
             </button>
           </form>
@@ -311,26 +372,80 @@
       <div class="row">
         <div class="comments col-md-9" id="newActivity">
           <!-- add event box -->
-          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
-            <input class="form-control" type="text" name="title" [(ngModel)]="newEvent.title"
-              placeholder="Title" /><br />
-            <input class="form-control" type="text" name="shortDescription" [(ngModel)]="newEvent.shortDescription"
-              placeholder="Short Description" /><br />
-            <input class="form-control" type="text" name="description" [(ngModel)]="newEvent.description"
-              placeholder="Description" /><br />
-            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newEvent.imageUrl"
-              placeholder="Image URL" /><br />
-            <input class="form-control" type="text" name="eventDate" [(ngModel)]="newEvent.eventDate"
-              placeholder="Event Date" /><br />
-            <input class="form-control" type="text" name="eventTime" [(ngModel)]="newEvent.eventTime"
-              placeholder="Event Time" /><br />
-            <input class="form-control" type="text" name="location.street" [(ngModel)]="newLocation.street"
-              placeholder="Event Time" /><br />
-            <input class="form-control" type="text" name="location.city" [(ngModel)]="newLocation.city"
-              placeholder="city" /><br />
-            <input class="form-control" type="text" name="location.state" [(ngModel)]="newLocation.state"
-              placeholder="state" /><br />
-            <button class="btn pull-right" type="submit" (click)="this.addNewEvent(newEvent, selected, newLocation)">
+          <form
+            #activityForm="ngForm"
+            ngNativeValidate
+            id="add-activity-form"
+            class="text-center"
+          >
+            <input
+              class="form-control"
+              type="text"
+              name="title"
+              [(ngModel)]="newEvent.title"
+              placeholder="Title"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="shortDescription"
+              [(ngModel)]="newEvent.shortDescription"
+              placeholder="Short Description"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="description"
+              [(ngModel)]="newEvent.description"
+              placeholder="Description"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="imageUrl"
+              [(ngModel)]="newEvent.imageUrl"
+              placeholder="Image URL"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="eventDate"
+              [(ngModel)]="newEvent.eventDate"
+              placeholder="Event Date"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="eventTime"
+              [(ngModel)]="newEvent.eventTime"
+              placeholder="Event Time"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="location.street"
+              [(ngModel)]="newLocation.street"
+              placeholder="Event Time"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="location.city"
+              [(ngModel)]="newLocation.city"
+              placeholder="city"
+            /><br />
+            <input
+              class="form-control"
+              type="text"
+              name="location.state"
+              [(ngModel)]="newLocation.state"
+              placeholder="state"
+            /><br />
+            <button
+              class="btn pull-right"
+              type="submit"
+              (click)="this.addNewEvent(newEvent, selected, newLocation); modal.close()"
+            >
               Submit
             </button>
           </form>

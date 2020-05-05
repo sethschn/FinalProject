@@ -1,10 +1,15 @@
 package com.skilldistillery.outdistancing.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -32,6 +37,8 @@ public class UserEvent {
 	@JoinColumn(name = "event_id")
 	@MapsId(value = "eventId")
 	private Event event;
+	
+//	private List<User> users;
 
 	public UserEvent() {
 		super();
@@ -86,6 +93,16 @@ public class UserEvent {
 		this.event = event;
 	}
 
+//	public void addUser(User user) {
+//		if (this.users == null) {
+//			this.users = new ArrayList<User>();
+//		}
+//		if (!this.users.contains(user)) {
+//			this.users.add(user);
+////			user.addEvent(this);
+//		}
+//	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

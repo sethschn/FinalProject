@@ -1,5 +1,98 @@
-<div *ngIf="!selected">
-  <button class="btn btn-info" mat-button (click)="openLg(createGroup)">Create Group</button>
+
+  <ng-template #createGroupModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Create Group</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card-body">
+        <form class="form" role="form" autocomplete="off">
+          <div class="form-group">
+            <label for="uname1">Name</label>
+            <input type="text" [(ngModel)]="newGroup.name" class="form-control form-control-lg rounded-0" name="name"
+              required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" [(ngModel)]="newGroup.shortDescription" name="shortDescription"
+              class="form-control form-control-lg rounded-0" required="">
+            <div class="invalid-feedback">EOops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label for="uname1">Description</label>
+            <input type="text" [(ngModel)]="newGroup.description" class="form-control form-control-lg rounded-0"
+              name="description" required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label for="uname1">Image URL</label>
+            <input type="text" [(ngModel)]="newGroup.imageUrl" class="form-control form-control-lg rounded-0"
+              name="imageUrl" required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <button type="submit" (click)="addNewGroup(newGroup); modal.close()"
+            class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
+        </form>
+      </div>
+      <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+  </ng-template>
+
+  <ng-template #editGroupModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Group</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card-body">
+        <form class="form" role="form" autocomplete="off">
+          <div class="form-group">
+            <label for="uname1">Name</label>
+            <input type="text" [(ngModel)]="editGroup.name" class="form-control form-control-lg rounded-0" name="name"
+              required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" rows="3" [(ngModel)]="editGroup.shortDescription" name="shortDescription"
+              class="form-control form-control-lg rounded-0" required="">
+            <div class="invalid-feedback">EOops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label for="uname1">Description</label>
+            <textarea rows="3" [(ngModel)]="editGroup.description" class="form-control form-control-lg rounded-0"
+              name="description" required=""></textarea>
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <div class="form-group">
+            <label for="uname1">Image URL</label>
+            <input type="text" [(ngModel)]="editGroup.imageUrl" class="form-control form-control-lg rounded-0"
+              name="imageUrl" required="">
+            <div class="invalid-feedback">Oops, you missed this one.</div>
+          </div>
+          <button type="submit" (click)="updateGroup(editGroup); modal.close()"
+            class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
+        </form>
+      </div>
+      <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+  </ng-template>
+
+<div *ngIf="!selected" class="justify-content-center">
+  <button class="btn btn-info" mat-button (click)="openLg(createGroupModal)">Create Group</button>
 
 
   <div class="row card-group">
@@ -52,25 +145,11 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <input type="submit" (click)="setEditGroup()" value="Edit" />
+      <button (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
       <button (click)="displayTable()">Back</button>
     </div>
     <br>
     <br>
-
-
-    <form *ngIf="editGroup">
-      <label for="task">Name:</label>
-      <input type="text" name="task" [(ngModel)]="editGroup.name" placeholder="Name" /><br />
-      <!-- <label for="completed">Enabled:</label>
-  <input type="checkbox" name="completed" [(ngModel)]="editGroup.enabled"/><br> -->
-      <label for="description">Description:</label>
-      <input type="text" size="100" name="description" [(ngModel)]="editGroup.description" /><br />
-      <label for="shortdescription">Short description:</label>
-      <input type="text" size="100" name="shortDescription" [(ngModel)]="editGroup.shortDescription" /><br />
-      <input type="submit" (click)="editGroup = null" value="Cancel" />
-      <input type="submit" (click)="updateGroup(editGroup)" value="Save" />
-    </form>
 
     <h1 style="text-align:center">Group Members</h1>
     <div class="row card-group justify-content-center">
@@ -100,48 +179,3 @@
   </div>
 
 
-  <ng-template #createGroup let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Create Group</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="card-body">
-        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-          <div class="form-group">
-            <label for="uname1">Name</label>
-            <input type="text" [(ngModel)]="newGroup.name" class="form-control form-control-lg rounded-0" name="name"
-              required="">
-            <div class="invalid-feedback">Oops, you missed this one.</div>
-          </div>
-          <div class="form-group">
-            <label>Short Description</label>
-            <input type="text" [(ngModel)]="newGroup.shortDescription" name="shortDescription"
-              class="form-control form-control-lg rounded-0" required="">
-            <div class="invalid-feedback">EOops, you missed this one.</div>
-          </div>
-          <div class="form-group">
-            <label for="uname1">Description</label>
-            <input type="text" [(ngModel)]="newGroup.description" class="form-control form-control-lg rounded-0"
-              name="description" required="">
-            <div class="invalid-feedback">Oops, you missed this one.</div>
-          </div>
-          <div class="form-group">
-            <label for="uname1">Image URL</label>
-            <input type="text" [(ngModel)]="newGroup.imageUrl" class="form-control form-control-lg rounded-0"
-              name="imageUrl" required="">
-            <div class="invalid-feedback">Oops, you missed this one.</div>
-          </div>
-          <button type="submit" (click)="addNewGroup(newGroup); modal.close()"
-            class="btn btn-success btn-lg float-right" id="btnLogin">Submit</button>
-        </form>
-      </div>
-      <!--/card-block-->
-    </div>
-    <!-- /form card login -->
-    <div class="modal-footer">
-      <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
-    </div>
-  </ng-template>

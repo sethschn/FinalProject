@@ -96,7 +96,10 @@
           <button class="btn btn-sm" (click)="setEditEvent(); open(editEventForm)">
             Edit Event
           </button>
-          <button class="btn btn-sm">
+          <button class="btn btn-sm" (click)="saveEventToUser(this.selected)">
+            Join Event
+          </button>
+          <button class="btn btn-sm" (click)="displayAllEvents()">
             Show Events
           </button>
         </div>
@@ -142,7 +145,7 @@
       </div>
     </div>
   </div>
-  <button class="btn btn-lg" (click)="open(content)">
+  <button class="btn btn-sm" (click)="open(content)">
     Leave A Comment
   </button>
 </div>
@@ -176,7 +179,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-success pull-right" (click)="addEventComment(newComment)">
+    <button class="btn btn-success pull-right" (click)="addEventComment(newComment); modal.close()">
       Submit
     </button>
   </div>
@@ -221,7 +224,7 @@
             <input class="form-control" type="text" name="equipmentDescription" [(ngModel)]="editCurrentEvent.eventTime"
               placeholder="Event Time" /><br />
             <button class="btn btn-success pull-right" type="submit"
-              (click)="this.updateCurrentEvent(editCurrentEvent)">
+              (click)="this.updateCurrentEvent(editCurrentEvent); modal.close()">
               Submit
             </button>
           </form>

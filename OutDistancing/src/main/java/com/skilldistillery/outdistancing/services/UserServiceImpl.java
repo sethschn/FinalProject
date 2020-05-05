@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.outdistancing.entities.Category;
+import com.skilldistillery.outdistancing.entities.Event;
 import com.skilldistillery.outdistancing.entities.Location;
 import com.skilldistillery.outdistancing.entities.User;
+import com.skilldistillery.outdistancing.repositories.EventRepository;
 import com.skilldistillery.outdistancing.repositories.LocationRepository;
 import com.skilldistillery.outdistancing.repositories.UserRepository;
 
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private LocationRepository locRepo;
+	
+	@Autowired
+	private EventRepository eventRepo;
 
 	@Override
 	public List<User> listAllUsers() {
@@ -101,6 +106,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserByUsername(String username) {
 		return userRepo.findByUsername(username);
+	}
+	
+	@Override
+	public User addUserEvent(int eventId, String username){
+		User user = userRepo.findByUsername(username);
+		Optional<Event> optEvent = eventRepo.findById(eventId);
+		if (optEvent.isPresent() && user != null) {
+			Event addEvent = optEvent.get();
+			user.addEvent(addEvent);
+			return userRepo.saveAndFlush(user);
+		}
+		return null;
+
 	}
 	
 
