@@ -1,5 +1,6 @@
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -92,6 +93,8 @@ import { GroupPipe } from './pipes/group.pipe';
     MatInputModule,
     MatTableModule,
     MatCarouselModule,
+    MatTabsModule
+
   ],
 
   providers: [
