@@ -1,6 +1,6 @@
+import { UserService } from './../../services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventCommentService } from './../../services/event-comment.service';
-import { Event } from './../../models/event';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
@@ -8,7 +8,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Eventcomment } from 'src/app/models/eventcomment';
 import { Activity } from 'src/app/models/activity';
 import { User } from 'src/app/models/user';
-
+import { Event } from 'src/app/models/event';
 
 @Component({
   selector: 'app-event-detail',
@@ -30,19 +30,19 @@ export class EventDetailComponent implements OnInit {
   eventActivity = new Activity();
   user = new User();
 
-
   constructor(
     private eventSvc: EventService,
     private currentRoute: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
     private commentSvc: EventCommentService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private userSvc: UserService
   ) {}
 
   ngOnInit(): void {
     if (!this.selected && this.currentRoute.snapshot.paramMap.get('id')) {
-      this.currentEventId = this.currentRoute.snapshot.paramMap.get('id')
+      this.currentEventId = this.currentRoute.snapshot.paramMap.get('id');
       this.eventSvc
         .show(this.currentRoute.snapshot.paramMap.get('id'))
         .subscribe(
@@ -62,6 +62,9 @@ export class EventDetailComponent implements OnInit {
     this.loadEvents();
   }
 
+  displayAllEvents() {
+    this.router.navigateByUrl(`/eventDetail`);
+  }
   displayEvent(event) {
     this.router.navigateByUrl(`/event/${event.id}`);
   }
@@ -108,6 +111,40 @@ export class EventDetailComponent implements OnInit {
   //   );
   // }
 
+  // saveEventToUser(event) {
+  //   console.log(event);
+  //   const user = this.userSvc.showLoggedInUser();
+  //   this.userSvc.addUserEvent(event, user).subscribe(
+  //     good => {
+  //       this.loadEvents();
+  //     },
+  //     bad => {
+  //       console.error('EventDetailComponent.saveEventToUser(): error saving')
+  //     }
+  //   )
+  // }
+
+  saveEventToUser(event) {
+    this.userSvc.showLoggedInUser().subscribe(
+      (good) => {
+        const user = good;
+        this.userSvc.addUserEvent(event, user).subscribe(
+          (success) => {
+            this.router.navigateByUrl(`/profile`);
+          },
+          (fail) => {
+            console.error(
+              'EventDetailComponent.saveEventToUser(): error saving'
+            );
+          }
+        );
+      },
+      (bad) => {
+        console.error('EventDetailComponent.saveEventToUser(): error saving');
+      }
+    );
+  }
+
   setEditEvent() {
     this.editCurrentEvent = Object.assign({}, this.selected);
   }
@@ -115,12 +152,12 @@ export class EventDetailComponent implements OnInit {
   updateCurrentEvent(event: Event) {
     console.log(event);
     this.eventSvc.update(event).subscribe(
-      good => {
+      (good) => {
         this.loadEvents();
         // this.editEvent = null;
         this.selected = this.editCurrentEvent;
       },
-      bad => {
+      (bad) => {
         console.error('EventDetailListComponent.updateEvent(): error updating');
         console.error(bad);
       }
@@ -143,11 +180,16 @@ export class EventDetailComponent implements OnInit {
 
   // open modal
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
   // close modal
   private getDismissReason(reason: any): string {
@@ -160,55 +202,55 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
-  addEventComment(comment: Eventcomment){
-    this.commentSvc.createComment(comment, this.selected.activity.id, this.currentEventId).subscribe(
-      good => {
-        this.newComment= new Eventcomment();
-        console.log(this.currentEventId);
-        this.loadComments();
-      },
-      bad =>{
-        console.error('event-detail.component.ts addComment(): error adding comment')
-        console.error(bad);
-      }
-    );
+  addEventComment(comment: Eventcomment) {
+    this.commentSvc
+      .createComment(comment, this.selected.activity.id, this.currentEventId)
+      .subscribe(
+        (good) => {
+          this.newComment = new Eventcomment();
+          console.log(this.currentEventId);
+          this.loadComments();
+        },
+        (bad) => {
+          console.error(
+            'event-detail.component.ts addComment(): error adding comment'
+          );
+          console.error(bad);
+        }
+      );
   }
 
-  loadComments(){
-    this.commentSvc.index(this.selected.activity.id, this.selected.id).subscribe(
-      comments =>{
-        this.eventComments = comments;
-        console.log(comments);
-      },
-      fail => {
-        console.error(fail);
-        // this.router.navigateByUrl(`/notFound`)
-      }
-    );
-
-
+  loadComments() {
+    this.commentSvc
+      .index(this.selected.activity.id, this.selected.id)
+      .subscribe(
+        (comments) => {
+          this.eventComments = comments;
+          console.log(comments);
+        },
+        (fail) => {
+          console.error(fail);
+          // this.router.navigateByUrl(`/notFound`)
+        }
+      );
   }
 
-  checkIfAdmin(user: User){
-    if (this.authSvc.getCurrentUserRole() == 'admin'){
+  checkIfAdmin(user: User) {
+    if (this.authSvc.getCurrentUserRole() == 'admin') {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-  deleteComment(eventComment: Eventcomment, event: Event){
+  deleteComment(eventComment: Eventcomment, event: Event) {
     this.commentSvc.disableEventComment(event, eventComment).subscribe(
-      data=> {
+      (data) => {
         this.loadComments();
       },
-      err => {
-        console.error('error in deleting activity component')
+      (err) => {
+        console.error('error in deleting activity component');
       }
-    )
+    );
   }
-
-
-
 }

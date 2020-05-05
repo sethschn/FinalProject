@@ -11,4 +11,5 @@ public interface UserService {
 	User updateUser (int userId, User user, String username);
 	Boolean changeUserEnabled(int UserId, String username);
 	User findUserByUsername(String username);
+	User addUserEvent(int eventId, String username);
 }
