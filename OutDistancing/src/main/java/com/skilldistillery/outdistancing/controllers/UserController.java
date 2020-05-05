@@ -105,6 +105,16 @@ public class UserController {
 		return user;
 	}
 	
-	
+	@DeleteMapping("users/{userId}/events/{eventId}")
+	public User removeUserEvent(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, @PathVariable int eventId, Principal principal) {
+		User user = userSvc.findUserByUsername(principal.getName());
+		try {
+			userSvc.removeUserEvent(eventId, user.getUsername());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		return user;
+	}
 	 
 }

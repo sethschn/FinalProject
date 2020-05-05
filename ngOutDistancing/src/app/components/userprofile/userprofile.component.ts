@@ -71,4 +71,26 @@ export class UserprofileComponent implements OnInit {
     );
   }
 
+  removeEventFromUser(event) {
+    this.userService.showLoggedInUser().subscribe(
+      (good) => {
+        const user = good;
+        this.userService.removeUserEvent(event, user).subscribe(
+          (success) => {
+            this.router.navigateByUrl(`/profile`);
+            this.reload();
+          },
+          (fail) => {
+            console.error(
+              'EventDetailComponent.removeEventToUser(): error saving'
+            );
+          }
+        );
+      },
+      (bad) => {
+        console.error('EventDetailComponent.removeEventToUser(): error saving');
+      }
+    );
+  }
+
 }
