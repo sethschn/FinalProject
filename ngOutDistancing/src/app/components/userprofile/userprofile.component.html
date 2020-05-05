@@ -41,7 +41,7 @@
     <div class="scrolling-wrapper">
     <h2 class="font-weight-light"></h2>
     <div class="d-flex flex-row flex-nowrap" >
-        <div class="card card-body" *ngFor="let group of currentUser.groups">
+        <div class="card card-body" *ngFor="let group of currentUser.groups | group">
           <img src="{{group.imageUrl}}"><br>
            <p> <b>{{group.name}}</b> <br>
             <!-- DO BUTTON TO LEAVE GROUP -->

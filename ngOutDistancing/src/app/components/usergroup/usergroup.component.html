@@ -96,7 +96,7 @@
 
 
   <div class="row card-group">
-    <mat-card class="col-3" *ngFor="let group of groups" style="text-align:center">
+    <mat-card class="col-3" *ngFor="let group of groups | group" style="text-align:center">
       <mat-card-header>
         <mat-card-title>{{group.name}}</mat-card-title>
       </mat-card-header>
