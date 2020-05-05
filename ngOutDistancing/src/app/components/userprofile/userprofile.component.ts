@@ -23,7 +23,7 @@ export class UserprofileComponent implements OnInit {
 
 
 
-  constructor(private userService: UserService, private group: UsergroupService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private groupSvc: UsergroupService, private eventSvc: EventService, private currentRoute: ActivatedRoute, private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
 
   ngOnInit(): void {
@@ -69,6 +69,21 @@ export class UserprofileComponent implements OnInit {
         console.log("error inside show logged in user");
       }
     );
+  }
+
+  leaveGroup(group: Usergroup){
+    this.groupSvc.leaveGroup(group.id).subscribe(
+      good => {
+        //this.selected = null;
+        this.reload();
+        console.log("Leave group success");
+        console.log(good);
+      },
+      err => {
+        console.log("Error leaving group in userprofile component");
+        console.log(err);
+      }
+    )
   }
 
   removeEventFromUser(event) {
