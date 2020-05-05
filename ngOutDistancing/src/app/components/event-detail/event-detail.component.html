@@ -1,11 +1,7 @@
 <div *ngIf="!selected">
   <h1 style="text-align: center;">Events</h1>
   <div class="row card-group">
-    <mat-card
-      class="col-3"
-      *ngFor="let event of eventList"
-      style="text-align: center;"
-    >
+    <mat-card class="col-3" *ngFor="let event of eventList" style="text-align: center;">
       <mat-card-header>
         <mat-card-title>{{ event.title }}</mat-card-title>
       </mat-card-header>
@@ -25,7 +21,7 @@
 
 <!-- Displays individual data -->
 <div *ngIf="selected">
-  <br /><br /><br />
+  <br /><br />
   <div class="container bg-faded py-3">
     <h1 class="text-center">{{ selected.title }}</h1>
     <div class="col text-center">
@@ -43,12 +39,14 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <img
-        [src]="selected.imageUrl"
-        image-resizing
-        image-Height="200px"
-        image-Width="200px"
-      />
+      <img [src]="selected.imageUrl" style="height: 350px;" image-Height="200px" image-Width="200px" />
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col text-center">
+        {{ selected.description }}
+      </div>
+
     </div>
     <hr />
     <div class="row card-group justify-content-center">
@@ -65,9 +63,7 @@
       </mat-card>
       <mat-card class="col-3" style="text-align: center;">
         <mat-card-header>
-          <mat-card-title
-            >Location: {{ selected.location.title }}</mat-card-title
-          >
+          <mat-card-title>Location: {{ selected.location.title }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>
@@ -97,10 +93,7 @@
     <div class="container bg-faded py-3">
       <div class="row">
         <div class="col text-center">
-          <button
-            class="btn btn-sm"
-            (click)="setEditEvent(); open(editEventForm)"
-          >
+          <button class="btn btn-sm" (click)="setEditEvent(); open(editEventForm)">
             Edit Event
           </button>
           <button class="btn btn-sm">
@@ -110,8 +103,7 @@
       </div>
     </div>
   </div>
-</div>
-<hr />
+
 <!-- End of invidual data display -->
 
 <!-- comment box code start -->
@@ -122,12 +114,7 @@
       <!-- comment -->
       <div class="comment mb-2 row" *ngFor="let comment of eventComments">
         <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-          <a href=""
-            ><img
-              class="mx-auto rounded-circle img-fluid"
-              src="{{ comment.user.imageUrl }}"
-              alt="avatar"
-          /></a>
+          <a href=""><img class="mx-auto rounded-circle img-fluid" src="{{ comment.user.imageUrl }}" alt="avatar" /></a>
         </div>
         <div class="comment-content col-md-11 col-sm-10">
           <h6 class="small comment-meta">
@@ -135,10 +122,7 @@
             {{ comment.createDate }}
           </h6>
           <h6 *ngIf="checkIfAdmin(this.user)">
-            <button
-              class="btn btn-sm btn-danger"
-              (click)="deleteComment(this.selected, this.comment)"
-            >
+            <button class="btn btn-sm btn-danger" (click)="deleteComment(this.selected, this.comment)">
               Disable
             </button>
           </h6>
@@ -151,9 +135,7 @@
           <div class="comment-body">
             <p>
               {{ comment.content }}<br />
-              <a href="" class="text-right small"
-                ><i class="ion-reply"></i> Reply</a
-              >
+              <a href="" class="text-right small"><i class="ion-reply"></i> Reply</a>
             </p>
           </div>
         </div>
@@ -170,12 +152,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Leave a Comment</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -188,12 +165,8 @@
           <!-- comment box -->
           <div class="row pt-2">
             <div class="col-12">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="Your Comment Please....."
-                [(ngModel)]="newComment.content"
-              ></textarea>
+              <textarea class="form-control" rows="5" placeholder="Your Comment Please....."
+                [(ngModel)]="newComment.content"></textarea>
               <br />
               <!-- <button class="btn btn-success pull-right" (click)="addComment(newComment)">Comment.</button> -->
             </div>
@@ -203,10 +176,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      class="btn btn-success pull-right"
-      (click)="addEventComment(newComment)"
-    >
+    <button class="btn btn-success pull-right" (click)="addEventComment(newComment)">
       Submit
     </button>
   </div>
@@ -217,12 +187,7 @@
 <ng-template #editEventForm let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Edit Event</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -232,74 +197,31 @@
       <div class="row">
         <div class="comments col-md-9" id="editActivity">
           <!-- edit activity box -->
-          <form
-            #activityForm="ngForm"
-            ngNativeValidate
-            id="add-activity-form"
-            class="text-center"
-          >
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
             <label class="text-left" for="editCurrentEvent">Title </label>
-            <input
-              class="form-control"
-              type="text"
-              name="title"
-              [(ngModel)]="editCurrentEvent.title"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Short Description
+            <input class="form-control" type="text" name="title" [(ngModel)]="editCurrentEvent.title" /><br />
+            <label class="text-left" for="editCurrentActivity">Short Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="shortDescription"
-              [(ngModel)]="editCurrentEvent.shortDescription"
-              placeholder="Short Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Full Description
+            <input class="form-control" type="text" name="shortDescription"
+              [(ngModel)]="editCurrentEvent.shortDescription" placeholder="Short Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Full Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="description"
-              [(ngModel)]="editCurrentEvent.description"
-              placeholder="Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Image Url
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCurrentEvent.description"
+              placeholder="Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Image Url
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="imageUrl"
-              [(ngModel)]="editCurrentEvent.imageUrl"
-              placeholder="Image URL"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Event Date
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCurrentEvent.imageUrl"
+              placeholder="Image URL" /><br />
+            <label class="text-left" for="editCurrentActivity">Event Date
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentLevel"
-              [(ngModel)]="editCurrentEvent.eventDate"
-              placeholder="Event Date"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Event Time
+            <input class="form-control" type="text" name="equipmentLevel" [(ngModel)]="editCurrentEvent.eventDate"
+              placeholder="Event Date" /><br />
+            <label class="text-left" for="editCurrentActivity">Event Time
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentDescription"
-              [(ngModel)]="editCurrentEvent.eventTime"
-              placeholder="Event Time"
-            /><br />
-            <button
-              class="btn btn-success pull-right"
-              type="submit"
-              (click)="this.updateCurrentEvent(editCurrentEvent)"
-            >
+            <input class="form-control" type="text" name="equipmentDescription" [(ngModel)]="editCurrentEvent.eventTime"
+              placeholder="Event Time" /><br />
+            <button class="btn btn-success pull-right" type="submit"
+              (click)="this.updateCurrentEvent(editCurrentEvent)">
               Submit
             </button>
           </form>
@@ -310,3 +232,4 @@
   <div class="modal-footer"></div>
 </ng-template>
 <!-- end edit modal -->
+</div>

@@ -1,3 +1,6 @@
+import { Usergroup } from './usergroup';
+import { GroupedObservable } from 'rxjs';
+
 export class User {
   id: number;
   username: string;
@@ -11,10 +14,13 @@ export class User {
   location: Location;
   role: string;
   events: Event[];
+  groups: Usergroup[];
 
-  constructor(id?: number, events?: Event[],username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string){
+
+  constructor(id?: number, groups?: Usergroup[],events?: Event[],username?: string, password?: string, email?: string, firstName?: string, lastName?: string, enabled?: boolean, description?: string, imageUrl?: string, location?: Location, role?: string){
     this.id = id;
     this.events = events;
+    this.groups = groups;
     this.username = username;
     this.password = password;
     this.email = email;

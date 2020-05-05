@@ -44,7 +44,7 @@
   <h2 class="font-weight-light"></h2>
   <div class="d-flex flex-row flex-nowrap" >
       <div class="card card-body" *ngFor="let activity of activities; let i = index">
-        <img src="{{activity.imageUrl}}"> <br>
+        <img src="{{activity.imageUrl}}">
          <p> <b>{{activity.title}}</b> <br>
           <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Detail</button>
       </p>
