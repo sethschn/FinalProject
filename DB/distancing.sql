@@ -673,8 +673,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (1, 'dude hiking is my passion', '2020-04-28', 1, 1, 1, NULL);
-INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (2, 'highly doubtful, prove it n00b', '2020-04-28', 1, 2, 1, 1);
+INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (1, 'Hiking is my number one passion', '2020-04-28', 1, 1, 1, NULL);
+INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (2, 'highly doubtful, prove it', '2020-04-28', 1, 2, 1, 1);
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (3, 'why you so mad', '2020-04-28', 1, 3, 1, 2);
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (4, 'Does anyone want to start a new group for birding enthusiasts? Or as I like to say Bird Nerds', '2020-05-04', 1, 2, 2, NULL);
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (5, 'This is the exact group I need in my life right now, I just bought my first pair of binoculars', '2020-05-04', 1, 9, 2, 4);
@@ -758,6 +758,13 @@ COMMIT;
 START TRANSACTION;
 USE `distancingdb`;
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (1, 1, 5, 'once I figured out what time the event was I had a great time hiking with the brotatoes');
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 1, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 2, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 3, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 4, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 5, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 6, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 7, NULL, NULL);
 
 COMMIT;
 
