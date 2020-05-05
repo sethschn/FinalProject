@@ -12,6 +12,7 @@ import { Event } from './../../models/event';
 import { Location } from './../../models/location';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class ActivityComponent implements OnInit {
     private modalService: NgbModal,
     private catSvc: CategoryService,
     private eventSvc: EventService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private userSvc: UserService
   ) { }
 
   ngOnInit(): void {
@@ -226,6 +228,10 @@ export class ActivityComponent implements OnInit {
     else {
       return false;
     }
+  }
+
+  checkIfLoggedIn(){
+    return this.authSvc.checkLogin();
   }
 
   // Opens Modal
