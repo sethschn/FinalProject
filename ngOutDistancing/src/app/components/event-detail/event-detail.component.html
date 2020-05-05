@@ -74,28 +74,30 @@
           </p>
         </mat-card-content>
       </mat-card>
-      <!-- <mat-card class="col-3" style="text-align: center;">
+
+      <mat-card class="col-3" style="text-align: center;" *ngIf="checkIfCreator(this.selected)">
         <mat-card-header>
           <mat-card-title
-            >Location: {{ selected.location.title }}</mat-card-title
+            >Creator Functions: </mat-card-title
           >
         </mat-card-header>
         <mat-card-content>
-          <p>
-            Equipment Level: {{ selected.shortDescription }} <br />{{
-              selected.equipmentDescription
-            }}
-          </p>
+          <div>
+          <button class="btn btn-sm" (click)="setEditEvent(); open(editEventForm)">
+            Edit Event
+          </button>
+          <button class="btn btn-sm" (click)="deleteEvent(this.selected.id)">
+            Disable Event
+          </button>
+        </div>
         </mat-card-content>
-      </mat-card> -->
+      </mat-card>
+
     </div>
     <hr />
     <div class="container bg-faded py-3">
       <div class="row">
         <div class="col text-center">
-          <!-- <button class="btn btn-sm" (click)="setEditEvent(); open(editEventForm)">
-            Edit Event
-          </button> -->
           <button class="btn btn-sm" (click)="saveEventToUser(this.selected)">
             Join Event
           </button>
@@ -105,7 +107,7 @@
         </div>
       </div>
     </div> <hr>
-    <div class="col text-center" *ngIf="checkIfCreator(this.selected)">
+    <!-- <div class="col text-center" *ngIf="checkIfCreator(this.selected)">
       <h6>Creator Functions:</h6>
       <button class="btn btn-sm" (click)="setEditEvent(); open(editEventForm)">
         Edit Event
@@ -113,7 +115,7 @@
       <button class="btn btn-sm" (click)="deleteEvent(this.selected.id)">
         Disable Event
       </button>
-    </div>
+    </div> -->
   </div>
 
 

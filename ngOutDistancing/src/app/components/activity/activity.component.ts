@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { ActivityComment } from 'src/app/models/activity-comment';
 import { ActivityCommentService } from 'src/app/services/activity-comment.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { EventService } from 'src/app/services/event.service';
@@ -14,11 +14,10 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
-
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.css']
+  styleUrls: ['./activity.component.css'],
 })
 export class ActivityComponent implements OnInit {
   activity = new Activity();
@@ -26,14 +25,13 @@ export class ActivityComponent implements OnInit {
   activityComments: ActivityComment[] = [];
 
   categories: Category[] = [];
-  selectedCategory:Category = new Category(0, "All");
+  selectedCategory: Category = new Category(0, 'All');
 
   eventList: Event[] = [];
   newEvent = new Event();
   newLocation = new Location();
 
   user = new User();
-
 
   closeResult = '';
   comment = new ActivityComment();
@@ -42,7 +40,6 @@ export class ActivityComponent implements OnInit {
   newActivity = new Activity();
   newComment = new ActivityComment();
   selected = null;
-
 
   constructor(
     private activitySvc: ActivityService,
@@ -54,7 +51,7 @@ export class ActivityComponent implements OnInit {
     private eventSvc: EventService,
     private authSvc: AuthService,
     private userSvc: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const activityIdStr = this.currentRoute.snapshot.paramMap.get('id');
@@ -63,132 +60,133 @@ export class ActivityComponent implements OnInit {
     this.loadCategories();
     if (!this.selected && activityIdStr) {
       this.currentActivityId = activityIdStr;
-      const activityId = Number.parseInt(activityIdStr,10);
+      const activityId = Number.parseInt(activityIdStr, 10);
       this.activitySvc.show(activityId).subscribe(
-        activity =>{
+        (activity) => {
           this.selected = activity;
           console.log(this.selected);
           this.loadComments();
-
         },
-        fail => {
+        (fail) => {
           console.error(fail);
-          this.router.navigateByUrl(`/notFound`)
+          this.router.navigateByUrl(`/notFound`);
         }
       );
-    }
-    else{
+    } else {
       this.reload();
     }
   }
 
-  loadComments(){
+  loadComments() {
     this.commentSvc.index(this.selected.id).subscribe(
-      comments =>{
+      (comments) => {
         this.activityComments = comments;
         console.log(comments);
       },
-      fail => {
+      (fail) => {
         console.error(fail);
         // this.router.navigateByUrl(`/notFound`)
       }
     );
-
-
   }
 
-  reload(){
+  reload() {
     this.activitySvc.index().subscribe(
-      data => {
+      (data) => {
         this.activities = data;
       },
-      bad =>{
-        console.error('nonUserLanding.reload(): error retrieving activity list')
+      (bad) => {
+        console.error(
+          'nonUserLanding.reload(): error retrieving activity list'
+        );
         console.error(bad);
       }
     );
   }
 
-  loadActivities(){
+  loadActivities() {
     this.activitySvc.index().subscribe(
-      data => {
+      (data) => {
         this.activities = data;
       },
-      err => {
+      (err) => {
         console.error('Error in our loadActivities() method. ' + err);
       }
     );
   }
 
-  addNewActivity(activity: Activity){
+  addNewActivity(activity: Activity) {
     this.activitySvc.create(activity).subscribe(
-      good => {
+      (good) => {
         this.reload();
         this.newActivity = new Activity();
       },
-      bad =>{
-        console.error('workoutListComponent.addWorkout(): error adding workout')
+      (bad) => {
+        console.error(
+          'workoutListComponent.addWorkout(): error adding workout'
+        );
         console.error(bad);
       }
     );
   }
 
-  updateCurrentActivity(activity: Activity){
-    console.log('update activity: ' + activity)
+  updateCurrentActivity(activity: Activity) {
+    console.log('update activity: ' + activity);
     this.activitySvc.update(activity).subscribe(
-      yay => {
+      (yay) => {
         this.reload();
         // this.editCurrentActivity = null;
         this.selected = this.editCurrentActivity;
       },
-      boo => {
-      console.error('activity component updating activity error');
-    }
+      (boo) => {
+        console.error('activity component updating activity error');
+      }
     );
   }
 
-  setEditActivity(){
+  setEditActivity() {
     this.editCurrentActivity = Object.assign({}, this.selected);
   }
 
-  displayTable(activities){
+  displayTable(activities) {
     this.selected = null;
     this.router.navigateByUrl(`/activities`);
   }
 
-  displayActivity(activity){
+  displayActivity(activity) {
     console.log('--------------------');
     console.log(activity);
     this.router.navigateByUrl(`/activities/${activity.id}`);
   }
 
-  addComment(comment: ActivityComment){
+  addComment(comment: ActivityComment) {
     this.commentSvc.createComment(comment, this.currentActivityId).subscribe(
-      good => {
-        this.newComment= new ActivityComment();
+      (good) => {
+        this.newComment = new ActivityComment();
         // this.selected = null;
         console.log(this.currentActivityId);
         // this.router.navigateByUrl(`/activities/${this.currentActivityId}`);
         this.loadComments();
       },
-      bad =>{
-        console.error('activity.component.ts addComment(): error adding comment')
+      (bad) => {
+        console.error(
+          'activity.component.ts addComment(): error adding comment'
+        );
         console.error(bad);
       }
     );
   }
 
-  loadCategories(){
+  loadCategories() {
     this.catSvc.indexCategory().subscribe(
-      data => {
+      (data) => {
         const cat = new Category();
-        cat.type = "All";
+        cat.type = 'All';
         this.selectedCategory = cat;
         this.categories = data;
         this.categories.unshift(cat);
-
       },
-      err => {
+      (err) => {
         console.error('Error in our loadActivities() method. ' + err);
       }
     );
@@ -201,6 +199,7 @@ export class ActivityComponent implements OnInit {
       (good) => {
         // this.loadEvents();
         this.newEvent = new Event();
+        this.router.navigateByUrl(`/eventDetail`);
       },
       (bad) => {
         console.error('EventDetailListComponent.createEvent(): error adding');
@@ -221,26 +220,30 @@ export class ActivityComponent implements OnInit {
     );
   }
 
-  checkIfAdmin(user: User){
-    if (this.authSvc.getCurrentUserRole() == 'admin'){
+  checkIfAdmin(user: User) {
+    if (this.authSvc.getCurrentUserRole() == 'admin') {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-  checkIfLoggedIn(){
+  checkIfLoggedIn() {
     return this.authSvc.checkLogin();
   }
 
   // Opens Modal
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   // Close Modal
@@ -253,8 +256,4 @@ export class ActivityComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
-
-
 }
