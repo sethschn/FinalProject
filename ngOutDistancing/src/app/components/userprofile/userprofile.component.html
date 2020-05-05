@@ -23,7 +23,7 @@
   <ngb-accordion>
     <ngb-panel *ngFor="let event of currentUser.userEvents | event" title="{{event.title}}">
       <ng-template ngbPanelContent>
-        <img src={{event.imageUrl}}><br>
+        <img src={{event.imageUrl}} style="height: 350px;"><br>
       {{event.eventDate}}<br>
       {{event.eventTime}}<br>
       {{event.description}}<br>
