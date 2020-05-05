@@ -91,7 +91,7 @@
     </div>
   </ng-template>
 
-<div *ngIf="!selected" class="justify-content-center">
+<div *ngIf="!selected">
   <button class="btn btn-info" mat-button (click)="openLg(createGroupModal)">Create Group</button>
 
 
@@ -145,7 +145,7 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <button (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
+      <button *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
       <button (click)="displayTable()">Back</button>
     </div>
     <br>
@@ -155,11 +155,11 @@
     <div class="row card-group justify-content-center">
       <mat-card class="col-3 justify-content-center" style="text-align:center">
         <mat-card-header>
-          <mat-card-title>Creator: {{selected.creator.username}}</mat-card-title>
+          <mat-card-title style="text-align:center">{{selected.creator.username}}</mat-card-title>
         </mat-card-header>
         <img mat-card-image class="rounded-circle" src="{{selected.creator.imageUrl}}">
         <mat-card-content>
-          <p> Bio: {{selected.creator.description}}</p>
+          <p>GROUP CREATOR<br> Bio: {{selected.creator.description}}</p>
         </mat-card-content>
         <mat-card-actions>
         </mat-card-actions>

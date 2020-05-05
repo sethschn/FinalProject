@@ -77,6 +77,16 @@ export class UsergroupComponent implements OnInit {
     this.selected = null;
   }
 
+  isCreator(creator: User){
+    if (parseInt(this.authService.getCurrentUserId()) === creator.id){
+      console.log("You created this group");
+      return true;
+    }else {
+      console.log("You can't edit this group");
+      return false;
+    }
+  }
+
   joinGroup(group: Usergroup){
     this.userService.showLoggedInUser().subscribe(
       user => {
