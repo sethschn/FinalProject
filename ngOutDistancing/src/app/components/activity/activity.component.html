@@ -51,7 +51,7 @@
     </div>
     <hr />
 
-
+    <div *ngIf="checkIfLoggedIn()">
     <div class="container bg-faded py-3">
       <div class="row">
         <div class="col text-center">
@@ -78,12 +78,14 @@
         </div>
       </div>
     </div>
+  </div>
     <hr />
 
 
 
 
   <!-- comment box code start -->
+<div *ngIf="checkIfLoggedIn()">
   <div class="container py-2">
     <div class="row">
       <div class="comments col-md-9" id="comments">
@@ -117,6 +119,7 @@
       Leave A Comment
     </button>
   </div>
+</div>
 </div>
 
 <!-- Comment box modal -->
@@ -435,21 +438,21 @@
               type="text"
               name="location.street"
               [(ngModel)]="newLocation.street"
-              placeholder="Event Time"
+              placeholder="Street"
             /><br />
             <input
               class="form-control"
               type="text"
               name="location.city"
               [(ngModel)]="newLocation.city"
-              placeholder="city"
+              placeholder="City"
             /><br />
             <input
               class="form-control"
               type="text"
               name="location.state"
               [(ngModel)]="newLocation.state"
-              placeholder="state"
+              placeholder="State"
             /><br />
             <button
               class="btn pull-right"
