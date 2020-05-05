@@ -87,7 +87,8 @@ export class UsergroupComponent implements OnInit {
           console.log("Group ID "+group.id);
           this.groupService.joinGroup(group.id).subscribe(
             good => {
-              //this.loadGroups();
+              this.loadGroups();
+              this.selected = good;
               // this.updateGroup(good);
               console.log("Success "+good);
               console.log(good);
