@@ -676,6 +676,9 @@ USE `distancingdb`;
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (1, 'dude hiking is my passion', '2020-04-28', 1, 1, 1, NULL);
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (2, 'highly doubtful, prove it n00b', '2020-04-28', 1, 2, 1, 1);
 INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (3, 'why you so mad', '2020-04-28', 1, 3, 1, 2);
+INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (4, 'Does anyone want to start a new group for birding enthusiasts? Or as I like to say Bird Nerds', '2020-05-04', 1, 2, 2, NULL);
+INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (5, 'This is the exact group I need in my life right now, I just bought my first pair of binoculars', '2020-05-04', 1, 9, 2, 4);
+INSERT INTO `activity_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `activity_id`, `in_reply_id`) VALUES (6, 'How can I get into this group as well?', '2020-05-04', 1, 12, 2, 5);
 
 COMMIT;
 
