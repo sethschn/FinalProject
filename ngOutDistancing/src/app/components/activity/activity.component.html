@@ -56,6 +56,7 @@
             Show All Activities
           </button>
         </div>
+
         <div class="col text-center" *ngIf="checkIfAdmin(this.user)">
           <button
             class="btn btn-sm"
@@ -82,12 +83,8 @@
         <!-- comment -->
         <div class="comment mb-2 row" *ngFor="let comment of activityComments">
           <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-            <a href=""
-              ><img
-                class="mx-auto rounded-circle img-fluid"
-                src="{{ comment.user.imageUrl }}"
-                alt="avatar"
-            /></a>
+            <a href=""><img class="mx-auto rounded-circle img-fluid" src="{{ comment.user.imageUrl }}"
+                alt="avatar" /></a>
           </div>
           <div class="comment-content col-md-11 col-sm-10">
             <h6 class="small comment-meta">
@@ -101,9 +98,7 @@
             <div class="comment-body">
               <p>
                 {{ comment.content }}<br />
-                <a href="" class="text-right small" (click)="open(reply)"
-                  ><i class="ion-reply"></i> Reply</a
-                >
+                <a href="" class="text-right small" (click)="open(reply)"><i class="ion-reply"></i> Reply</a>
               </p>
             </div>
           </div>
@@ -120,12 +115,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Leave a Comment</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -138,12 +128,8 @@
           <!-- comment box -->
           <div class="row pt-2">
             <div class="col-12">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="Your Comment Please....."
-                [(ngModel)]="newComment.content"
-              ></textarea>
+              <textarea class="form-control" rows="5" placeholder="Your Comment Please....."
+                [(ngModel)]="newComment.content"></textarea>
               <br />
               <!-- <button class="btn btn-success pull-right" (click)="addComment(newComment)">Comment.</button> -->
             </div>
@@ -163,12 +149,7 @@
 <ng-template #reply let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Reply To A Comment</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -181,12 +162,7 @@
           <!-- REPLY box -->
           <div class="row pt-2">
             <div class="col-12">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="....."
-                [(ngModel)]="newComment.content"
-              ></textarea>
+              <textarea class="form-control" rows="5" placeholder="....." [(ngModel)]="newComment.content"></textarea>
               <br />
             </div>
           </div>
@@ -206,13 +182,8 @@
   <h1 style="text-align: center;">Activities</h1>
 
   <div style="text-align: center;">
-    <button
-      mat-button
-      type="button"
-      class="btn btn-info"
-      *ngFor="let category of categories"
-      (click)="selectedCategory = category"
-    >
+    <button mat-button type="button" class="btn btn-info" *ngFor="let category of categories"
+      (click)="selectedCategory = category">
       {{ category.type }}
     </button>
   </div>
@@ -226,11 +197,8 @@
   </div>
   <br />
   <div class="row card-group">
-    <mat-card
-      class="col-3"
-      *ngFor="let activity of activities | activityCategory: selectedCategory"
-      style="text-align: center;"
-    >
+    <mat-card class="col-3" *ngFor="let activity of activities | activityCategory: selectedCategory "
+      style="text-align: center;">
       <mat-card-header>
         <mat-card-title>{{ activity.title }}</mat-card-title>
       </mat-card-header>
@@ -246,11 +214,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button
-          class="btn btn-info"
-          mat-button
-          (click)="displayActivity(activity)"
-        >
+        <button class="btn btn-info" mat-button (click)="displayActivity(activity)">
           Activity Detail
         </button>
         <button class="btn btn-info" mat-button (click)="open(addEvent)">Add Event</button>
@@ -264,12 +228,7 @@
 <ng-template #addActivity let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add New Activity</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -346,12 +305,7 @@
 <ng-template #editActivity let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Edit Activity</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -361,61 +315,26 @@
       <div class="row">
         <div class="comments col-md-9" id="editActivity">
           <!-- edit activity box -->
-          <form
-            #activityForm="ngForm"
-            ngNativeValidate
-            id="add-activity-form"
-            class="text-center"
-          >
+          <form #activityForm="ngForm" ngNativeValidate id="add-activity-form" class="text-center">
             <label class="text-left" for="editCurrentActivity">Title </label>
-            <input
-              class="form-control"
-              type="text"
-              name="title"
-              [(ngModel)]="editCurrentActivity.title"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Short Description
+            <input class="form-control" type="text" name="title" [(ngModel)]="editCurrentActivity.title" /><br />
+            <label class="text-left" for="editCurrentActivity">Short Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="shortDescription"
-              [(ngModel)]="editCurrentActivity.shortDescription"
-              placeholder="Short Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Full Description
+            <input class="form-control" type="text" name="shortDescription"
+              [(ngModel)]="editCurrentActivity.shortDescription" placeholder="Short Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Full Description
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="description"
-              [(ngModel)]="editCurrentActivity.description"
-              placeholder="Description"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Image Url
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCurrentActivity.description"
+              placeholder="Description" /><br />
+            <label class="text-left" for="editCurrentActivity">Image Url
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="imageUrl"
-              [(ngModel)]="editCurrentActivity.imageUrl"
-              placeholder="Image URL"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Equipment Level
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCurrentActivity.imageUrl"
+              placeholder="Image URL" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Level
             </label>
-            <input
-              class="form-control"
-              type="text"
-              name="equipmentLevel"
-              [(ngModel)]="editCurrentActivity.equipmentLevel"
-              placeholder="Equipment Level"
-            /><br />
-            <label class="text-left" for="editCurrentActivity"
-              >Equipment Description
+            <input class="form-control" type="text" name="equipmentLevel"
+              [(ngModel)]="editCurrentActivity.equipmentLevel" placeholder="Equipment Level" /><br />
+            <label class="text-left" for="editCurrentActivity">Equipment Description
             </label>
             <input
               class="form-control"
@@ -443,12 +362,7 @@
 <ng-template #addEvent let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

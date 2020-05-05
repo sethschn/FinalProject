@@ -7,21 +7,26 @@ import { Category } from '../models/category';
 })
 export class ActivityCategoryPipe implements PipeTransform {
 
-  transform(activities: Activity[], category: Category) {
+  transform(activities: Activity[], category: Category, showDisabled: boolean = false) {
     console.log(activities);
     console.log(category);
 
     const results = [];
 
     if(category.type ==='All'){
-      return activities;
+      activities.forEach(activity => {
+        if(!showDisabled && activity.enabled){
+          results.push(activity);
+        }
+      });
+      return results;
     }
 
     activities.forEach((activity) => {
       console.log(activity.categories);
 
       activity.categories.forEach((activityCategory) => {
-        if(activityCategory.type === category.type) {
+        if(activityCategory.type === category.type && (!showDisabled && activity.enabled) ) {
           results.push(activity);
         }
       });
