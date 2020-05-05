@@ -3,7 +3,7 @@
 
 <section>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center" >
       <div class="col-md-4 mt-4">
           <div class="card profile-card-5">
               <div class="card-img-block" *ngIf="currentUser">
@@ -18,13 +18,7 @@
                 </div>
               </div>
       </div>
-      <ngb-accordion>
-        <ngb-panel *ngFor="let group of currentUser.userGroups" title="{{group.title}}">
-          <ng-template ngbPanelContent>
-            <img src={{group.imageUrl}}><br>
-          {{group.description}}<br>
-      </ng-template></ngb-panel>
-      </ngb-accordion>
+
     </div>
 
   <br>
@@ -36,6 +30,15 @@
       {{event.eventDate}}<br>
       {{event.eventTime}}<br>
       {{event.description}}<br>
+  </ng-template></ngb-panel>
+  </ngb-accordion>
+<br>
+
+  <ngb-accordion>
+    <ngb-panel *ngFor="let group of currentUser.groups" title="{{group.name}}">
+      <ng-template ngbPanelContent>
+        <img src={{group.imageUrl}}><br>
+      {{group.description}}<br>
   </ng-template></ngb-panel>
   </ngb-accordion>
 

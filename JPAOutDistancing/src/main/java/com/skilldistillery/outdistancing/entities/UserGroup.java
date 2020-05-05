@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "user_group")
@@ -42,12 +42,13 @@ public class UserGroup {
 	@CreationTimestamp
 	private LocalDate createDate;
 	
+	@JsonIgnoreProperties(value="groups")
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
 //	@Column(name = "creator_id")
 	private User creator;
 	
-//	@JsonIgnore
+	@JsonIgnoreProperties(value="groups")
 	@ManyToMany(mappedBy="groups", cascade = {CascadeType.ALL})
 	private List<User> users;
 	
