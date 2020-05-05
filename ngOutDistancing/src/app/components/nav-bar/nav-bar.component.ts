@@ -100,7 +100,7 @@ export class NavBarComponent implements OnInit {
           good => {
             this.authService.login(user.username,user.password).subscribe(
               great =>{
-                this.router.navigateByUrl("/userLanding");
+                this.router.navigateByUrl("/profile");
                 console.log(great);
               },
               terrible => {
