@@ -102,7 +102,27 @@ export class UsergroupComponent implements OnInit {
   }
 
   leaveGroup(group: Usergroup){
-
+    this.groupService.leaveGroup(group.id).subscribe(
+      good => {
+        //this.selected = null;
+        this.loadGroups();
+        this.groupService.show(group.id).subscribe(
+          group => {
+            this.selected = group;
+          },
+          err => {
+            console.log("Error showing updated group");
+            console.log(err);
+          }
+        )
+        console.log("Leave group success");
+        console.log(good);
+      },
+      err => {
+        console.log("Error leaving group in usergroup component");
+        console.log(err);
+      }
+    )
   }
 
   joinGroup(group: Usergroup){

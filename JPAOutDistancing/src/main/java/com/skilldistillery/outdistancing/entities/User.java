@@ -282,6 +282,12 @@ public class User {
 		}
 	}
 	
+	public void removeGroup(UserGroup group) {
+		if (this.groups.contains(group)) {
+			this.groups.remove(group);
+		}
+	}
+	
 	public void addEvent(Event events) {
 		if (this.userEvents == null) {
 			this.userEvents = new ArrayList<Event>();

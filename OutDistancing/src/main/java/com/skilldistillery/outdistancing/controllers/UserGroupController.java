@@ -85,7 +85,25 @@ public class UserGroupController {
 			UserGroup userGroup = null;
 		try {
 			userGroup = usergroupSvc.addUserGroup(userGroupId, principal.getName());
-			System.out.println("addUserToGroup "+userGroup);
+			//System.out.println("addUserToGroup "+userGroup);
+			if (userGroup == null) {
+				resp.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(400);
+			return userGroup;
+		}
+		return userGroup;
+	}
+	
+	@DeleteMapping("usergroups/{userGroupId}/leavegroup")
+	public UserGroup removeUserToGroup(@PathVariable("userGroupId") int userGroupId,
+			HttpServletResponse resp, Principal principal) {
+			UserGroup userGroup = null;
+		try {
+			userGroup = usergroupSvc.removeUserFromGroup(userGroupId, principal.getName());
+			//System.out.println("addUserToGroup "+userGroup);
 			if (userGroup == null) {
 				resp.setStatus(400);
 			}
