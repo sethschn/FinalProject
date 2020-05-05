@@ -145,6 +145,27 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
+  removeEventFromUser(event) {
+    this.userSvc.showLoggedInUser().subscribe(
+      (good) => {
+        const user = good;
+        this.userSvc.removeUserEvent(event, user).subscribe(
+          (success) => {
+            this.router.navigateByUrl(`/profile`);
+          },
+          (fail) => {
+            console.error(
+              'EventDetailComponent.removeEventToUser(): error saving'
+            );
+          }
+        );
+      },
+      (bad) => {
+        console.error('EventDetailComponent.removeEventToUser(): error saving');
+      }
+    );
+  }
+
   setEditEvent() {
     this.editCurrentEvent = Object.assign({}, this.selected);
   }

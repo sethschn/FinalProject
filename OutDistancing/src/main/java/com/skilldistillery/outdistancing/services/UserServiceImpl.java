@@ -118,7 +118,18 @@ public class UserServiceImpl implements UserService {
 			return userRepo.saveAndFlush(user);
 		}
 		return null;
-
+	}
+	
+	@Override
+	public User removeUserEvent(int eventId, String username) {
+		User user = userRepo.findByUsername(username);
+		Optional<Event> optEvent = eventRepo.findById(eventId);
+		if (optEvent.isPresent() && user != null) {
+			Event removeEvent = optEvent.get();
+			user.removeEvent(removeEvent);
+			return userRepo.saveAndFlush(user);
+		}
+		return null;
 	}
 	
 
