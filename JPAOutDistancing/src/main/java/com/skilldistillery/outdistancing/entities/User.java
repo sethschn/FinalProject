@@ -281,6 +281,15 @@ public class User {
 			group.addUser(this);
 		}
 	}
+	
+	public void addEvent(Event events) {
+		if (this.userEvents == null) {
+			this.userEvents = new ArrayList<Event>();
+		}
+		if (!this.userEvents.contains(events)) {
+			this.userEvents.add(events);
+		}
+	}
 
 	@Override
 	public int hashCode() {

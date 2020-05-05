@@ -23,11 +23,9 @@
           <mat-card-title>Resources</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <ul>
-            <li *ngFor="let resource of selected.resources">
+            <p *ngFor="let resource of selected.resources">
               <a href="{{ resource.link }}"> {{ resource.name }}</a>
-            </li>
-          </ul>
+            </p>
         </mat-card-content>
       </mat-card>
       <mat-card class="col-3" style="text-align: center;">
@@ -66,7 +64,7 @@
             Edit Activity
           </button>
           <button
-            class="btn btn-sm btn-outline-primary"
+            class="btn btn-sm"
             (click)="open(addActivity)"
           >
             Add Activity
@@ -155,7 +153,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn pull-right" (click)="addComment(newComment)">
+    <button class="btn pull-right" (click)="addComment(newComment); modal.close()">
       Submit
     </button>
   </div>
@@ -197,7 +195,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-success pull-right" (click)="addComment(newComment)">
+    <button class="btn btn-success pull-right" (click)="addComment(newComment); modal.close()">
       Submit
     </button>
   </div>
@@ -216,6 +214,14 @@
       (click)="selectedCategory = category"
     >
       {{ category.type }}
+    </button>
+  </div>
+  <div class="col text-center" *ngIf="checkIfAdmin(this.user)">
+    <button
+      class="btn btn-sm"
+      (click)="open(addActivity)"
+    >
+      Add Activity
     </button>
   </div>
   <br />
@@ -324,7 +330,7 @@
             <button
               class="btn pull-right"
               type="submit"
-              (click)="this.addNewActivity(newActivity)"
+              (click)="this.addNewActivity(newActivity); modal.close()"
             >
               Submit
             </button>
@@ -421,7 +427,7 @@
             <button
               class="btn pull-right"
               type="submit"
-              (click)="this.updateCurrentActivity(editCurrentActivity)"
+              (click)="this.updateCurrentActivity(editCurrentActivity); modal.close()"
             >
               Submit
             </button>
@@ -524,7 +530,7 @@
             <button
               class="btn pull-right"
               type="submit"
-              (click)="this.addNewEvent(newEvent, selected, newLocation)"
+              (click)="this.addNewEvent(newEvent, selected, newLocation); modal.close()"
             >
               Submit
             </button>

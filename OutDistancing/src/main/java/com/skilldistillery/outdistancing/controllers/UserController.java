@@ -93,6 +93,17 @@ public class UserController {
 		return isEnabled;
 	}
 	
+	@PutMapping("users/{userId}/events/{eventId}")
+	public User addUserEvent(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, @PathVariable int eventId, Principal principal) {
+		User user = userSvc.findUserByUsername(principal.getName());
+		try {
+			userSvc.addUserEvent(eventId, user.getUsername());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		return user;
+	}
 	
 	
 	 

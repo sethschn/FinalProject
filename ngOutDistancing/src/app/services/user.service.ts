@@ -105,6 +105,20 @@ export class UserService {
         })
         );
       }
+
+  public addUserEvent(event, user){
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<User>(`${this.url}/${user.id}/events/${event.id}`, {}, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('addUserEvent method in user service failed');
+      })
+      );
+
+  }
+
+
   }
 
 

@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.outdistancing.entities.Category;
+import com.skilldistillery.outdistancing.entities.Event;
 import com.skilldistillery.outdistancing.entities.User;
 import com.skilldistillery.outdistancing.entities.UserGroup;
+import com.skilldistillery.outdistancing.repositories.EventRepository;
 import com.skilldistillery.outdistancing.repositories.UserGroupRepository;
 import com.skilldistillery.outdistancing.repositories.UserRepository;
 
@@ -20,6 +21,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private EventRepository eventRepo;
 
 	@Override
 	public List<UserGroup> listAllGroups() {
@@ -120,5 +124,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 //        System.out.println("Returning null");
 		return null;
 	}
+	
+
 
 }
