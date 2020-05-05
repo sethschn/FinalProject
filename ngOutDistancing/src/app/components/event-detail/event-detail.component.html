@@ -227,11 +227,11 @@
               placeholder="Image URL" /><br />
             <label class="text-left" for="editCurrentActivity">Event Date
             </label>
-            <input class="form-control" type="text" name="equipmentLevel" [(ngModel)]="editCurrentEvent.eventDate"
+            <input class="form-control" type="text" name="eventDate" [(ngModel)]="editCurrentEvent.eventDate"
               placeholder="Event Date" /><br />
             <label class="text-left" for="editCurrentActivity">Event Time
             </label>
-            <input class="form-control" type="text" name="equipmentDescription" [(ngModel)]="editCurrentEvent.eventTime"
+            <input class="form-control" type="text" name="eventTime" [(ngModel)]="editCurrentEvent.eventTime"
               placeholder="Event Time" /><br />
             <button class="btn btn-success pull-right" type="submit"
               (click)="this.updateCurrentEvent(editCurrentEvent); modal.close()">
