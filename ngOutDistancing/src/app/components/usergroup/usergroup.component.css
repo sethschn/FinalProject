@@ -18,6 +18,10 @@ mat-card img{
   height: 50%;
 }
 
+mat-card-title{
+  text-align: center;
+}
+
 button {
   background-color:#F7DC6F   ;
   color:black;

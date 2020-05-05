@@ -34,16 +34,14 @@
   </ngb-accordion>
 <br>
 
-  <div class="container-fluid py-2">
+  <div class="container-fluid py-2" id="containercards">
     <div class="scrolling-wrapper">
     <h2 class="font-weight-light"></h2>
     <div class="d-flex flex-row flex-nowrap" >
         <div class="card card-body" *ngFor="let group of currentUser.groups | group">
           <img src="{{group.imageUrl}}"><br>
            <p> <b>{{group.name}}</b> <br>
-            <button type="button" (click)="leaveGroup(group)">LEAVE GROUP</button>
-            <!-- DO BUTTON TO LEAVE GROUP -->
-            <!-- <button class="btn btn-info" mat-button (click)="displayGroup(group)"> Group Detail</button> -->
+            <button type="button" (click)="leaveGroup(group)">Leave Group</button><br>
         </p>
         </div>
       </div>

@@ -40,7 +40,6 @@
 
 
 <div class="container-fluid py-2">
-  <div class="scrolling-wrapper">
   <h2 class="font-weight-light"></h2>
   <div class="d-flex flex-row flex-nowrap" >
       <div class="card card-body" *ngFor="let activity of activities; let i = index">
@@ -51,33 +50,3 @@
       </div>
     </div>
   </div>
-  </div>
-
-  <!-- STARTS EVENTS SCROLL
-  <div class="container-fluid py-2">
-    <div class="scrolling-wrapper">
-    <h2 class="font-weight-light"></h2>
-    <div class="d-flex flex-row flex-nowrap" >
-        <div class="card card-body" *ngFor="let event of events; let i = index">
-          <img src="{{activity.imageUrl}}"> <br>
-           <p> <b>{{activity.title}}</b> <br>
-            <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Detail</button>
-        </p>
-        </div>
-      </div>
-    </div>
-    </div> -->
-
-
-<!-- STARTS CAROUSEL MULTIPLES ACTIVITIES -->
-
-<!-- <ngb-carousel activities>
-  <ng-template ngbSlide *ngFor="let activity of activities">
-      <img src="{{activity.imageUrl}}" alt="Angular Carousel 1">
-    <div class="carousel-caption">
-      <h3>{{activity.title}}</h3>
-      <p>{{activity.shortDescription}}</p>
-      <button class="btn btn-info" mat-button (click)="displayActivity(activity)">Activity Detail</button>
-    </div>
-  </ng-template>
-</ngb-carousel> -->
