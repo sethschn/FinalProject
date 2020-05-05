@@ -18,7 +18,9 @@
                 </div>
               </div>
       </div>
+    </div>
 
+  <br>
 
   <ngb-accordion>
     <ngb-panel *ngFor="let event of currentUser.userEvents" title="{{event.title}}">
@@ -29,7 +31,16 @@
       {{event.description}}<br>
   </ng-template></ngb-panel>
   </ngb-accordion>
-</div>
+
+  <ngb-accordion>
+    <ngb-panel *ngFor="let group of currentUser.userGroups" title="{{group.title}}">
+      <ng-template ngbPanelContent>
+        <img src={{group.imageUrl}}><br>
+      {{group.description}}<br>
+  </ng-template></ngb-panel>
+  </ngb-accordion>
+
+
 </div>
 </section>
 
