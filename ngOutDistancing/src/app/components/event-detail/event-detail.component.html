@@ -25,7 +25,7 @@
 
 <!-- Displays individual data -->
 <div *ngIf="selected">
-  <br /><br /><br />
+  <br /><br />
   <div class="container bg-faded py-3">
     <h1 class="text-center">{{ selected.title }}</h1>
     <div class="col text-center">
@@ -45,10 +45,17 @@
     <div class="row justify-content-center">
       <img
         [src]="selected.imageUrl"
-        image-resizing
+        style="height: 350px;"
         image-Height="200px"
         image-Width="200px"
       />
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col text-center">
+        {{ selected.description }}
+      </div>
+
     </div>
     <hr />
     <div class="row card-group justify-content-center">
