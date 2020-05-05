@@ -113,6 +113,7 @@ public class EventServiceImpl implements EventService {
 		User currentUser = userRepo.findByUsername(username);
 		if (optEvent.isPresent() && currentUser != null) {
 			Event updateEvent = optEvent.get();
+			System.out.println(updateEvent);
 			updateEvent.setEnabled(!updateEvent.isEnabled());
 			eventRepo.saveAndFlush(updateEvent);
 			return true;
