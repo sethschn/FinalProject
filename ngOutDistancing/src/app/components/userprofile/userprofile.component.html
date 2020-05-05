@@ -18,6 +18,13 @@
                 </div>
               </div>
       </div>
+      <ngb-accordion>
+        <ngb-panel *ngFor="let group of currentUser.userGroups" title="{{group.title}}">
+          <ng-template ngbPanelContent>
+            <img src={{group.imageUrl}}><br>
+          {{group.description}}<br>
+      </ng-template></ngb-panel>
+      </ngb-accordion>
     </div>
 
   <br>
@@ -31,15 +38,6 @@
       {{event.description}}<br>
   </ng-template></ngb-panel>
   </ngb-accordion>
-
-  <ngb-accordion>
-    <ngb-panel *ngFor="let group of currentUser.userGroups" title="{{group.title}}">
-      <ng-template ngbPanelContent>
-        <img src={{group.imageUrl}}><br>
-      {{group.description}}<br>
-  </ng-template></ngb-panel>
-  </ngb-accordion>
-
 
 </div>
 </section>

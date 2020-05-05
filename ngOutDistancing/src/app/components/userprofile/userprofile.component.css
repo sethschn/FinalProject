@@ -4,19 +4,20 @@
   transition: all 1s ease;
 }
 section{
-  float:left;
+  float:center;
   width:100%;
   background: #fff;  /* fallback for old browsers */
   padding:30px 0;
   background-color: #2E8B57 ;
   background-image: linear-gradient(#9FF5FC,#D83278 );
 }
-h1{float:center; width:100%; color:#232323; margin-bottom:30px; font-size: 18px;}
+h1{float:right; width:100%; color:#232323; margin-bottom:30px; font-size: 18px;}
 h1 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px; font-weight:700}
 h1 a{color:#131313; font-weight:bold;}
 
 .profile-card-5{
   margin-top:20px;
+  text-align: center;
 }
 .profile-card-5 .btn{
   border-radius:2px;
@@ -66,6 +67,11 @@ h1 a{color:#131313; font-weight:bold;}
   background-color:#2E8B57;
   border-color:#2E8B57;
 
+}
+
+ngb-accordion{
+  color:#227E7E;
+  text-align: center !important;
 }
 
 
