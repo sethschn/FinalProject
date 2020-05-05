@@ -1,3 +1,4 @@
+import { Usergroup } from './../models/usergroup';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -5,8 +6,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GroupPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(groups: Usergroup[]): unknown {
+    const results = [];
+
+    groups.forEach((group) => {
+      if(group.enabled){
+        results.push(group);
+      }
+    });
+
+    return results;
+
   }
 
 }

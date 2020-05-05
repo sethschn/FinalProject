@@ -96,7 +96,7 @@
 
 
   <div class="row card-group">
-    <mat-card class="col-3" *ngFor="let group of groups" style="text-align:center">
+    <mat-card class="col-3" *ngFor="let group of groups | group" style="text-align:center">
       <mat-card-header>
         <mat-card-title>{{group.name}}</mat-card-title>
       </mat-card-header>
@@ -145,7 +145,8 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <button *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
+      <button type="button" *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
+      <button type="button" *ngIf="isMember(selected)" (click)="leaveGroup(selected)">LEAVE GROUP</button>
       <button (click)="displayTable()">Back</button>
     </div>
     <br>

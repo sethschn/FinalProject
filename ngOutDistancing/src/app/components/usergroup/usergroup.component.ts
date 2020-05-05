@@ -31,10 +31,6 @@ export class UsergroupComponent implements OnInit {
     this.loadGroups();
   }
 
-  createGroup(){
-
-  }
-
   loadGroups(){
     this.groupService.index().subscribe(
       data => {
@@ -70,7 +66,10 @@ export class UsergroupComponent implements OnInit {
   }
 
   displayGroup(group: Usergroup){
+    console.log("Displaying Group");
+    console.log(group);
     this.selected = group;
+    console.log(this.selected.users);
   }
 
   displayTable(){
@@ -85,6 +84,45 @@ export class UsergroupComponent implements OnInit {
       console.log("You can't edit this group");
       return false;
     }
+  }
+
+  isMember(group: Usergroup){
+    console.log("Is member check()");
+    let member = false;
+    group.users.forEach(user=>{
+
+      console.log(user.username);
+      if (parseInt(this.authService.getCurrentUserId()) == user.id){
+        console.log("You are a member of this group");
+        member = true;
+      }
+    });
+    console.log("End statement");
+    return member;
+  }
+
+  leaveGroup(group: Usergroup){
+    this.groupService.leaveGroup(group.id).subscribe(
+      good => {
+        //this.selected = null;
+        this.loadGroups();
+        this.groupService.show(group.id).subscribe(
+          group => {
+            this.selected = group;
+          },
+          err => {
+            console.log("Error showing updated group");
+            console.log(err);
+          }
+        )
+        console.log("Leave group success");
+        console.log(good);
+      },
+      err => {
+        console.log("Error leaving group in usergroup component");
+        console.log(err);
+      }
+    )
   }
 
   joinGroup(group: Usergroup){
