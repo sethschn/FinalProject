@@ -170,6 +170,17 @@ export class EventDetailComponent implements OnInit {
     this.editCurrentEvent = Object.assign({}, this.selected);
   }
 
+  checkIfCreator(event){
+    const userId = this.authSvc.getCurrentUserId();
+    console.log(userId);
+    console.log(event.creator.id);
+    if (event.creator.id == userId){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   updateCurrentEvent(event: Event) {
     console.log(event);
     this.eventSvc.update(event).subscribe(
