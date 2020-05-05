@@ -55,6 +55,7 @@ public class EventServiceImpl implements EventService {
 			event.setActivity(optActivity.get());
 			event.setCreator(currentUser);
 			event.setLocation(newLocation);
+			event.setEnabled(true);
 			try {
 				event = eventRepo.saveAndFlush(event);
 				return event;
