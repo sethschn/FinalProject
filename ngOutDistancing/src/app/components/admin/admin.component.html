@@ -1,56 +1,53 @@
+<br/>
 <h1 style="text-align:center">Welcome Mary Wood to the Admin Dashboard </h1>
-
+<br />
 <div class="wrapper wrapper-content">
   <div class="row">
     <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-success pull-right">Monthly</span>
+          <span class="label label-primary pull-right">Weekly</span>
           <h5><a href="/admin#Users" style="color: black;"> Visitors</a></h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">666</h1>
-          <div class="stat-percent font-bold text-success">13% <i class="fa fa-bolt"></i></div>
-          <small>Increase</small>
+          <h1 class="no-margins">444</h1>
+          <small class="font-bold text-navy">Visitors Since Website Creation</small>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-info pull-right">Annual</span>
-          <h5> Activities</h5>
+          <span class="label label-info pull-right">New</span>
+          <h5><a href="/admin#Groups" style="color: black;"> Groups</a></h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">275,800</h1>
-          <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
+          <h1 class="no-margins">12</h1>
+          <small class="font-bold text-info">Groups Created by Users</small>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-primary pull-right">Today</span>
-          <h5> Events</h5>
+          <span class="label label-primary pull-right">Added</span>
+          <h5><a href="/admin#Resources" style="color: black;"> Resources</a></h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">106,120</h1>
-          <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
-          <small>New visits</small>
+          <h1 class="no-margins">23</h1>
+          <small class="font-bold text-navy">New Resources posted by Users</small>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-danger pull-right">Low value</span>
-          <h5> Groups</h5>
+          <span class="label label-info pull-right">Upcoming</span>
+          <h5><a href="/admin#Events" style="color: black;"> Events</a></h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">80,600</h1>
-          <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
-          <small>In first month</small>
+          <h1 class="no-margins">12</h1>
+          <small class="font-bold text-info">Events Added in first month</small>
         </div>
       </div>
     </div>
@@ -129,7 +126,7 @@
         <div class="col-lg-6">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Current User List</h5>
+              <h5><a name="Users">Current User List</a></h5>
               <div class="ibox-tools">
                 <a class="collapse-link">
                   <i class="fa fa-chevron-up"></i>
@@ -166,7 +163,7 @@
         <div class="col-lg-6">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Current Group List</h5>
+              <h5><a name="Groups">Current Group List</a></h5>
               <div class="ibox-tools">
                 <a class="collapse-link">
                   <i class="fa fa-chevron-up"></i>
@@ -190,7 +187,7 @@
                   <tr *ngFor="let group of groups">
                     <td><small>{{group.name}}</small></td>
                     <td><small>{{group.shortDescription}}</small></td>
-                    <td>{{group.enabled}}</td>
+                    <td><small>{{group.enabled}}</small></td>
                     <td><input class="btn btn-danger" type="submit" (click)="deleteGroup(group.id)" value="X">
                     </td>
                 </tbody>
@@ -209,7 +206,7 @@
     <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Current Activity List</h5>
+          <h5><a name="Activities">Current Activity List</a></h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -233,7 +230,7 @@
               <tr *ngFor="let activity of activities">
                 <td><small>{{activity.title}}</small></td>
                 <td><small>{{activity.shortDescription}}</small></td>
-                <td>{{activity.enabled}}</td>
+                <td><small>{{activity.enabled}}</small></td>
                 <td><input class="btn btn-danger" type="submit" (click)="deleteActivity(activity.id)" value="X">
                 </td>
             </tbody>
@@ -249,7 +246,7 @@
     <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Current Event List</h5>
+          <h5><a name="Events">Current Event List</a></h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -265,7 +262,6 @@
               <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Last Name</th>
                 <th>Enabled</th>
                 <th></th>
               </tr>
@@ -274,7 +270,7 @@
               <tr *ngFor="let event of events">
                 <td><small>{{event.title}}</small></td>
                 <td><small>{{event.shortDescription}}</small></td>
-                <td>{{event.enabled}}</td>
+                <td><small>{{event.enabled}}</small></td>
                 <td><input class="btn btn-danger" type="submit" (click)="deleteEvent(event.id)" value="X">
                 </td>
             </tbody>
@@ -288,7 +284,7 @@
     <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Current Resource List</h5>
+          <h5><a name="Resources">Current Resource List</a></h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -310,7 +306,7 @@
             <tbody>
               <tr *ngFor="let resource of resourceList">
                 <td><small>{{resource.name}}</small></td>
-                <td>{{resource.link}}</td>
+                <td><small><a href="{{resource.link}}" style="color: black;"> Resource Link</a></small></td>
                 <td><input class="btn btn-danger" type="submit" (click)="deleteResource(resource.id)" value="X">
                 </td>
             </tbody>
