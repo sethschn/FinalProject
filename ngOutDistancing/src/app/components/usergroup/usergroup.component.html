@@ -152,9 +152,9 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <button class="btn btn-info" type="button" *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
-      <button class="btn btn-info" type="button" *ngIf="isMember(selected)" (click)="leaveGroup(selected)">LEAVE GROUP</button>
-      <button class="btn btn-info" (click)="displayTable()">Back</button>
+      <button class="btn" type="button" *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
+      <button class="btn" type="button" *ngIf="isMember(selected)" (click)="leaveGroup(selected)">Leave group</button>
+      <button class="btn" (click)="displayTable()">Back</button>
     </div>
     <br>
     <br>
