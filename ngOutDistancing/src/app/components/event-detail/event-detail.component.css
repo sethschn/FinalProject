@@ -12,10 +12,12 @@ mat-card {
 }
 
 mat-card img{
-  width: 100%;
   text-align:center;
-  height: 50%;
+  height: 225px;
+  width: 100%;
 }
+
+
 
  button {
   background-color:#F7DC6F;
