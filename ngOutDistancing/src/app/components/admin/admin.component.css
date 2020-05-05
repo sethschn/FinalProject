@@ -795,7 +795,6 @@ code {
   margin: 0 0 7px;
   padding: 0;
   text-overflow: ellipsis;
-  float: left;
 }
 .ibox-title .label {
   float: left;
