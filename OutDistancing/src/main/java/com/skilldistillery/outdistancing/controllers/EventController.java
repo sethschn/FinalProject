@@ -82,22 +82,30 @@ public class EventController {
 		return event;
 	}
 
-	@DeleteMapping("activities/{actId}/events/{evtId}")
-	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtId") Integer evtId,
-			@PathVariable("actId") Integer actId, Principal principal) {
-//		boolean isEnabled = eventSvc.changeEventEnabled(evtId);
-		try {
-			if (eventSvc.deleteById(evtId, principal.getName())) {
-				res.setStatus(200);
-				return true;
-			} else {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(409);
+//	@DeleteMapping("events/{evtId}")
+//	public boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable("evtId") Integer evtId, Principal principal) {
+////		boolean isEnabled = eventSvc.changeEventEnabled(evtId);
+//		try {
+//			if (eventSvc.changeEventEnabled(evtId, principal.getName())) {
+//				System.out.println("*************************************************************************");
+//				res.setStatus(200);
+//				return true;
+//			} else {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			res.setStatus(409);
+//		}
+//		return false;
+//	}
+	@DeleteMapping("events/{evtId}")
+	public void deactivateEvent(@PathVariable("evtId") Integer evtId, HttpServletResponse resp, Principal principal) {
+		if (eventSvc.changeEventEnabled(evtId, principal.getName())) {
+			resp.setStatus(200);
+		} else {
+			resp.setStatus(404);
 		}
-		return false;
 	}
 
 }

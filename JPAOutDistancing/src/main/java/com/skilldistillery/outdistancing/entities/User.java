@@ -76,7 +76,7 @@ public class User {
 	@OneToMany(mappedBy = "creator")
 	private List<Event> events;
 	
-	@JsonIgnore
+
 	@ManyToMany
 	@JoinTable(name="group_member",
 	joinColumns= @JoinColumn(name="user_id"),
