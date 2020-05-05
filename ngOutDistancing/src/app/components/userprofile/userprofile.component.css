@@ -64,8 +64,8 @@ h1 a{color:#131313; font-weight:bold;}
   background-position: center;
 }
 .modal-header{
-  background-color:#2E8B57;
-  border-color:#2E8B57;
+  background-color:#9FF5FC;
+  border-color:#9FF5FC;
 
 }
 
@@ -73,6 +73,39 @@ ngb-accordion{
   color:#227E7E;
   text-align: center !important;
 }
+
+.card-body {
+  min-height: 300px;
+  min-width: 300px;
+  margin-right: 15px;
+  width: 300px;
+  margin-bottom: 10px;
+  max-width:100%;
+  margin-left: 10px;
+  text-align: center;
+
+}
+.card-body img{
+
+object-fit: cover; /*this makes the image in src fit to the size specified below*/
+width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+height: 80%;
+
+}
+
+.scrolling-wrapper {
+margin-top: 2%;
+overflow-x: scroll;
+overflow-y: hidden;
+white-space: pre-wrap;
+}
+
+button {
+background-color:#F7DC6F   ;
+color: black;
+}
+
+
 
 
 
