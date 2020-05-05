@@ -130,7 +130,7 @@ export class EventDetailComponent implements OnInit {
         const user = good;
         this.userSvc.addUserEvent(event, user).subscribe(
           (success) => {
-            this.router.navigateByUrl(`/users/${user.id}`);
+            this.router.navigateByUrl(`/profile`);
           },
           (fail) => {
             console.error(
