@@ -24,7 +24,7 @@
   <br>
 
   <ngb-accordion>
-    <ngb-panel *ngFor="let event of currentUser.userEvents" title="{{event.title}}">
+    <ngb-panel *ngFor="let event of currentUser.userEvents | event" title="{{event.title}}">
       <ng-template ngbPanelContent>
         <img src={{event.imageUrl}}><br>
       {{event.eventDate}}<br>
