@@ -741,8 +741,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (1, 'yo brosephs what time we meeting up I cant read good', '2020-04-28', 1, 1, 1, NULL);
-INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (2, 'dude its on the details page, read', '2020-04-28', 1, 2, 1, 1);
+INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (1, 'Am I blind? What time we meeting up for this event?', '2020-04-28', 1, 1, 1, NULL);
+INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (2, 'Yeah seems you are indeed blind!', '2020-04-28', 1, 2, 1, 1);
+INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (3, 'I have never been more excited about an event! #birdnerd #birdgang', '2020-05-04', 1, 2, 8, NULL);
+INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (4, 'You are going too Clayton? Now I have no excuse not to attend', '2020-05-04', 1, 9, 8, 3);
+INSERT INTO `event_comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `event_id`, `in_reply_id`) VALUES (5, 'I\'m surprised you weren\'t the first one signed up Katherine since you talk about birds all day', '2020-05-04', 1, 12, 8, 4);
 
 COMMIT;
 
@@ -770,7 +773,7 @@ INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VAL
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 5, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 6, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 7, NULL, NULL);
-INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (3, 8, NULL, NULL);
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (12, 8, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (4, 9, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (5, 10, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (6, 11, NULL, NULL);
