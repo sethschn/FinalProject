@@ -92,7 +92,7 @@
   </ng-template>
 
 <div *ngIf="!selected">
-  <button class="btn btn-info" mat-button (click)="openLg(createGroupModal)">Create Group</button>
+
 
 
   <div class="row card-group">
@@ -112,6 +112,13 @@
       </mat-card-actions>
     </mat-card>
   </div>
+  <br>
+  <div  style="text-align: right;">
+  <button class="btn btn-lg" mat-button (click)="openLg(createGroupModal)">Create Group</button>
+  </div>
+  <br>
+  <br>
+  <br>
 </div>
 
 <div *ngIf="selected">
@@ -145,9 +152,9 @@
     </div>
     <hr />
     <div class="row justify-content-center">
-      <button type="button" *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
-      <button type="button" *ngIf="isMember(selected)" (click)="leaveGroup(selected)">LEAVE GROUP</button>
-      <button (click)="displayTable()">Back</button>
+      <button class="btn btn-info" type="button" *ngIf="isCreator(selected.creator)" (click)="setEditGroup(); openLg(editGroupModal)">Edit</button>
+      <button class="btn btn-info" type="button" *ngIf="isMember(selected)" (click)="leaveGroup(selected)">LEAVE GROUP</button>
+      <button class="btn btn-info" (click)="displayTable()">Back</button>
     </div>
     <br>
     <br>
@@ -155,8 +162,8 @@
     <h1 style="text-align:center">Group Members</h1>
     <div class="row card-group justify-content-center">
       <mat-card class="col-3 justify-content-center" style="text-align:center">
-        <mat-card-header>
-          <mat-card-title style="text-align:center">{{selected.creator.username}}</mat-card-title>
+        <mat-card-header >
+          <mat-card-title class="justify-content-center">{{selected.creator.username}}</mat-card-title>
         </mat-card-header>
         <img mat-card-image class="rounded-circle" src="{{selected.creator.imageUrl}}">
         <mat-card-content>

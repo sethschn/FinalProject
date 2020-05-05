@@ -13,10 +13,11 @@ export class Event {
   imageUrl: string;
   activity: Activity;
   location: Location;
+  creator: number;
 
   constructor(id?:number,title?: string,eventTime?: string,
     eventDate?: string,shortDescription?: string,enabled?: boolean,
-    description?: string,imageUrl?: string, activity?: Activity, location?: Location){
+    description?: string,imageUrl?: string, activity?: Activity, location?: Location, creator?: number){
     this.id= id;
     this.title= title;
     this.eventTime= eventTime;
@@ -27,6 +28,7 @@ export class Event {
     this.imageUrl= imageUrl;
     this.activity= activity;
     this.location = location;
+    this.creator = creator;
     }
 
 }
