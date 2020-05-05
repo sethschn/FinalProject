@@ -62,15 +62,29 @@ export class UsergroupService {
   }
 
 
-  public joinGroup(id: number){
+  public joinGroup(groupId: number){
     const httpOptions = this.getHttpOptions();
     if (this.authService.checkLogin()){
-      return this.http.put<Usergroup>(`${this.url}/${id}/joingroup`, {}, httpOptions)
+      return this.http.put<Usergroup>(`${this.url}/${groupId}/joingroup`, {}, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log("******");
             console.log(err);
             return throwError('joinGroup method in usergroup service failed');
+          })
+        );
+    }
+  }
+
+  public leaveGroup(groupId: number){
+    const httpOptions = this.getHttpOptions();
+    if (this.authService.checkLogin()){
+      return this.http.put<Usergroup>(`${this.url}/${groupId}/leavegroup`, {}, httpOptions)
+        .pipe(
+          catchError((err: any) => {
+            console.log("******");
+            console.log(err);
+            return throwError('leaveGroup method in usergroup service failed');
           })
         );
     }
