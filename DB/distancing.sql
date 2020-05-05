@@ -578,7 +578,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `group_member` (`user_id`, `group_id`) VALUES (1, 1);
+INSERT INTO `group_member` (`user_id`, `group_id`) VALUES (2, 1);
 INSERT INTO `group_member` (`user_id`, `group_id`) VALUES (2, 2);
 INSERT INTO `group_member` (`user_id`, `group_id`) VALUES (3, 3);
 INSERT INTO `group_member` (`user_id`, `group_id`) VALUES (4, 4);
@@ -765,7 +765,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `distancingdb`;
-INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (1, 1, 5, 'once I figured out what time the event was I had a great time hiking with the brotatoes');
+INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (8, 1, 5, 'once I figured out what time the event was I had a great time hiking with the brotatoes');
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 1, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 2, NULL, NULL);
 INSERT INTO `user_event` (`user_id`, `event_id`, `rating`, `rating_comment`) VALUES (2, 3, NULL, NULL);
