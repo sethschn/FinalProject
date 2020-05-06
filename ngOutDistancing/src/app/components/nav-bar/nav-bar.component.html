@@ -30,7 +30,7 @@
           <a class="nav-link" [routerLink]="['/groups']">GROUPS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/contact']">COVID-19</a>
+          <a class="nav-link" [routerLink]="['/contact']" target="_blank">COVID-19</a>
         </li>
         <li class="nav-item" *ngIf="!loggedIn()">
           <a class="nav-link" (click)="open(loginModal)" [routerLink]="['']">LOGIN</a>
