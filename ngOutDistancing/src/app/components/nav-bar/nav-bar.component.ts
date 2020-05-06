@@ -78,6 +78,7 @@ export class NavBarComponent implements OnInit {
       good => {
         console.log(good);
         this.currUser = good;
+        this.userImg = good.imageUrl;
         this.router.navigateByUrl("/profile");
         this.newUser = new User();
       },

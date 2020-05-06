@@ -63,11 +63,6 @@ h1 a{color:#131313; font-weight:bold;}
   color: white;
   background-position: center;
 }
-.modal-header{
-  background-color:#9FF5FC;
-  border-color:#9FF5FC;
-
-}
 
 ngb-accordion{
   color:#227E7E;
